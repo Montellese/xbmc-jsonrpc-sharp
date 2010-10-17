@@ -1,9 +1,9 @@
-﻿-/- PlaybackStarted
--/- PlaybackPaused
--/- PlaybackResumed
--/- PlaybackStopped
--/- PlaybackSeek
--/- PlaybackSpeedChanged
+﻿+/+ PlaybackStarted
++/+ PlaybackPaused
++/+ PlaybackResumed
++/- PlaybackStopped
++/- PlaybackSeek
++/+ PlaybackSpeedChanged
 
 -/- QueueNextItem
 

@@ -100,12 +100,12 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 -/- VideoLibrary.GetRecentlyAddedMusicVideos [ReadData]: Retrieve all recently added music videos. Parameter example { "fields": ["plot"], "sortmethod": "title","sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
 -/- VideoLibrary.ScanForContent [ScanLibrary]:
 
--/- System.Shutdown [ControlPower]:
--/- System.Suspend [ControlPower]:
--/- System.Hibernate [ControlPower]:
--/- System.Reboot [ControlPower]:
--/- System.GetInfoLabels [ReadData]: Retrieve info labels about the system
--/- System.GetInfoBooleans [ReadData]: Retrieve info booleans about the system
++/- System.Shutdown [ControlPower]:
++/- System.Suspend [ControlPower]:
++/- System.Hibernate [ControlPower]:
++/- System.Reboot [ControlPower]:
++/+ System.GetInfoLabels [ReadData]: Retrieve info labels about the system
++/+ System.GetInfoBooleans [ReadData]: Retrieve info booleans about the system
 
 -/- XBMC.GetVolume [ReadData]: Retrieve the current volume
 -/- XBMC.SetVolume [ControlPlayback]: Set volume. Parameter integer between 0 and 100

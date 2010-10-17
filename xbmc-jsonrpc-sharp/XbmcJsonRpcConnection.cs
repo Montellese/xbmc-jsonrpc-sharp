@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
-using System.Text;
 using Newtonsoft.Json.Linq;
+using System.Text;
 
 namespace XBMC.JsonRpc
 {
@@ -27,6 +27,7 @@ namespace XBMC.JsonRpc
 
         private XbmcJsonRpc jsonRpc;
         private XbmcPlayer player;
+        private XbmcSystem system;
 
         #endregion
 
@@ -61,6 +62,11 @@ namespace XBMC.JsonRpc
             get { return this.player; }
         }
 
+        public XbmcSystem System
+        {
+            get { return this.system; }
+        }
+
         #endregion
 
         #region Events
@@ -83,6 +89,7 @@ namespace XBMC.JsonRpc
             // TODO: Setup of all namespaces
             this.jsonRpc = new XbmcJsonRpc(this.client);
             this.player = new XbmcPlayer(this.client);
+            this.system = new XbmcSystem(this.client);
         }
 
         public XbmcJsonRpcConnection(string address, int port)

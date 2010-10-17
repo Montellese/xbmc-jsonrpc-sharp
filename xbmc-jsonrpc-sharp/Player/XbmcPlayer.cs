@@ -64,7 +64,7 @@ namespace XBMC.JsonRpc
         public event EventHandler<XbmcPlayerPlaybackChangedEventArgs> PlaybackStarted;
         public event EventHandler<XbmcPlayerPlaybackPositionChangedEventArgs> PlaybackPaused;
         public event EventHandler<XbmcPlayerPlaybackPositionChangedEventArgs> PlaybackResumed;
-        public event EventHandler<XbmcPlayerPlaybackChangedEventArgs> PlaybackStopped;
+        public event EventHandler PlaybackStopped;
 
         public event EventHandler<XbmcPlayerPlaybackPositionChangedEventArgs> PlaybackSeek;
         public event EventHandler<XbmcPlayerPlaybackChangedEventArgs> PlaybackSpeedChanged;
@@ -146,12 +146,18 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            throw new NotImplementedException();
+            TimeSpan current, total;
+            if (player.GetTime(out current, out total) == XbmcPlayerState.Unavailable)
+            {
+                return;
+            }
+
+            this.PlaybackPaused(this, new XbmcPlayerPlaybackPositionChangedEventArgs(player, current, total));
         }
 
         internal void OnPlaybackResumed()
         {
-            if (this.PlaybackPaused == null)
+            if (this.PlaybackResumed == null)
             {
                 return;
             }
@@ -162,28 +168,29 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            throw new NotImplementedException();
+            TimeSpan current, total;
+            if (player.GetTime(out current, out total) != XbmcPlayerState.Playing)
+            {
+                return;
+            }
+
+            this.PlaybackResumed(this, new XbmcPlayerPlaybackPositionChangedEventArgs(player, current, total));
         }
 
         internal void OnPlaybackStopped()
         {
-            if (this.PlaybackPaused == null)
+            // TODO: Fired twice when playback is paused
+            if (this.PlaybackStopped == null)
             {
                 return;
             }
 
-            XbmcMediaPlayer player = this.getActivePlayer();
-            if (player == null)
-            {
-                return;
-            }
-
-            throw new NotImplementedException();
+            this.PlaybackStopped(this, null);
         }
 
         internal void OnPlaybackSeek()
         {
-            if (this.PlaybackPaused == null)
+            if (this.PlaybackSeek == null)
             {
                 return;
             }
@@ -194,12 +201,19 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            throw new NotImplementedException();
+            TimeSpan current, total;
+            // TODO: Need to get the correct position
+            if (player.GetTime(out current, out total) == XbmcPlayerState.Unavailable)
+            {
+                return;
+            }
+
+            this.PlaybackSeek(this, new XbmcPlayerPlaybackPositionChangedEventArgs(player, current, total));
         }
 
         internal void OnPlaybackSpeedChanged()
         {
-            if (this.PlaybackPaused == null)
+            if (this.PlaybackSpeedChanged == null)
             {
                 return;
             }
@@ -210,7 +224,7 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            throw new NotImplementedException();
+            this.PlaybackSpeedChanged(this, new XbmcPlayerPlaybackChangedEventArgs(player));
         }
 
         #endregion

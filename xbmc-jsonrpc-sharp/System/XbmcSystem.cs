@@ -141,23 +141,39 @@ namespace XBMC.JsonRpc
             return list;
         }
 
-        public IDictionary<string, bool> GetInfoBooleans(params string[] booleans)
+        public string GetInfoLabel(string label)
         {
-            if (booleans == null)
+            if (label == null)
+            {
+                throw new ArgumentNullException("label");
+            }
+
+            JObject result = this.client.Call("System.GetInfoLabels", new string[] { label }) as JObject;
+            if (result == null || result[label] == null)
+            {
+                return null;
+            }
+
+            return (string)result[label];
+        }
+
+        public IDictionary<string, bool> GetInfoBooleans(params string[] labels)
+        {
+            if (labels == null)
             {
                 throw new ArgumentNullException("labels");
             }
-            if (booleans.Length <= 0)
+            if (labels.Length <= 0)
             {
                 throw new ArgumentException();
             }
 
-            JObject results = this.client.Call("System.GetInfoBooleans", booleans) as JObject;
+            JObject results = this.client.Call("System.GetInfoBooleans", labels) as JObject;
             Dictionary<string, bool> list = new Dictionary<string, bool>();
             if (results != null)
             {
                 int index = 0;
-                foreach (string label in booleans)
+                foreach (string label in labels)
                 {
                     if (results[label] != null)
                     {
@@ -169,6 +185,22 @@ namespace XBMC.JsonRpc
             }
 
             return list;
+        }
+
+        public bool GetInfoBoolean(string label)
+        {
+            if (label == null)
+            {
+                throw new ArgumentNullException("label");
+            }
+
+            JObject result = this.client.Call("System.GetInfoBooleans", new string[] { label }) as JObject;
+            if (result == null || result[label] == null)
+            {
+                return false;
+            }
+
+            return (bool)result[label];
         }
 
         #endregion

@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace XBMC.JsonRpc
 {
-    public abstract class XbmcMediaPlayer : XbmcJsonRpcNamespace
+    public class XbmcMediaPlayer : XbmcJsonRpcNamespace
     {
         #region Private variables
 

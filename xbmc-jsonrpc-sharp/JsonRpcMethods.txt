@@ -54,32 +54,32 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 +/- PicturePlayer.Zoom [ControlPlayback]: Zooms current picture. Parameter integer of zoom level
 +/- PicturePlayer.Rotate [ControlPlayback]: Rotates current picture
 
--/- VideoPlaylist.Play [ControlPlayback]:
--/- VideoPlaylist.SkipPrevious [ControlPlayback]:
--/- VideoPlaylist.SkipNext [ControlPlayback]:
++/- VideoPlaylist.Play [ControlPlayback]:
++/- VideoPlaylist.SkipPrevious [ControlPlayback]:
++/- VideoPlaylist.SkipNext [ControlPlayback]:
 -/- VideoPlaylist.GetItems [ReadData]:
 -/- VideoPlaylist.Add [ControlPlayback]:
--/- VideoPlaylist.Clear [ControlPlayback]: Clear video playlist
--/- VideoPlaylist.Shuffle [ControlPlayback]: Shuffle video playlist
--/- VideoPlaylist.UnShuffle [ControlPlayback]: UnShuffle video playlist
++/- VideoPlaylist.Clear [ControlPlayback]: Clear video playlist
++/- VideoPlaylist.Shuffle [ControlPlayback]: Shuffle video playlist
++/- VideoPlaylist.UnShuffle [ControlPlayback]: UnShuffle video playlist
 
--/- AudioPlaylist.Play [ControlPlayback]:
--/- AudioPlaylist.SkipPrevious [ControlPlayback]:
--/- AudioPlaylist.SkipNext [ControlPlayback]:
++/- AudioPlaylist.Play [ControlPlayback]:
++/- AudioPlaylist.SkipPrevious [ControlPlayback]:
++/- AudioPlaylist.SkipNext [ControlPlayback]:
 -/- AudioPlaylist.GetItems [ReadData]:
 -/- AudioPlaylist.Add [ControlPlayback]:
--/- AudioPlaylist.Clear [ControlPlayback]: Clear audio playlist
--/- AudioPlaylist.Shuffle [ControlPlayback]: Shuffle audio playlist
--/- AudioPlaylist.UnShuffle [ControlPlayback]: UnShuffle audio playlist
++/- AudioPlaylist.Clear [ControlPlayback]: Clear audio playlist
++/- AudioPlaylist.Shuffle [ControlPlayback]: Shuffle audio playlist
++/- AudioPlaylist.UnShuffle [ControlPlayback]: UnShuffle audio playlist
 
--/- Playlist.Create [ReadData]: Creates a virtual playlist from a given one from a file
--/- Playlist.Destroy [ReadData]: Destroys a virtual playlist
++/- Playlist.Create [ReadData]: Creates a virtual playlist from a given one from a file
++/- Playlist.Destroy [ReadData]: Destroys a virtual playlist
 -/- Playlist.GetItems [ReadData]: Retrieve items in the playlist. Parameter example {"playlist": "music" }. playlist optional.
 -/- Playlist.Add [ControlPlayback]: Add items to the playlist. Parameter example {"playlist": "music", "file": "/foo/bar.mp3" }. playlist optional.
 -/- Playlist.Remove [ControlPlayback]: Remove items in the playlist. Parameter example {"playlist": "music", "item": 0 }. playlist optional.
 -/- Playlist.Swap [ControlPlayback]: Swap items in the playlist. Parameter example {"playlist": "music", "item1": 0, "item2": 1 }. playlist optional.
--/- Playlist.Shuffle [ControlPlayback]: Shuffle playlist
--/- Playlist.UnShuffle [ControlPlayback]: UnShuffle playlist
++/- Playlist.Shuffle [ControlPlayback]: Shuffle playlist
++/- Playlist.UnShuffle [ControlPlayback]: UnShuffle playlist
 
 -/- Files.GetSources [ReadData]: Get the sources of the media windows. Parameter example {"media": "video"}. Media can be video, music, pictures or files
 -/- Files.Download [ReadData]: Specify a file to download to get info about how to download it, i.e a proper URL
@@ -107,10 +107,10 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 +/+ System.GetInfoLabels [ReadData]: Retrieve info labels about the system
 +/+ System.GetInfoBooleans [ReadData]: Retrieve info booleans about the system
 
--/- XBMC.GetVolume [ReadData]: Retrieve the current volume
--/- XBMC.SetVolume [ControlPlayback]: Set volume. Parameter integer between 0 and 100
--/- XBMC.ToggleMute [ControlPlayback]: Toggle mute
++/+ XBMC.GetVolume [ReadData]: Retrieve the current volume
++/? XBMC.SetVolume [ControlPlayback]: Set volume. Parameter integer between 0 and 100
++/? XBMC.ToggleMute [ControlPlayback]: Toggle mute
 -/- XBMC.Play [ControlPlayback]: Starts playback
--/- XBMC.StartSlideshow [ControlPlayback]: Starts slideshow. Parameter example {"directory": "/foo/", "random": true, "recursive": true} or just string to recursively and random run directory
--/- XBMC.Log [Logging]: Logs a line in the xbmc.log. Parameter example {"message": "foo", "level": "info"} or just a string to log message with level debug
--/- XBMC.Quit [ControlPower]: Quit xbmc
++/- XBMC.StartSlideshow [ControlPlayback]: Starts slideshow. Parameter example {"directory": "/foo/", "random": true, "recursive": true} or just string to recursively and random run directory
++/- XBMC.Log [Logging]: Logs a line in the xbmc.log. Parameter example {"message": "foo", "level": "info"} or just a string to log message with level debug
++/- XBMC.Quit [ControlPower]: Quit xbmc

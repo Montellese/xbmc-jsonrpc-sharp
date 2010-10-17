@@ -28,6 +28,7 @@ namespace XBMC.JsonRpc
         private XbmcJsonRpc jsonRpc;
         private XbmcPlayer player;
         private XbmcSystem system;
+        private XbmcGeneral xbmc;
 
         #endregion
 
@@ -67,6 +68,11 @@ namespace XBMC.JsonRpc
             get { return this.system; }
         }
 
+        public XbmcGeneral Xbmc
+        {
+            get { return this.xbmc; }
+        }
+
         #endregion
 
         #region Events
@@ -90,6 +96,7 @@ namespace XBMC.JsonRpc
             this.jsonRpc = new XbmcJsonRpc(this.client);
             this.player = new XbmcPlayer(this.client);
             this.system = new XbmcSystem(this.client);
+            this.xbmc = new XbmcGeneral(this.client);
         }
 
         public XbmcJsonRpcConnection(string address, int port)

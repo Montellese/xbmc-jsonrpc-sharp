@@ -49,6 +49,10 @@
     <Compile Include="Player\XbmcMediaPlayer.cs" />
     <Compile Include="Player\XbmcPlayer.cs" />
     <Compile Include="Player\XbmcPlayerState.cs" />
+    <Compile Include="Playlist\XbmcAudioPlaylist.cs" />
+    <Compile Include="Playlist\XbmcMediaPlaylist.cs" />
+    <Compile Include="Playlist\XbmcPlaylist.cs" />
+    <Compile Include="Playlist\XbmcVideoPlaylist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocketStateObject.cs" />
     <Compile Include="System\XbmcSystem.cs" />
@@ -56,13 +60,13 @@
     <Compile Include="JsonRpc\XbmcJsonRpc.cs" />
     <Compile Include="XbmcJsonRpcConnection.cs" />
     <Compile Include="XbmcJsonRpcNamespace.cs" />
+    <Compile Include="Xbmc\XbmcGeneral.cs" />
+    <Compile Include="Xbmc\XbmcLogLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
     <Folder Include="Library\Audio\" />
     <Folder Include="Library\Video\" />
-    <Folder Include="Playlist\" />
-    <Folder Include="Xbmc\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="JsonRpcAnnouncements.txt" />

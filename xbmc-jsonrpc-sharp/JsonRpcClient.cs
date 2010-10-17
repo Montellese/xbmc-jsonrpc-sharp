@@ -192,7 +192,7 @@ namespace XBMC.JsonRpc
                 throw new UnknownJsonRpcErrorException();
             }
 
-            throw new JsonRpcErrorException(Int32.Parse(error["code"].Value<JValue>().Value.ToString()), error["message"].Value<JValue>().Value.ToString());
+            throw new JsonRpcErrorException((int)error["code"], (string)error["message"]);
         }
 
         #endregion

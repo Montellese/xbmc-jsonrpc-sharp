@@ -62,10 +62,10 @@ namespace XBMC.JsonRpc
             }
 
             return new XbmcJsonRpcMethod(
-                obj["command"].Value<JValue>().Value.ToString(),
-                obj["description"].Value<JValue>().Value.ToString(),
-                obj["permission"].Value<JValue>().Value.ToString(),
-                Boolean.Parse(obj["executable"].Value<JValue>().Value.ToString()));
+                (string)obj["command"],
+                (string)obj["description"],
+                (string)obj["permission"],
+                (bool)obj["executable"]);
         }
 
         #endregion

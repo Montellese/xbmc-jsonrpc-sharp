@@ -1,104 +1,116 @@
-﻿+ JSONRPC.Introspect [ReadData]: Enumerates all actions and descriptions. Parameter example {"getdescriptions": true, "getpermissions": true, "filterbytransport": true }. All parameters optional
-+ JSONRPC.Version [ReadData]: Retrieve the jsonrpc protocol version
-+ JSONRPC.Permission [ReadData]: Retrieve the clients permissions
-+ JSONRPC.Ping [ReadData]: Ping responder
-+ JSONRPC.Announce [ReadData]: Announce to other connected clients. Parameter example {"sender": "foo", "message": "bar", "data": "somedata" }. data is optional
-- Player.GetActivePlayers [ReadData]: Returns all active players IDs
-- AudioPlayer.State [ReadData]: Returns Current Playback state
-- AudioPlayer.PlayPause [ControlPlayback]: Pauses or unpause playback, returns new state
-- AudioPlayer.Stop [ControlPlayback]: Stops playback
-- AudioPlayer.SkipPrevious [ControlPlayback]: Skips to previous item on the playlist
-- AudioPlayer.SkipNext [ControlPlayback]: Skips to next item on the playlist
-- AudioPlayer.BigSkipBackward [ControlPlayback]:
-- AudioPlayer.BigSkipForward [ControlPlayback]:
-- AudioPlayer.SmallSkipBackward [ControlPlayback]:
-- AudioPlayer.SmallSkipForward [ControlPlayback]:
-- AudioPlayer.Rewind [ControlPlayback]: Rewind current playback
-- AudioPlayer.Forward [ControlPlayback]: Forward current playback
-- AudioPlayer.GetTime [ReadData]: Retrieve time
-- AudioPlayer.GetTimeMS [ReadData]: Retrieve time in MS
-- AudioPlayer.GetPercentage [ReadData]: Retrieve percentage
-- AudioPlayer.SeekTime [ControlPlayback]: Seek to a specific time. Parameter integer in seconds
-- AudioPlayer.SeekPercentage [ControlPlayback]: Seek to a specific percentage. Parameter float or integer from 0 to 100
-- AudioPlayer.Record [ControlPlayback]:
-- VideoPlayer.State [ReadData]: Returns Current Playback state
-- VideoPlayer.PlayPause [ControlPlayback]: Pauses or unpause playback, returns new state
-- VideoPlayer.Stop [ControlPlayback]: Stops playback
-- VideoPlayer.SkipPrevious [ControlPlayback]: Skips to previous item on the playlist
-- VideoPlayer.SkipNext [ControlPlayback]: Skips to next item on the playlist
-- VideoPlayer.BigSkipBackward [ControlPlayback]:
-- VideoPlayer.BigSkipForward [ControlPlayback]:
-- VideoPlayer.SmallSkipBackward [ControlPlayback]:
-- VideoPlayer.SmallSkipForward [ControlPlayback]:
-- VideoPlayer.Rewind [ControlPlayback]: Rewind current playback
-- VideoPlayer.Forward [ControlPlayback]: Forward current playback
-- VideoPlayer.GetTime [ReadData]: Retrieve time
-- VideoPlayer.GetTimeMS [ReadData]: Retrieve time in MS
-- VideoPlayer.GetPercentage [ReadData]: Retrieve percentage
-- VideoPlayer.SeekTime [ControlPlayback]: Seek to a specific time. Parameter integer in seconds
-- VideoPlayer.SeekPercentage [ControlPlayback]: Seek to a specific percentage. Parameter float or integer from 0 to 100
-- PicturePlayer.PlayPause [ControlPlayback]: Pauses or unpause slideshow
-- PicturePlayer.Stop [ControlPlayback]: Stops slideshow
-- PicturePlayer.SkipPrevious [ControlPlayback]: Skips to previous picture in the slideshow
-- PicturePlayer.SkipNext [ControlPlayback]: Skips to next picture in the slideshow
-- PicturePlayer.MoveLeft [ControlPlayback]: If picture is zoomed move viewport left otherwise skip previous
-- PicturePlayer.MoveRight [ControlPlayback]: If picture is zoomed move viewport right otherwise skip previous
-- PicturePlayer.MoveDown [ControlPlayback]: If picture is zoomed move viewport down
-- PicturePlayer.MoveUp [ControlPlayback]: If picture is zoomed move viewport up
-- PicturePlayer.ZoomOut [ControlPlayback]: Zoom out once
-- PicturePlayer.ZoomIn [ControlPlayback]: Zoom in once
-- PicturePlayer.Zoom [ControlPlayback]: Zooms current picture. Parameter integer of zoom level
-- PicturePlayer.Rotate [ControlPlayback]: Rotates current picture
-- VideoPlaylist.Play [ControlPlayback]:
-- VideoPlaylist.SkipPrevious [ControlPlayback]:
-- VideoPlaylist.SkipNext [ControlPlayback]:
-- VideoPlaylist.GetItems [ReadData]:
-- VideoPlaylist.Add [ControlPlayback]:
-- VideoPlaylist.Clear [ControlPlayback]: Clear video playlist
-- VideoPlaylist.Shuffle [ControlPlayback]: Shuffle video playlist
-- VideoPlaylist.UnShuffle [ControlPlayback]: UnShuffle video playlist
-- AudioPlaylist.Play [ControlPlayback]:
-- AudioPlaylist.SkipPrevious [ControlPlayback]:
-- AudioPlaylist.SkipNext [ControlPlayback]:
-- AudioPlaylist.GetItems [ReadData]:
-- AudioPlaylist.Add [ControlPlayback]:
-- AudioPlaylist.Clear [ControlPlayback]: Clear audio playlist
-- AudioPlaylist.Shuffle [ControlPlayback]: Shuffle audio playlist
-- AudioPlaylist.UnShuffle [ControlPlayback]: UnShuffle audio playlist
-- Playlist.Create [ReadData]: Creates a virtual playlist from a given one from a file
-- Playlist.Destroy [ReadData]: Destroys a virtual playlist
-- Playlist.GetItems [ReadData]: Retrieve items in the playlist. Parameter example {"playlist": "music" }. playlist optional.
-- Playlist.Add [ControlPlayback]: Add items to the playlist. Parameter example {"playlist": "music", "file": "/foo/bar.mp3" }. playlist optional.
-- Playlist.Remove [ControlPlayback]: Remove items in the playlist. Parameter example {"playlist": "music", "item": 0 }. playlist optional.
-- Playlist.Swap [ControlPlayback]: Swap items in the playlist. Parameter example {"playlist": "music", "item1": 0, "item2": 1 }. playlist optional.
-- Playlist.Shuffle [ControlPlayback]: Shuffle playlist
-- Playlist.UnShuffle [ControlPlayback]: UnShuffle playlist
-- Files.GetSources [ReadData]: Get the sources of the media windows. Parameter example {"media": "video"}. Media can be video, music, pictures or files
-- Files.Download [ReadData]: Specify a file to download to get info about how to download it, i.e a proper URL
-- Files.GetDirectory [ReadData]: Retrieve the specified directory. Parameter example {"directory": "foo/bar", "media": "video"}. Media can be video, music, pictures or files
-- AudioLibrary.GetArtists [ReadData]: Retrieve all artists
-- AudioLibrary.GetAlbums [ReadData]: Retrieve all albums from specified artist or genre, Fields: album_description, album_theme, album_mood, album_style, album_type, album_label, album_artist, album_genre, album_rating, album_title
-- AudioLibrary.GetSongs [ReadData]: Retrieve all songs from specified album, artist or genre
-- AudioLibrary.ScanForContent [ScanLibrary]:
-- VideoLibrary.GetMovies [ReadData]: Retrieve all movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
-- VideoLibrary.GetTVShows [ReadData]: Parameter example { "fields": ["plot"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
-- VideoLibrary.GetSeasons [ReadData]: Parameter example { "tvshowid": 0, "fields": ["season"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
-- VideoLibrary.GetEpisodes [ReadData]: Parameter example { "tvshowid": 0, "season": 1, "fields": ["plot"], "sortmethod": "episode", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
-- VideoLibrary.GetMusicVideos [ReadData]: Parameter example { "artistid": 0, "albumid": 0, "fields": ["plot"], "sortmethod": "artistignorethe", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
-- VideoLibrary.GetRecentlyAddedMovies [ReadData]: Retrieve all recently added movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
-- VideoLibrary.GetRecentlyAddedEpisodes [ReadData]: Retrieve all recently added episodes. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
-- VideoLibrary.GetRecentlyAddedMusicVideos [ReadData]: Retrieve all recently added music videos. Parameter example { "fields": ["plot"], "sortmethod": "title","sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
-- VideoLibrary.ScanForContent [ScanLibrary]:
-- System.Shutdown [ControlPower]:
-- System.Suspend [ControlPower]:
-- System.Hibernate [ControlPower]:
-- System.Reboot [ControlPower]:
-- System.GetInfoLabels [ReadData]: Retrieve info labels about the system
-- System.GetInfoBooleans [ReadData]: Retrieve info booleans about the system
-- XBMC.GetVolume [ReadData]: Retrieve the current volume
-- XBMC.SetVolume [ControlPlayback]: Set volume. Parameter integer between 0 and 100
-- XBMC.ToggleMute [ControlPlayback]: Toggle mute
-- XBMC.Play [ControlPlayback]: Starts playback
-- XBMC.StartSlideshow [ControlPlayback]: Starts slideshow. Parameter example {"directory": "/foo/", "random": true, "recursive": true} or just string to recursively and random run directory
-- XBMC.Log [Logging]: Logs a line in the xbmc.log. Parameter example {"message": "foo", "level": "info"} or just a string to log message with level debug
-- XBMC.Quit [ControlPower]: Quit xbmc
+﻿+/+ JSONRPC.Introspect [ReadData]: Enumerates all actions and descriptions. Parameter example {"getdescriptions": true, "getpermissions": true, "filterbytransport": true }. All parameters optional
++/+ JSONRPC.Version [ReadData]: Retrieve the jsonrpc protocol version
++/+ JSONRPC.Permission [ReadData]: Retrieve the clients permissions
++/+ JSONRPC.Ping [ReadData]: Ping responder
++/- JSONRPC.Announce [ReadData]: Announce to other connected clients. Parameter example {"sender": "foo", "message": "bar", "data": "somedata" }. data is optional
+
++/+ Player.GetActivePlayers [ReadData]: Returns all active players IDs
+
++/- AudioPlayer.State [ReadData]: Returns Current Playback state
++/- AudioPlayer.PlayPause [ControlPlayback]: Pauses or unpause playback, returns new state
++/+ AudioPlayer.Stop [ControlPlayback]: Stops playback
++/- AudioPlayer.SkipPrevious [ControlPlayback]: Skips to previous item on the playlist
++/- AudioPlayer.SkipNext [ControlPlayback]: Skips to next item on the playlist
++/- AudioPlayer.BigSkipBackward [ControlPlayback]:
++/- AudioPlayer.BigSkipForward [ControlPlayback]:
++/- AudioPlayer.SmallSkipBackward [ControlPlayback]:
++/- AudioPlayer.SmallSkipForward [ControlPlayback]:
++/- AudioPlayer.Rewind [ControlPlayback]: Rewind current playback
++/- AudioPlayer.Forward [ControlPlayback]: Forward current playback
+x/x AudioPlayer.GetTime [ReadData]: Retrieve time
++/+ AudioPlayer.GetTimeMS [ReadData]: Retrieve time in MS
++/- AudioPlayer.GetPercentage [ReadData]: Retrieve percentage
++/- AudioPlayer.SeekTime [ControlPlayback]: Seek to a specific time. Parameter integer in seconds
++/+ AudioPlayer.SeekPercentage [ControlPlayback]: Seek to a specific percentage. Parameter float or integer from 0 to 100
++/- AudioPlayer.Record [ControlPlayback]:
+
++/- VideoPlayer.State [ReadData]: Returns Current Playback state
++/- VideoPlayer.PlayPause [ControlPlayback]: Pauses or unpause playback, returns new state
++/- VideoPlayer.Stop [ControlPlayback]: Stops playback
++/- VideoPlayer.SkipPrevious [ControlPlayback]: Skips to previous item on the playlist
++/- VideoPlayer.SkipNext [ControlPlayback]: Skips to next item on the playlist
++/- VideoPlayer.BigSkipBackward [ControlPlayback]:
++/- VideoPlayer.BigSkipForward [ControlPlayback]:
++/- VideoPlayer.SmallSkipBackward [ControlPlayback]:
++/- VideoPlayer.SmallSkipForward [ControlPlayback]:
++/- VideoPlayer.Rewind [ControlPlayback]: Rewind current playback
++/- VideoPlayer.Forward [ControlPlayback]: Forward current playback
+x/x VideoPlayer.GetTime [ReadData]: Retrieve time
++/- VideoPlayer.GetTimeMS [ReadData]: Retrieve time in MS
++/- VideoPlayer.GetPercentage [ReadData]: Retrieve percentage
++/- VideoPlayer.SeekTime [ControlPlayback]: Seek to a specific time. Parameter integer in seconds
++/- VideoPlayer.SeekPercentage [ControlPlayback]: Seek to a specific percentage. Parameter float or integer from 0 to 100
+
+-/- PicturePlayer.PlayPause [ControlPlayback]: Pauses or unpause slideshow
+-/- PicturePlayer.Stop [ControlPlayback]: Stops slideshow
+-/- PicturePlayer.SkipPrevious [ControlPlayback]: Skips to previous picture in the slideshow
+-/- PicturePlayer.SkipNext [ControlPlayback]: Skips to next picture in the slideshow
+-/- PicturePlayer.MoveLeft [ControlPlayback]: If picture is zoomed move viewport left otherwise skip previous
+-/- PicturePlayer.MoveRight [ControlPlayback]: If picture is zoomed move viewport right otherwise skip previous
+-/- PicturePlayer.MoveDown [ControlPlayback]: If picture is zoomed move viewport down
+-/- PicturePlayer.MoveUp [ControlPlayback]: If picture is zoomed move viewport up
+-/- PicturePlayer.ZoomOut [ControlPlayback]: Zoom out once
+-/- PicturePlayer.ZoomIn [ControlPlayback]: Zoom in once
+-/- PicturePlayer.Zoom [ControlPlayback]: Zooms current picture. Parameter integer of zoom level
+-/- PicturePlayer.Rotate [ControlPlayback]: Rotates current picture
+
+-/- VideoPlaylist.Play [ControlPlayback]:
+-/- VideoPlaylist.SkipPrevious [ControlPlayback]:
+-/- VideoPlaylist.SkipNext [ControlPlayback]:
+-/- VideoPlaylist.GetItems [ReadData]:
+-/- VideoPlaylist.Add [ControlPlayback]:
+-/- VideoPlaylist.Clear [ControlPlayback]: Clear video playlist
+-/- VideoPlaylist.Shuffle [ControlPlayback]: Shuffle video playlist
+-/- VideoPlaylist.UnShuffle [ControlPlayback]: UnShuffle video playlist
+
+-/- AudioPlaylist.Play [ControlPlayback]:
+-/- AudioPlaylist.SkipPrevious [ControlPlayback]:
+-/- AudioPlaylist.SkipNext [ControlPlayback]:
+-/- AudioPlaylist.GetItems [ReadData]:
+-/- AudioPlaylist.Add [ControlPlayback]:
+-/- AudioPlaylist.Clear [ControlPlayback]: Clear audio playlist
+-/- AudioPlaylist.Shuffle [ControlPlayback]: Shuffle audio playlist
+-/- AudioPlaylist.UnShuffle [ControlPlayback]: UnShuffle audio playlist
+
+-/- Playlist.Create [ReadData]: Creates a virtual playlist from a given one from a file
+-/- Playlist.Destroy [ReadData]: Destroys a virtual playlist
+-/- Playlist.GetItems [ReadData]: Retrieve items in the playlist. Parameter example {"playlist": "music" }. playlist optional.
+-/- Playlist.Add [ControlPlayback]: Add items to the playlist. Parameter example {"playlist": "music", "file": "/foo/bar.mp3" }. playlist optional.
+-/- Playlist.Remove [ControlPlayback]: Remove items in the playlist. Parameter example {"playlist": "music", "item": 0 }. playlist optional.
+-/- Playlist.Swap [ControlPlayback]: Swap items in the playlist. Parameter example {"playlist": "music", "item1": 0, "item2": 1 }. playlist optional.
+-/- Playlist.Shuffle [ControlPlayback]: Shuffle playlist
+-/- Playlist.UnShuffle [ControlPlayback]: UnShuffle playlist
+
+-/- Files.GetSources [ReadData]: Get the sources of the media windows. Parameter example {"media": "video"}. Media can be video, music, pictures or files
+-/- Files.Download [ReadData]: Specify a file to download to get info about how to download it, i.e a proper URL
+-/- Files.GetDirectory [ReadData]: Retrieve the specified directory. Parameter example {"directory": "foo/bar", "media": "video"}. Media can be video, music, pictures or files
+
+-/- AudioLibrary.GetArtists [ReadData]: Retrieve all artists
+-/- AudioLibrary.GetAlbums [ReadData]: Retrieve all albums from specified artist or genre, Fields: album_description, album_theme, album_mood, album_style, album_type, album_label, album_artist, album_genre, album_rating, album_title
+-/- AudioLibrary.GetSongs [ReadData]: Retrieve all songs from specified album, artist or genre
+-/- AudioLibrary.ScanForContent [ScanLibrary]:
+
+-/- VideoLibrary.GetMovies [ReadData]: Retrieve all movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
+-/- VideoLibrary.GetTVShows [ReadData]: Parameter example { "fields": ["plot"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
+-/- VideoLibrary.GetSeasons [ReadData]: Parameter example { "tvshowid": 0, "fields": ["season"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
+-/- VideoLibrary.GetEpisodes [ReadData]: Parameter example { "tvshowid": 0, "season": 1, "fields": ["plot"], "sortmethod": "episode", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
+-/- VideoLibrary.GetMusicVideos [ReadData]: Parameter example { "artistid": 0, "albumid": 0, "fields": ["plot"], "sortmethod": "artistignorethe", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
+-/- VideoLibrary.GetRecentlyAddedMovies [ReadData]: Retrieve all recently added movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
+-/- VideoLibrary.GetRecentlyAddedEpisodes [ReadData]: Retrieve all recently added episodes. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
+-/- VideoLibrary.GetRecentlyAddedMusicVideos [ReadData]: Retrieve all recently added music videos. Parameter example { "fields": ["plot"], "sortmethod": "title","sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
+-/- VideoLibrary.ScanForContent [ScanLibrary]:
+
+-/- System.Shutdown [ControlPower]:
+-/- System.Suspend [ControlPower]:
+-/- System.Hibernate [ControlPower]:
+-/- System.Reboot [ControlPower]:
+-/- System.GetInfoLabels [ReadData]: Retrieve info labels about the system
+-/- System.GetInfoBooleans [ReadData]: Retrieve info booleans about the system
+
+-/- XBMC.GetVolume [ReadData]: Retrieve the current volume
+-/- XBMC.SetVolume [ControlPlayback]: Set volume. Parameter integer between 0 and 100
+-/- XBMC.ToggleMute [ControlPlayback]: Toggle mute
+-/- XBMC.Play [ControlPlayback]: Starts playback
+-/- XBMC.StartSlideshow [ControlPlayback]: Starts slideshow. Parameter example {"directory": "/foo/", "random": true, "recursive": true} or just string to recursively and random run directory
+-/- XBMC.Log [Logging]: Logs a line in the xbmc.log. Parameter example {"message": "foo", "level": "info"} or just a string to log message with level debug
+-/- XBMC.Quit [ControlPower]: Quit xbmc

@@ -53,7 +53,7 @@ namespace XBMC.JsonRpc
                 return -1;
             }
 
-            return Convert.ToInt32(query["version"].Value<JValue>().Value.ToString());
+            return (int)query["version"];
         }
 
         public ICollection<string> Permission()

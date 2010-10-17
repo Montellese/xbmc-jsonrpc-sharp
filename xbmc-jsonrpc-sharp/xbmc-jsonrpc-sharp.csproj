@@ -41,6 +41,14 @@
     <Compile Include="JsonRpcClient.cs" />
     <Compile Include="JsonRpcErrorException.cs" />
     <Compile Include="JsonRpc\XbmcJsonRpcMethod.cs" />
+    <Compile Include="Player\XbmcPicturePlayer.cs" />
+    <Compile Include="Player\XbmcPlayerPlaybackChangedEventArgs.cs" />
+    <Compile Include="Player\XbmcPlayerPlaybackPositionChangedEventArgs.cs" />
+    <Compile Include="Player\XbmcVideoPlayer.cs" />
+    <Compile Include="Player\XbmcAudioPlayer.cs" />
+    <Compile Include="Player\XbmcMediaPlayer.cs" />
+    <Compile Include="Player\XbmcPlayer.cs" />
+    <Compile Include="Player\XbmcPlayerState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocketStateObject.cs" />
     <Compile Include="StateObject.cs" />
@@ -53,14 +61,12 @@
     <Folder Include="Files\" />
     <Folder Include="Library\Audio\" />
     <Folder Include="Library\Video\" />
-    <Folder Include="Player\Audio\" />
-    <Folder Include="Player\Picture\" />
-    <Folder Include="Player\Video\" />
     <Folder Include="Playlist\Audio\" />
     <Folder Include="Playlist\Video\" />
     <Folder Include="System\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="JsonRpcAnnouncements.txt" />
     <Content Include="JsonRpcMethods.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

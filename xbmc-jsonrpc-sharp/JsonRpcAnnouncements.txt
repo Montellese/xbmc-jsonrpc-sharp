@@ -1,0 +1,10 @@
+﻿-/- PlaybackStarted
+-/- PlaybackPaused
+-/- PlaybackResumed
+-/- PlaybackStopped
+-/- PlaybackSeek
+-/- PlaybackSpeedChanged
+
+-/- QueueNextItem
+
++/+ ApplicationStop

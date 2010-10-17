@@ -26,6 +26,7 @@ namespace XBMC.JsonRpc
         private Socket socket;
 
         private XbmcJsonRpc jsonRpc;
+        private XbmcPlayer player;
 
         #endregion
 
@@ -55,6 +56,17 @@ namespace XBMC.JsonRpc
             get { return this.jsonRpc; }
         }
 
+        public XbmcPlayer Player
+        {
+            get { return this.player; }
+        }
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler Aborted;
+
         #endregion
 
         #region Constructors
@@ -70,6 +82,7 @@ namespace XBMC.JsonRpc
 
             // TODO: Setup of all namespaces
             this.jsonRpc = new XbmcJsonRpc(this.client);
+            this.player = new XbmcPlayer(this.client);
         }
 
         public XbmcJsonRpcConnection(string address, int port)
@@ -138,28 +151,67 @@ namespace XBMC.JsonRpc
 
         #region Private functions
 
+        private void onAborted()
+        {
+            if (this.Aborted == null)
+            {
+                return;
+            }
+
+            this.Aborted(this, null);
+        }
+
         private void onAnnouncement(string data)
         {
             JObject announcement = JObject.Parse(data);
-            JToken method = announcement["method"];
             JObject param = announcement["params"] as JObject;
-            if (method == null || string.CompareOrdinal(method.Value<JValue>().Value.ToString(), AnnouncementMethod) != 0
+            if (announcement["method"] == null || string.CompareOrdinal((string)announcement["method"], AnnouncementMethod) != 0
                 || param == null)
             {
                 return;
             }
 
-            JToken sender = param["sender"];
-            JToken message = param["message"];
-            if (sender == null || string.CompareOrdinal(sender.Value<JValue>().Value.ToString(), AnnouncementSender) != 0
-                || message == null)
+            if (param["sender"] == null || string.CompareOrdinal((string)param["sender"], AnnouncementSender) != 0
+                || param["message"] == null)
             {
                 return;
             }
 
-            string type = message.Value<JValue>().Value.ToString();
+            string type = (string)param["message"];
 
-            // TODO: Handle different announcement types
+            if (string.CompareOrdinal(type, "PlaybackStarted") == 0)
+            {
+                this.player.OnPlaybackStarted();
+            }
+            else if (string.CompareOrdinal(type, "PlaybackPaused") == 0)
+            {
+                this.player.OnPlaybackPaused();
+            }
+            else if (string.CompareOrdinal(type, "PlaybackResumed") == 0)
+            {
+                this.player.OnPlaybackResumed();
+            }
+            else if (string.CompareOrdinal(type, "PlaybackStopped") == 0)
+            {
+                this.player.OnPlaybackStopped();
+            }
+            else if (string.CompareOrdinal(type, "PlaybackSeek") == 0)
+            {
+                this.player.OnPlaybackSeek();
+            }
+            else if (string.CompareOrdinal(type, "PlaybackSpeedChanged") == 0)
+            {
+                this.player.OnPlaybackSpeedChanged();
+            }
+            else if (string.CompareOrdinal(type, "QueueNextItem") == 0)
+            {
+                // TODO: Handle announcement QueueNextItem
+            }
+            else if (string.CompareOrdinal(type, "ApplicationStop") == 0)
+            {
+                this.Close();
+                this.onAborted();
+            }
 
             Console.Out.WriteLine("Announcement: " + type);
         }

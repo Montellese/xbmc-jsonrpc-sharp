@@ -16,42 +16,51 @@ namespace XBMC.JsonRpc
 
         public virtual bool MoveLeft()
         {
-            throw new NotImplementedException();
+            return (this.client.Call("PicturePlayer.MoveLeft") != null);
         }
 
         public virtual bool MoveRight()
         {
-            throw new NotImplementedException();
+            return (this.client.Call("PicturePlayer.MoveRight") != null);
         }
 
         public virtual bool MoveDown()
         {
-            throw new NotImplementedException();
+            return (this.client.Call("PicturePlayer.MoveDown") != null);
         }
 
         public virtual bool MoveUp()
         {
-            throw new NotImplementedException();
+            return (this.client.Call("PicturePlayer.MoveUp") != null);
         }
 
         public virtual bool ZoomOut()
         {
-            throw new NotImplementedException();
+            return (this.client.Call("PicturePlayer.ZoomOut") != null);
         }
 
         public virtual bool ZoomIn()
         {
-            throw new NotImplementedException();
+            return (this.client.Call("PicturePlayer.ZoomIn") != null);
         }
 
         public virtual bool Zoom(int level)
         {
-            throw new NotImplementedException();
+            if (level < 1)
+            {
+                level = 1;
+            }
+            else if (level > 10)
+            {
+                level = 10;
+            }
+
+            return (this.client.Call("PicturePlayer.Zoom", level) != null);
         }
 
         public virtual bool Rotate()
         {
-            throw new NotImplementedException();
+            return (this.client.Call("PicturePlayer.Rotate") != null);
         }
 
         #endregion

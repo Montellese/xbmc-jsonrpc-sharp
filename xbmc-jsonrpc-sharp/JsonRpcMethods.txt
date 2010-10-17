@@ -41,18 +41,18 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 +/- VideoPlayer.SeekTime [ControlPlayback]: Seek to a specific time. Parameter integer in seconds
 +/- VideoPlayer.SeekPercentage [ControlPlayback]: Seek to a specific percentage. Parameter float or integer from 0 to 100
 
--/- PicturePlayer.PlayPause [ControlPlayback]: Pauses or unpause slideshow
--/- PicturePlayer.Stop [ControlPlayback]: Stops slideshow
--/- PicturePlayer.SkipPrevious [ControlPlayback]: Skips to previous picture in the slideshow
--/- PicturePlayer.SkipNext [ControlPlayback]: Skips to next picture in the slideshow
--/- PicturePlayer.MoveLeft [ControlPlayback]: If picture is zoomed move viewport left otherwise skip previous
--/- PicturePlayer.MoveRight [ControlPlayback]: If picture is zoomed move viewport right otherwise skip previous
--/- PicturePlayer.MoveDown [ControlPlayback]: If picture is zoomed move viewport down
--/- PicturePlayer.MoveUp [ControlPlayback]: If picture is zoomed move viewport up
--/- PicturePlayer.ZoomOut [ControlPlayback]: Zoom out once
--/- PicturePlayer.ZoomIn [ControlPlayback]: Zoom in once
--/- PicturePlayer.Zoom [ControlPlayback]: Zooms current picture. Parameter integer of zoom level
--/- PicturePlayer.Rotate [ControlPlayback]: Rotates current picture
++/- PicturePlayer.PlayPause [ControlPlayback]: Pauses or unpause slideshow
++/- PicturePlayer.Stop [ControlPlayback]: Stops slideshow
++/- PicturePlayer.SkipPrevious [ControlPlayback]: Skips to previous picture in the slideshow
++/- PicturePlayer.SkipNext [ControlPlayback]: Skips to next picture in the slideshow
++/- PicturePlayer.MoveLeft [ControlPlayback]: If picture is zoomed move viewport left otherwise skip previous
++/- PicturePlayer.MoveRight [ControlPlayback]: If picture is zoomed move viewport right otherwise skip previous
++/- PicturePlayer.MoveDown [ControlPlayback]: If picture is zoomed move viewport down
++/- PicturePlayer.MoveUp [ControlPlayback]: If picture is zoomed move viewport up
++/- PicturePlayer.ZoomOut [ControlPlayback]: Zoom out once
++/- PicturePlayer.ZoomIn [ControlPlayback]: Zoom in once
++/- PicturePlayer.Zoom [ControlPlayback]: Zooms current picture. Parameter integer of zoom level
++/- PicturePlayer.Rotate [ControlPlayback]: Rotates current picture
 
 -/- VideoPlaylist.Play [ControlPlayback]:
 -/- VideoPlaylist.SkipPrevious [ControlPlayback]:

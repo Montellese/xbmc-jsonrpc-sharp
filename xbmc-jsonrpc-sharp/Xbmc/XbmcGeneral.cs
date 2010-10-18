@@ -9,9 +9,21 @@ namespace XBMC.JsonRpc
     {
         #region Private variables
 
+        private XbmcSystem system;
+
         #endregion
 
         #region Public variables
+
+        public string BuildVersion
+        {
+            get { return this.system.GetInfoLabel("System.BuildVersion"); }
+        }
+
+        public DateTime BuildData
+        {
+            get { return DateTime.Parse(this.system.GetInfoLabel("System.BuildDate")); }
+        }
 
         #endregion
 
@@ -19,7 +31,9 @@ namespace XBMC.JsonRpc
 
         internal XbmcGeneral(JsonRpcClient client)
             : base(client)
-        { }
+        { 
+            this.system = new XbmcSystem(client);
+        }
 
         #endregion
 

@@ -37,10 +37,12 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Files\XbmcFiles.cs" />
     <Compile Include="InvalidJsonRpcResponseException.cs" />
     <Compile Include="JsonRpcClient.cs" />
     <Compile Include="JsonRpcErrorException.cs" />
     <Compile Include="JsonRpc\XbmcJsonRpcMethod.cs" />
+    <Compile Include="Media\MediaType.cs" />
     <Compile Include="Player\XbmcPicturePlayer.cs" />
     <Compile Include="Player\XbmcPlayerPlaybackChangedEventArgs.cs" />
     <Compile Include="Player\XbmcPlayerPlaybackPositionChangedEventArgs.cs" />
@@ -64,13 +66,12 @@
     <Compile Include="Xbmc\XbmcLogLevel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Files\" />
-    <Folder Include="Library\Audio\" />
-    <Folder Include="Library\Video\" />
+    <Folder Include="Library\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="JsonRpcAnnouncements.txt" />
     <Content Include="JsonRpcMethods.txt" />
+    <Content Include="XbmcInfoLabels.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

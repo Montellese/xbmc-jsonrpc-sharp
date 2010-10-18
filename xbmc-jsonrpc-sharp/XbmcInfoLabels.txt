@@ -1,0 +1,291 @@
+﻿XBMC's InfoLabels (10/18/2010)
+==============================
+AudioScrobbler.ConnectState						Connected to the audioscrobbler		
+AudioScrobbler.SubmitInterval					Shows next reconnect when submission failed
+AudioScrobbler.FilesCached						Number of cached songs
+AudioScrobbler.SubmitState						Shows time left until the current song is submitted
+Container.FolderPath							Shows complete path of currently displayed folder
+Container.FolderName							Shows top most folder in currently displayed folder
+Container.Viewmode								Returns the current viewmode (list, icons etc.)
+Container.SortMethod							Returns the current sort method (name, year, rating, etc.)
+Container.PluginName							Returns the current plugins base folder name
+Container.PluginCategory						Returns the current plugins category (set by the scripter)
+Container.ShowPlot								Returns the TV Show Plot of the current container and can be used at season and episode level
+Container(id).NumPages							Number of pages in the container with given id. If no id is specified it grabs the current container.
+Container(id).NumItems							Number of items in the container with given id. If no id is specified it grabs the current container.
+Container(id).CurrentPage						Current page in the container with given id. If no id is specified it grabs the current container.
+Container(id).Position							Returns the current focused position of Container (id) as a numeric label.
+Container(id).ListItem(offset).Label			Shows ListItem.Label for a specific List or Panel Container with a offset ( eg: Container(50).Listitem(2).Label )
+Container(id).ListItem(offset).Label2			Shows ListItem.Label2 for a specific List or Panel Container with a offset ( eg: Container(50).Listitem(-2).Label2 )
+Container(id).ListItem(offset).Icon				Shows ListItem.Icon for a specific List or Panel Container with a offset ( eg: Container(52).Listitem(1).Icon)
+Container(id).ListItem(offset).ActualIcon		Shows ListItem.ActualIcon for a specific List or Panel Container with a offset ( eg: Container(50).Listitem(0).ActualIcon )
+Container(id).ListItem(offset).Thumb			Shows ListItem.Thumb for a specific List or Panel Container with a offset ( eg: Container(50).Listitem(0).Thumb )
+Container.Property(addoncategory)				Returns the current add-on category
+Container.Property(reponame)					Returns the current add-on repository name
+Control.GetLabel(id)							Returns the label value or texture name of the control with the given id.
+Fanart.Color1									Returns the first of three colors included in the currently selected Fanart theme for the parent TV Show. Colors are arranged Lightest to Darkest.
+Fanart.Color2									Returns the second of three colors included in the currently selected Fanart theme for the parent TV Show. Colors are arranged Lightest to Darkest.
+Fanart.Color3									Returns the third of three colors included in the currently selected Fanart theme for the parent TV Show. Colors are arranged Lightest to Darkest.
+Listitem.Label									Shows the left label of the currently selected item in a list or thumb control
+ListItem.Label2									Shows the right label of the currently selected item in a list or thumb control
+ListItem.Title									Shows the title of the currently selected song or movie in a list or thumb control
+ListItem.OriginalTitle							Shows the original title of the currently selected movie in a list or thumb control
+ListItem.SortLetter								Shows the first letter of the current file in a list or thumb control
+ListItem.TrackNumber							Shows the track number of the currently selected song in a list or thumb control
+ListItem.Artist									Shows the artist of the currently selected song in a list or thumb control
+ListItem.Property(Artist_Born)					Date of Birth of the currently selected Artist
+ListItem.Property(Artist_Died)					Date of Death of the currently selected Artist
+ListItem.Property(Artist_Formed)				Formation date of the currently selected Band
+ListItem.Property(Artist_Disbanded)				Disbanding date of the currently selected Band
+ListItem.Property(Artist_YearsActive)			Years the currently selected artist has been active
+ListItem.Property(Artist_Instrument)			Instruments played by the currently selected artist
+ListItem.Property(Artist_Description)			Shows a biography of the currently selected artist
+ListItem.Property(Artist_Mood)					Shows the moods of the currently selected artist
+ListItem.Property(Artist_Style)					Shows the styles of the currently selected artist
+ListItem.Property(Artist_Genre)					Shows the genre of the currently selected artist
+ListItem.Album									Shows the album of the currently selected song in a list or thumb control
+ListItem.Property(Album_Mood)					Shows the moods of the currently selected Album
+ListItem.Property(Album_Style)					Shows the styles of the currently selected Album
+ListItem.Property(Album_Theme)					Shows the themes of the currently selected Album
+ListItem.Property(Album_Type)					Shows the Album Type (e.g. compilation, enhanced, explicit lyrics) of the currently selected Album
+ListItem.Property(Album_Label)					Shows the record label of the currently selected Album
+ListItem.Property(Album_Description)			Shows a review of the currently selected Album
+ListItem.Year									Shows the year of the currently selected song, album or movie in a list or thumb control
+ListItem.Premiered								Shows the release/aired date of the currently selected episode, show or movie in a list or thumb control
+ListItem.Genre									Shows the genre of the currently selected song, album or movie in a list or thumb control
+ListItem.Director								Shows the director of the currently selected movie in a list or thumb control
+ListItem.Country								Shows the production country of the currently selected movie in a list or thumb control
+ListItem.Episode								Shows the number of total, watched or unwatched episodes for the currently selected tvshow or season based on the the current watched filter
+ListItem.Season									Shows the season value for the currently selected tvshow
+ListItem.TVShowTitle							Shows the name value for the currently selected tvshow in the season and episode depth of the video library
+ListItem.Property(TotalEpisodes)				Shows the total number of episodes for the currently selected tvshow or season
+ListItem.Property(WatchedEpisodes)				Shows the number of watched episodes for the currently selected tvshow or season
+ListItem.Property(UnWatchedEpisodes)			Shows the number of unwatched episodes for the currently selected tvshow or season
+ListItem.Property(NumEpisodes)					Shows the number of total, watched or unwatched episodes for the currently selected tvshow or season, based on the the current watched filter. (same as ListItem.Episode)
+ListItem.PictureResolution						Shows the dimensions of the selected picture
+ListItem.PictureDateTime						Shows the date/timestamp of the selected picture
+ListItem.FileName								Shows the filename of the currently selected song or movie in a list or thumb control
+ListItem.Path									Shows the complete path of the currently selected song or movie in a list or thumb control
+ListItem.FolderName								Shows top most folder of the path of the currently selected song or movie in a list or thumb control
+ListItem.FileNameAndPath						Shows the full path with filename of the currently selected song or movie in a list or thumb control
+ListItem.Date									Shows the file date of the currently selected song or movie in a list or thumb control
+ListItem.Size									Shows the file size of the currently selected song or movie in a list or thumb control
+ListItem.Rating									Shows the IMDB rating of the currently selected movie in a list or thumb control
+ListItem.RatingAndVotes							Shows the IMDB rating and votes of the currently selected movie in a list or thumb control
+ListItem.Mpaa									Show the MPAA rating of the currently selected movie in a list or thumb control
+ListItem.ProgramCount							Shows the number of times an xbe has been run from "my programs"
+ListItem.Duration								Shows the song or movie duration of the currently selected movie in a list or thumb control
+ListItem.Cast									Shows a concatenated string of cast members of the currently selected movie in a list or thumb control
+ListItem.CastAndRole							Shows a concatenated string of cast members and roles of the currently selected movie in a list or controlpanel
+ListItem.Studio									Studio of current selected Music Video in a list or thumb control
+ListItem.Trailer								Shows the full trailer path with filename of the currently selected movie in a list or thumb control
+ListItem.Writer									Name of Writer of current Video in a list or thumb control
+listitem.Tagline								Small Summary of current Video in a list or thumb control
+ListItem.PlotOutline							Small Summary of current Video in a list or thumb control
+ListItem.Plot									Complete Text Summary of Video in a list or thumb control
+ListItem.VideoCodec								Shows the video codec of the currently selected video (common values: 3iv2, avc1, div2, div3, divx, divx 4, dx50, flv, h264, microsoft, mp42, mp43, mp4v, mpeg1video, mpeg2video, mpg4, rv40, svq1, svq3, theora, vp6f, wmv2, wmv3, wvc1, xvid)
+ListItem.VideoResolution						Shows the resolution of the currently selected video (possible values: 480, 576, 540, 720, 1080). Note that 540 usually means a widescreen format (around 960x540) while 576 means PAL resolutions (normally 720x576), therefore 540 is actually better resolution than 576.
+ListItem.VideoAspect							Shows the aspect ratio of the currently selected video (possible values: 1.33, 1.66, 1.78, 1.85, 2.20, 2.35)
+ListItem.AudioCodec								Shows the audio codec of the currently selected video (common values: aac, ac3, cook, dca, eac3, mp1, mp2, mp3, pcm_s16be, pcm_s16le, pcm_u8, vorbis, wmapro, wmav2)
+ListItem.AudioChannels							Shows the number of audio channels of the currently selected video (possible values: 0, 1, 2, 4, 5, 6, 8)
+ListItem.AudioLanguage							Shows the audio language of the currently selected video (returns an ISO 639-2 three character code, e.g. eng, epo, deu)
+ListItem.SubtitleLanguage						Shows the subtitle language of the currently selected video (returns an ISO 639-2 three character code, e.g. eng, epo, deu)
+ListItem.Property(Addon.Name)					Shows the name of the currently selected addon
+ListItem.Property(Addon.Version)				Shows the version of the currently selected addon
+ListItem.Property(Addon.Summary)				Shows a short description of the currently selected addon
+ListItem.Property(Addon.Description)			Shows the full description of the currently selected addon
+ListItem.Property(Addon.Type)					Shows the type (screensaver, script, skin, etc...) of the currently selected addon
+ListItem.Property(Addon.Creator)				Shows the name of the author the currently selected addon
+ListItem.Property(Addon.Disclaimer)				Shows the disclaimer of the currently selected addon
+ListItem.Property(Addon.Changelog)				Shows the changelog of the currently selected addon
+ListItem.Property(Addon.ID)						Shows the identifier of the currently selected addon
+ListItem.Property(Addon.Status)					Shows the status of the currently selected addon
+ListItem.Property(Addon.Broken)					Shows a message when the addon is marked as broken in the repo
+ListItem.Property(Addon.Path)					Shows the path of the currently selected addon
+MusicPlayer.Title								Title of the currently playing song, also available are "MusicPlayer.offset(number).Title" offset is relative to the current playing item and "MusicPlayer.Position(number).Title" position is relative to the start of the playlist
+MusicPlayer.Album								Album from which the current song is from, also available are "MusicPlayer.offset(number).Album" offset is relative to the current playing item and "MusicPlayer.Position(number).Album" position is relative to the start of the playlist
+MusicPlayer.Property(Album_Mood)				Shows the moods of the currently playing Album
+MusicPlayer.Property(Album_Style)				Shows the styles of the currently playing Album
+MusicPlayer.Property(Album_Theme)				Shows the themes of the currently playing Album
+MusicPlayer.Property(Album_Type)				Shows the Album Type (e.g. compilation, enhanced, explicit lyrics) of the currently playing Album
+MusicPlayer.Property(Album_Label)				Shows the record label of the currently playing Album
+MusicPlayer.Property(Album_Description)			Shows a review of the currently playing Album
+MusicPlayer.Artist								Artist(s) of current song, also available are "MusicPlayer.offset(number).Artist" offset is relative to the current playing item and "MusicPlayer.Position(number).Artist" position is relative to the start of the playlist
+MusicPlayer.Property(Artist_Born)				Date of Birth of the currently playing Artist
+MusicPlayer.Property(Artist_Died)				Date of Death of the currently playing Artist
+MusicPlayer.Property(Artist_Formed)				Formation date of the currently playing Artist/Band
+MusicPlayer.Property(Artist_Disbanded)			Disbanding date of the currently playing Artist/Band
+MusicPlayer.Property(Artist_YearsActive)		Years the currently Playing artist has been active
+MusicPlayer.Property(Artist_Instrument)			Instruments played by the currently playing artist
+MusicPlayer.Property(Artist_Description)		Shows a biography of the currently playing artist
+MusicPlayer.Property(Artist_Mood)				Shows the moods of the currently playing artist
+MusicPlayer.Property(Artist_Style)				Shows the styles of the currently playing artist
+MusicPlayer.Property(Artist_Genre)				Shows the genre of the currently playing artist
+MusicPlayer.Genre								Genre(s) of current song, also available are "MusicPlayer.offset(number).Genre" offset is relative to the current playing item and "MusicPlayer.Position(number).Genre" position is relative to the start of the playlist
+MusicPlayer.Year								Year of release of current song, also available are "MusicPlayer.offset(number).Year" offset is relative to the current playing item and "MusicPlayer.Position(number).Year" position is relative to the start of the playlist
+MusicPlayer.Rating								Numeric Rating of current song, also available are "MusicPlayer.offset(number).Rating" offset is relative to the current playing item and "MusicPlayer.Position(number).Rating" position is relative to the start of the playlist
+MusicPlayer.DiscNumber							Disc Number of current song stored in ID tag info, also available are "MusicPlayer.offset(number).DiscNumber" offset is relative to the current playing item and "MusicPlayer.Position(number).DiscNumber" position is relative to the start of the playlist
+MusicPlayer.Comment								Comment of current song stored in ID tag info, also available are "MusicPlayer.offset(number).Comment" offset is relative to the current playing item and "MusicPlayer.Position(number).Comment" position is relative to the start of the playlist
+MusicPlayer.Time								Current time in song
+MusicPlayer.TimeRemaining						Current remaining time in song
+MusicPlayer.TimeSpeed							Both the time and the playspeed formatted up. eg 1:23 (2x)
+MusicPlayer.TrackNumber							Track number of current song, also available are "MusicPlayer.offset(number).TrackNumber" offset is relative to the current playing item and "MusicPlayer.Position(number).TrackNumber" position is relative to the start of the playlist
+MusicPlayer.Duration							Duration of current song, also available are "MusicPlayer.offset(number).Duration" offset is relative to the current playing item and "MusicPlayer.Position(number).Duration" position is relative to the start of the playlist
+MusicPlayer.BitRate								Bitrate of current song
+MusicPlayer.Channels							Number of channels of current song
+MusicPlayer.BitsPerSample						Number of bits per sample of current song
+MusicPlayer.SampleRate							Samplerate of current song
+MusicPlayer.Codec								Codec of current song
+MusicPlayer.PlaylistPosition					Position of the current song in the current music playlist
+MusicPlayer.PlaylistLength						Total size of the current music playlist
+MusicPartyMode.SongsPlayed						Number of songs played during Party Mode
+MusicPartyMode.MatchingSongs					Number of songs available to Party Mode
+MusicPartyMode.MatchingSongsPicked				Number of songs picked already for Party Mode
+MusicPartyMode.MatchingSongsLeft				Number of songs left to be picked from for Party Mode
+MusicPartyMode.RelaxedSongsPicked				Not currently used
+MusicPartyMode.RandomSongsPicked				Number of unique random songs picked during Party Mode
+Network.IPAddress								The Xbox's IP Address (formatted as IP: <ipaddress>)
+Network.MacAddress								The Xbox's mac address
+Network.IsDHCP									Network type is DHCP or FIXED
+Network.LinkState								Network linkstate e.g. 10mbit/100mbit etc.
+Network.SubnetAddress							Network subnet address
+Network.GatewayAddress							Network gateway address
+Network.DHCPAddress								DHCP ip address
+Network.DNS1Address								Network dns 1 address
+Network.DNS2Address								Network dns 2 address
+Player.FinishTime								Time playing media will end
+Player.Time										Elapsed time of current playing media
+Player.TimeRemaining							Remaining time of current playing media
+Player.Duration									Total duration of the current playing media
+Player.SeekTime									Time to which the user is seeking
+Player.SeekOffset								Indicates the seek offset after a seek press (eg user presses BigStepForward, player.seekoffset returns +10:00)
+Player.Volume									Current volume (between -60 and 0dB)
+Player.CacheLevel								Players current cache fill percentage (if supported by the player)
+Player.Folderpath								Shows the full path of the currently playing song or movie
+Player.Filenameandpath							Shows the full path with filename of the currently playing song or movie
+Playlist.Position								Position of the current item in the current playlist (video or music)
+Playlist.Length									Total size of the current playlist (video or music)
+Playlist.Random									Returns string ID's 590 (Randomize Play Enabled) or 591 (Disabled)
+Playlist.Repeat									Returns string ID's 592 (Repeat One), 593 (Repeat All), or 594 (Repeat Off)
+Skin.CurrentTheme								Returns the current selected skin theme.
+Skin.String(name)								Returns the user-set skin string, set via the Skin.SetString(name) built in function. Allows skinners to have user-customisable labels.
+System.Time										Current time
+System.Time(xx)									Shows hours (hh), minutes (mm) or seconds (ss)
+System.Date										Current date
+System.AlarmPos									Shutdown Timer position
+System.FreeSpace								Total Freespace on the drive
+System.UsedSpace								Total Usedspace on the drive
+System.TotalSpace								Totalspace on the drive
+System.UsedSpacePercent							Total Usedspace Percent on the drive
+System.FreeSpacePercent							Total Freespace Percent on the drive
+System.Freespace(DRIVE)							Freespace on drive DRIVE. DRIVE can be C, E, F, G, X, Y or Z
+System.UsedSpace(DRIVE)							Usedspace on drive DRIVE. DRIVE can be C, E, F, G, X, Y or Z
+System.TotalSpace(DRIVE)						Totalspace on drive DRIVE. DRIVE can be C, E, F, or G
+System.UsedSpacePercent(DRIVE)					Usedspace Percent on drive DRIVE. DRIVE can be C, E, F, or G
+System.FreeSpacePercent(DRIVE)					Freespace Percent on drive DRIVE. DRIVE can be C, E, F, or G
+System.CPUTemperature							Current CPU temperature
+System.GPUTemperature							Current GPU temperature
+System.FanSpeed									Current fan speed
+System.BuildVersion								Version of build
+System.BuildDate								Date of build
+System.FPS										Current rendering speed (frames per second)
+System.FreeMemory								Amount of free memory in Mb
+System.ScreenMode								Screenmode (eg PAL)
+System.ScreenWidth								Width of screen in pixels
+System.ScreenHeight								Height of screen in pixels
+System.CurrentWindow							Current Window we are in
+System.CurrentControl							Current focused control
+System.XboxNickName								Nickname of the xbox
+System.DVDLabel									Label of the disk in the DVD-ROM drive
+System.LaunchXBE								Label of the currently launched Game or Application
+System.HddTemperature							Hdd temperature
+System.Hddinfomodel								Hdd model info
+System.HddInfoFirmware							Hdd firmware version
+System.HddInfoSerial							Hdd serial number
+System.HddInfoPw								Hdd password
+System.HddInfoLockState							Hdd lockstate info
+System.HddLockKey								Hdd lock key
+System.HddBootDate								Hdd first boot date
+System.HddCycleCount							Hdd switch on counter
+System.DvdInfoModel								Dvd model info
+System.DvdInfoFirmware							Dvd firmware version
+System.HddCycleCount							Hhdd switch on counter
+System.MplayerVersion							Mplayer.dll version
+System.KernelVersion							Xbox kernel version
+System.Uptime									System current uptime
+System.TotalUptime								System total uptime
+System.CpuFrequency								Xbox cpu frequency
+System.XboxVersion								Detected xbox version
+System.AvCablepackInfo							Av cablepack info
+System.ScreenResolution							Screen resolution
+System.VideoEncoderInfo							Video encoder info
+System.XboxSerial								Xbox serial number
+System.VideoXbeRegion							Xbox video xbe region
+System.Bios										Xbox detected bios, id's -> \system\systeminfo\biosIds.ini
+System.Modchip									Detected modchip
+System.InternetState							Will return the internet state, connected or not connected and for Conditional use: Connected->TRUE, not Connected->FALSE, do not use to check status in a pythonscript since it is threaded.
+System.ControllerPort(x)						For x=1,2,3,4 will in time return connected devices on the controller port e.g. system.controllerport(1)
+System.Language									Shows the current language
+System.GetBool(boolean)							Returns the value of any standard system boolean setting. Will not work with settings in advancedsettings.xml
+System.ProfileName								Shows the User name of the currently logged in XBMC user
+Visualisation.Preset							Shows the current preset of the visualisation
+Visualisation.Name								Shows the name of the visualisation
+VideoPlayer.Time								Current time in movie
+VideoPlayer.TimeRemaining						Current remaining time in movie
+VideoPlayer.TimeSpeed							Current time + playspeed. eg 1:23:14 (-4x)
+VideoPlayer.Duration							Length of current movie
+VideoPlayer.Title								Title of currently playing video. If it's in the database it will return the database title, else the filename
+VideoPlayer.TVShowTitle							Title of currently playing episode's tvshow name
+VideoPlayer.Genre								Genre(s) of current movie, if it's in the database
+VideoPlayer.Director							Director of current movie, if it's in the database
+VideoPlayer.Country								Production country of current movie, if it's in the database
+VideoPlayer.Year								Year of release of current movie, if it's in the database
+VideoPlayer.Rating								IMDb user rating of current movie, if it's in the database
+VideoPlayer.RatingAndVotes						IMDb user rating and votes of current movie, if it's in the database
+VideoPlayer.mpaa								MPAA rating of current movie, if it's in the database
+VideoPlayer.PlaylistPosition					Position of the current song in the current video playlist
+VideoPlayer.PlaylistLength						Total size of the current video playlist
+VideoPlayer.Cast								A concatenated string of cast members of the current movie, if it's in the database
+VideoPlayer.CastAndRole							A concatenated string of cast members and roles of the current movie, if it's in the database
+VideoPlayer.Album								Album from which the current Music Video is from, if it's in the database
+VideoPlayer.Artist								Artist(s) of current Music Video, if it's in the database
+VideoPlayer.Studio								Studio of current Music Video, if it's in the database
+VideoPlayer.Writer								Name of Writer of current playing Video, if it's in the database
+VideoPlayer.Tagline								Small Summary of current playing Video, if it's in the database
+VideoPlayer.PlotOutline							Small Summary of current playing Video, if it's in the database
+VideoPlayer.Plot								Complete Text Summary of current playing Video, if it's in the database
+VideoPlayer.VideoCodec							Shows the video codec of the currently playing video (common values: see ListItem.VideoCodec)
+VideoPlayer.VideoResolution						Shows the video resolution of the currently playing video (possible values: see ListItem.VideoResolution)
+VideoPlayer.VideoAspect							Shows the aspect ratio of the currently playing video (possible values: see ListItem.VideoAspect)
+VideoPlayer.AudioCodec							Shows the audio codec of the currently playing video (common values: see ListItem.AudioCodec)
+VideoPlayer.AudioChannels						Shows the number of audio channels of the currently playing video (possible values: see ListItem.AudioChannels)
+Weather.Conditions								Current weather conditions – this is looked up in a background process.
+Weather.Temperature								Current weather temperature
+Weather.Location								City/town which the above two items are for
+Window([window]).Property(key)					Window property. (key can be any value, optional window can be id or name)
+Window.Property(xmlfile)						Displays the name of the xml file currently shown
+Window(Weather).Property(key)					The weather window has the following info labels. Location, Updated, Current.Condition, Current.Temperature, Current.FeelsLike, Current.UVIndex, Current.Wind, Current.DewPoint, Current.Humidity, Day0.Title, Day0.HighTemp, Day0.LowTemp, Day0.Outlook, Day1.Title, Day1.HighTemp, Day1.LowTemp, Day1.Outlook, Day2.Title, Day2.HighTemp, Day2.LowTemp, Day2.Outlook, Day3.Title, Day3.HighTemp, Day3.LowTemp, Day3.Outlook
+XLinkKai.UserName								Shows the XLink Kai username 
+
+Images Available in XBMC
+========================
+Container.FolderThumb							Thumbnail Image of the current displayed folder of list and thumb panels
+Container.TvshowThumb							Thumbnail Image of the parent TV show
+Container.SeasonThumb							Thumbnail Image of the parent TV show season
+Fanart.Image									Fanart image for the parent TV Show
+Listitem.Property(Fanart_Image)					Fanart image for the selected item
+ListItem.Thumb									Shows the thumbnail (if it exists) of the currently selected item in a list or thumb control
+ListItem.Icon									Shows the thumbnail (if it exists) of the currently selected item in a list or thumb control. If no thumbnail image exists, it will show the "Big" version of the icon.
+ListItem.ActualIcon								Shows the icon of the currently selected item in a list or thumb control.
+ListItem.Overlay								Shows the Overlay Icon status (compressed file, Trainer, watched, unwatched, locked) of the currently selected item in a list or thumb control.
+ListItem.Property(SeasonThumb)					Thumbnail Image of the parent TV show season, for use in dialogvideoinfo.xml
+ListItem.Property(Addon.StarRating)				Returns a value of rating0.png to rating5.png for the currently selected addon
+MusicPlayer.Cover								Cover of currently playing album
+MusicPlayer.Property(Fanart_Image)				Fanart image of the currently playing artist
+Player.StarRating								Returns a value of 0 to 5 as a graphical display from images named rating0.png to rating5.png of the skin
+Skin.String(name)								Returns the image or image folder set by the user via a Skin.SetPath(name) or Skin.SetImage(name) built in function. Allows skinners to have user-customisable images and multiimages.
+System.ProfileThumb								Shows the Thumbnail image of the currently logged in XBMC user
+VideoPlayer.Cover								Cover of currently playing movie
+Weather.Conditions								Image of current weather conditions
+Window([window]).Property(key)					Window property. (key can be any value, optional window can be id or name)
+Window(Weather).Property(key)					The weather window has the following info images. Current.ConditionIcon, Day0.OutlookIcon, Day1.OutlookIcon, Day2.OutlookIcon, Day3.OutlookIcon, Current.FanartCode, Day0.FanartCode, Day1.FanartCode, Day2.FanartCode, Day3.FanartCode

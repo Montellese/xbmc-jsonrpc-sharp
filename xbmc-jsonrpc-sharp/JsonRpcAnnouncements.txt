@@ -2,9 +2,19 @@
 +/+ PlaybackPaused
 +/+ PlaybackResumed
 +/- PlaybackStopped
++/- PlaybackEnded
 +/- PlaybackSeek
++/- PlaybackSeekChapter
 +/+ PlaybackSpeedChanged
 
 -/- QueueNextItem
 
 +/+ ApplicationStop
++/- Shutdown
++/- Suspend
++/- Hibernate
++/- Reboot
++/- Sleep
++/- Wake
++/- Resume
++/- LowBattery

@@ -61,6 +61,8 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 +/- VideoPlaylist.SkipNext [ControlPlayback]:
 -/- VideoPlaylist.GetItems [ReadData]:
 -/- VideoPlaylist.Add [ControlPlayback]:
+-/- VideoPlaylist.Insert [ControlPlayback]:
++/- VideoPlaylist.Remove [ControlPlayback]:
 +/- VideoPlaylist.Clear [ControlPlayback]: Clear video playlist
 +/- VideoPlaylist.Shuffle [ControlPlayback]: Shuffle video playlist
 +/- VideoPlaylist.UnShuffle [ControlPlayback]: UnShuffle video playlist
@@ -70,6 +72,8 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 +/- AudioPlaylist.SkipNext [ControlPlayback]:
 -/- AudioPlaylist.GetItems [ReadData]:
 -/- AudioPlaylist.Add [ControlPlayback]:
+-/- AudioPlaylist.Insert [ControlPlayback]:
++/- AudioPlaylist.Remove [ControlPlayback]:
 +/- AudioPlaylist.Clear [ControlPlayback]: Clear audio playlist
 +/- AudioPlaylist.Shuffle [ControlPlayback]: Shuffle audio playlist
 +/- AudioPlaylist.UnShuffle [ControlPlayback]: UnShuffle audio playlist
@@ -83,7 +87,7 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 +/- Playlist.Shuffle [ControlPlayback]: Shuffle playlist
 +/- Playlist.UnShuffle [ControlPlayback]: UnShuffle playlist
 
--/- Files.GetSources [ReadData]: Get the sources of the media windows. Parameter example {"media": "video"}. Media can be video, music, pictures or files
++/+ Files.GetSources [ReadData]: Get the sources of the media windows. Parameter example {"media": "video"}. Media can be video, music, pictures or files
 +/- Files.Download [ReadData]: Specify a file to download to get info about how to download it, i.e a proper URL
 +/- Files.GetDirectory [ReadData]: Retrieve the specified directory. Parameter example {"directory": "foo/bar", "media": "video"}. Media can be video, music, pictures or files
 

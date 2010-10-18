@@ -223,9 +223,17 @@ namespace XBMC.JsonRpc
             {
                 this.player.OnPlaybackStopped();
             }
+            else if (string.CompareOrdinal(type, "PlaybackEnded") == 0)
+            {
+                this.player.OnPlaybackEnded();
+            }
             else if (string.CompareOrdinal(type, "PlaybackSeek") == 0)
             {
                 this.player.OnPlaybackSeek();
+            }
+            else if (string.CompareOrdinal(type, "PlaybackSeekChapter") == 0)
+            {
+                this.player.OnPlaybackSeekChapter();
             }
             else if (string.CompareOrdinal(type, "PlaybackSpeedChanged") == 0)
             {
@@ -239,6 +247,43 @@ namespace XBMC.JsonRpc
             {
                 this.Close();
                 this.onAborted();
+            }
+            else if (string.CompareOrdinal(type, "Shutdown") == 0)
+            {
+                this.Close();
+                this.system.OnShutdown();
+            }
+            else if (string.CompareOrdinal(type, "Suspend") == 0)
+            {
+                this.Close();
+                this.system.OnSuspend();
+            }
+            else if (string.CompareOrdinal(type, "Hibernate") == 0)
+            {
+                this.Close();
+                this.system.OnHibernate();
+            }
+            else if (string.CompareOrdinal(type, "Reboot") == 0)
+            {
+                this.Close();
+                this.system.OnReboot();
+            }
+            else if (string.CompareOrdinal(type, "Sleep") == 0)
+            {
+                this.Close();
+                this.system.OnSleep();
+            }
+            else if (string.CompareOrdinal(type, "Wake") == 0)
+            {
+                this.system.OnWake();
+            }
+            else if (string.CompareOrdinal(type, "Resume") == 0)
+            {
+                this.system.OnResume();
+            }
+            else if (string.CompareOrdinal(type, "LowBattery") == 0)
+            {
+                this.system.OnLowBattery();
             }
 
             Console.Out.WriteLine("Announcement: " + type);

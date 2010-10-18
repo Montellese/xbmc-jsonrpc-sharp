@@ -61,6 +61,19 @@ namespace XBMC.JsonRpc
 
         #endregion
 
+        #region Events
+
+        public event EventHandler ShuttingDown;
+        public event EventHandler Suspending;
+        public event EventHandler Hibernating;
+        public event EventHandler Rebooting;
+        public event EventHandler Sleeping;
+        public event EventHandler Waking;
+        public event EventHandler Resuming;
+        public event EventHandler LowBattery;
+
+        #endregion
+
         #region Constructor
 
         internal XbmcSystem(JsonRpcClient client)
@@ -201,6 +214,74 @@ namespace XBMC.JsonRpc
             }
 
             return (bool)result[label];
+        }
+
+        #endregion
+
+        #region Internal functions
+
+        internal void OnShutdown()
+        {
+            if (this.ShuttingDown != null)
+            {
+                this.ShuttingDown(this, null);
+            }
+        }
+
+        internal void OnSuspend()
+        {
+            if (this.Suspending != null)
+            {
+                this.Suspending(this, null);
+            }
+        }
+
+        internal void OnHibernate()
+        {
+            if (this.Hibernating != null)
+            {
+                this.Hibernating(this, null);
+            }
+        }
+
+        internal void OnReboot()
+        {
+            if (this.Rebooting != null)
+            {
+                this.Rebooting(this, null);
+            }
+        }
+
+        internal void OnSleep()
+        {
+            if (this.Sleeping != null)
+            {
+                this.Sleeping(this, null);
+            }
+        }
+
+        internal void OnWake()
+        {
+            if (this.Waking != null)
+            {
+                this.Waking(this, null);
+            }
+        }
+
+        internal void OnResume()
+        {
+            if (this.Resuming != null)
+            {
+                this.Resuming(this, null);
+            }
+        }
+
+        internal void OnLowBattery()
+        {
+            if (this.LowBattery != null)
+            {
+                this.LowBattery(this, null);
+            }
         }
 
         #endregion

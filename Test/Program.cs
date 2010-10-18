@@ -24,11 +24,13 @@ namespace Test
                     xbmc.Player.PlaybackPaused += xbmc_PlaybackPaused;
                     xbmc.Player.PlaybackResumed += xbmc_PlaybackResumed;
                     xbmc.Player.PlaybackStopped += xbmc_PlaybackStopped;
+                    xbmc.Player.PlaybackEnded += xbmc_PlaybackEnded;
                     xbmc.Player.PlaybackSeek += xbmc_PlaybackSeek;
                     xbmc.Player.PlaybackSpeedChanged += xbmc_PlaybackSpeedChanged;
 
-                    Console.Out.WriteLine("succeeded (Version {0})",     xbmc.JsonRpc.Version());
+                    Console.Out.WriteLine("succeeded (Version {0})", xbmc.JsonRpc.Version());
                     Console.Out.WriteLine("Press <Enter> to disconnect...");
+                    //xbmc.Playlist.GetItems();
 
                     while (!aborted)
                     {
@@ -71,7 +73,12 @@ namespace Test
 
         private static void xbmc_PlaybackStopped(object sender, EventArgs e)
         {
-            Console.Out.WriteLine("Playback  stopped");
+            Console.Out.WriteLine("Playback stopped");
+        }
+
+        private static void xbmc_PlaybackEnded(object sender, EventArgs e)
+        {
+            Console.Out.WriteLine("Playback ended");
         }
 
         private static void xbmc_PlaybackSeek(object sender, XbmcPlayerPlaybackPositionChangedEventArgs e)

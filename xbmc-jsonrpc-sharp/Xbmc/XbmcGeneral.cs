@@ -114,6 +114,7 @@ namespace XBMC.JsonRpc
 
         public bool Play()
         {
+            // TODO: XBMC.Play()
             throw new NotImplementedException();
         }
 

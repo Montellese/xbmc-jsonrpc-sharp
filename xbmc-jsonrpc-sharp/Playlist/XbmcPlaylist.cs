@@ -59,44 +59,39 @@ namespace XBMC.JsonRpc
             return (this.client.Call("Playlist.Destroy", this.getPlaylistArgument(playlist)) != null);
         }
 
+        public bool GetItems()
+        {
+            // TODO: Playlist.GetItems()
+            throw new NotSupportedException();
+        }
+
         public bool GetItems(string playlist)
         {
-            if (string.IsNullOrEmpty(playlist))
-            {
-                return false;
-            }
-
-            throw new NotImplementedException();
+            // TODO: Playlist.GetItems(playlist)
+            throw new NotSupportedException();
         }
 
-        public bool Add(string playlist)
+        public bool Add(string playlist, string file)
+        {
+            // TODO: Playlist.Add
+            throw new NotSupportedException();
+        }
+
+        public bool Remove(string playlist, int item)
+        {
+            // TODO: Playlist.Remove
+            throw new NotSupportedException();
+        }
+
+        public bool Swap(string playlist, int item1, int item2)
         {
             if (string.IsNullOrEmpty(playlist))
             {
                 return false;
             }
 
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(string playlist)
-        {
-            if (string.IsNullOrEmpty(playlist))
-            {
-                return false;
-            }
-
-            throw new NotImplementedException();
-        }
-
-        public bool Swap(string playlist)
-        {
-            if (string.IsNullOrEmpty(playlist))
-            {
-                return false;
-            }
-
-            throw new NotImplementedException();
+            // TODO: Playlist.Swap
+            throw new NotSupportedException();
         }
 
         public bool Shuffle(string playlist)

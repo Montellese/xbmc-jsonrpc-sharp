@@ -16,9 +16,26 @@ namespace XBMC.JsonRpc
 
         #region JSON RPC Calls
 
-        public ICollection<string> GetSources(XbmcMediaType mediaType)
+        public ICollection<XbmcFileSource> GetSources(XbmcMediaType mediaType)
         {
-            throw new NotImplementedException();
+            JObject args = new JObject();
+            args.Add(new JProperty("media", getMediaType(mediaType)));
+
+            JObject query = this.client.Call("Files.GetSources", args) as JObject;
+            List<XbmcFileSource> sources = new List<XbmcFileSource>();
+            if (query != null && query["shares"] != null)
+            {
+                foreach (JObject source in (JArray)query["shares"])
+                {
+                    XbmcFileSource src = XbmcFileSource.FromJsonObject(source);
+                    if (src != null)
+                    {
+                        sources.Add(src);
+                    }
+                }
+            }
+
+            return sources;
         }
 
         public string GetDownloadUrl(string file)

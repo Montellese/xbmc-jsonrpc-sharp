@@ -54,22 +54,6 @@ namespace XBMC.JsonRpc
             throw new NotImplementedException();
         }
 
-        public virtual bool Insert()
-        {
-            // TODO: MediaPlaylist.Insert()
-            throw new NotImplementedException();
-        }
-
-        public virtual bool Remove(int item)
-        {
-            if (item < 0)
-            {
-                throw new IndexOutOfRangeException();
-            }
-
-            return (this.client.Call(this.playlistName + ".Remove", item) != null);
-        }
-
         public virtual bool Clear()
         {
             return (this.client.Call(this.playlistName + ".Clear") != null);

@@ -1,12 +1,17 @@
 ﻿using System;
+using Newtonsoft.Json.Linq;
 
 namespace XBMC.JsonRpc
 {
-    public class XbmcMediaPlaylist : XbmcJsonRpcNamespace
+    public abstract class XbmcMediaPlaylist<TMediaType>
+        : XbmcJsonRpcNamespace
+        where TMediaType : XbmcMedia 
     {
         #region Private variables
 
         private string playlistName;
+
+        protected string[] fields;
 
         #endregion
 
@@ -21,6 +26,7 @@ namespace XBMC.JsonRpc
             }
 
             this.playlistName = playlistName;
+            this.fields = new string[] { "title", "artist", "genre", "year", "rating" };
         }
 
         #endregion
@@ -42,11 +48,11 @@ namespace XBMC.JsonRpc
             return (this.client.Call(this.playlistName + ".SkipNext") != null);
         }
 
-        public virtual bool GetItems()
-        {
-            // TODO: MediaPlaylist.GetItems()
-            throw new NotImplementedException();
-        }
+        public abstract TMediaType GetCurrentItem(params string[] fields);
+
+        public abstract XbmcPlaylist<TMediaType> GetItems(params string[] fields);
+
+        public abstract XbmcPlaylist<TMediaType> GetItems(int start, int end, params string[] fields);
 
         public virtual bool Add()
         {
@@ -67,6 +73,33 @@ namespace XBMC.JsonRpc
         public virtual bool UnShuffle()
         {
             return (this.client.Call(this.playlistName + ".UnShuffle") != null);
+        }
+
+        #endregion
+
+        #region Helper functions
+
+        protected JObject getItems(string[] fields, int start, int end) 
+        {
+            JObject args = new JObject();
+            if (fields != null && fields.Length > 0)
+            {
+                args.Add(new JProperty("fields", fields));
+            }
+            else
+            {
+                args.Add(new JProperty("fields", this.fields));
+            }
+            if (start >= 0)
+            {
+                args.Add(new JProperty("start", start));
+            }
+            if (end >= 0)
+            {
+                args.Add(new JProperty("end", end));
+            }
+
+            return (this.client.Call(this.playlistName + ".GetItems", args) as JObject);
         }
 
         #endregion

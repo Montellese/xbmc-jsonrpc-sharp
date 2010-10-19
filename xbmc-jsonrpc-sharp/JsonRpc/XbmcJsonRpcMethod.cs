@@ -53,7 +53,7 @@ namespace XBMC.JsonRpc
 
         #region Public functions
 
-        internal static XbmcJsonRpcMethod FromJsonObject(JObject obj)
+        internal static XbmcJsonRpcMethod FromJson(JObject obj)
         {
             if (obj == null) 
             {

@@ -27,7 +27,7 @@ namespace XBMC.JsonRpc
             {
                 foreach (JObject source in (JArray)query["shares"])
                 {
-                    XbmcFileSource src = XbmcFileSource.FromJsonObject(source);
+                    XbmcFileSource src = XbmcFileSource.FromJson(source);
                     if (src != null)
                     {
                         sources.Add(src);

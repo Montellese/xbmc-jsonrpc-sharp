@@ -31,6 +31,7 @@ namespace XBMC.JsonRpc
         private XbmcGeneral xbmc;
         private XbmcFiles files;
         private XbmcPlaylist playlist;
+        private XbmcLibrary library;
 
         #endregion
 
@@ -85,6 +86,11 @@ namespace XBMC.JsonRpc
             get { return this.playlist; }
         }
 
+        public XbmcLibrary Library
+        {
+            get { return this.library; }
+        }
+
         #endregion
 
         #region Events
@@ -104,13 +110,13 @@ namespace XBMC.JsonRpc
             this.client = new JsonRpcClient(uri, username, password);
             this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            // TODO: Setup of all namespaces
             this.jsonRpc = new XbmcJsonRpc(this.client);
             this.player = new XbmcPlayer(this.client);
             this.system = new XbmcSystem(this.client);
             this.xbmc = new XbmcGeneral(this.client);
             this.files = new XbmcFiles(this.client);
             this.playlist = new XbmcPlaylist(this.client);
+            this.library = new XbmcLibrary(this.client);
         }
 
         public XbmcJsonRpcConnection(string address, int port)

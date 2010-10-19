@@ -90,7 +90,7 @@ x/x Playlist.Swap [ControlPlayback]: Swap items in the playlist. Parameter examp
 -/- AudioLibrary.GetArtists [ReadData]: Retrieve all artists
 -/- AudioLibrary.GetAlbums [ReadData]: Retrieve all albums from specified artist or genre, Fields: album_description, album_theme, album_mood, album_style, album_type, album_label, album_artist, album_genre, album_rating, album_title
 -/- AudioLibrary.GetSongs [ReadData]: Retrieve all songs from specified album, artist or genre
--/- AudioLibrary.ScanForContent [ScanLibrary]:
++/- AudioLibrary.ScanForContent [ScanLibrary]:
 
 -/- VideoLibrary.GetMovies [ReadData]: Retrieve all movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
 -/- VideoLibrary.GetTVShows [ReadData]: Parameter example { "fields": ["plot"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
@@ -100,7 +100,7 @@ x/x Playlist.Swap [ControlPlayback]: Swap items in the playlist. Parameter examp
 -/- VideoLibrary.GetRecentlyAddedMovies [ReadData]: Retrieve all recently added movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
 -/- VideoLibrary.GetRecentlyAddedEpisodes [ReadData]: Retrieve all recently added episodes. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
 -/- VideoLibrary.GetRecentlyAddedMusicVideos [ReadData]: Retrieve all recently added music videos. Parameter example { "fields": ["plot"], "sortmethod": "title","sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
--/- VideoLibrary.ScanForContent [ScanLibrary]:
++/- VideoLibrary.ScanForContent [ScanLibrary]:
 
 +/- System.Shutdown [ControlPower]:
 +/- System.Suspend [ControlPower]:

@@ -30,7 +30,6 @@ namespace Test
 
                     Console.Out.WriteLine("succeeded (Version {0})", xbmc.JsonRpc.Version());
                     Console.Out.WriteLine("Press <Enter> to disconnect...");
-                    //xbmc.Playlist.GetItems();
 
                     while (!aborted)
                     {

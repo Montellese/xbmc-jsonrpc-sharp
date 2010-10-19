@@ -71,7 +71,7 @@ namespace XBMC.JsonRpc
 
         #region Public functions
 
-        internal static XbmcFileSource FromJsonObject(JObject obj)
+        internal static XbmcFileSource FromJson(JObject obj)
         {
             if (obj == null) 
             {

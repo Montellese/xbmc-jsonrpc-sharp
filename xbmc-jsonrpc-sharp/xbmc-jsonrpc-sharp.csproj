@@ -44,7 +44,23 @@
     <Compile Include="JsonRpcClient.cs" />
     <Compile Include="JsonRpcErrorException.cs" />
     <Compile Include="JsonRpc\XbmcJsonRpcMethod.cs" />
-    <Compile Include="Media\MediaType.cs" />
+    <Compile Include="Library\XbmcLibrary.cs" />
+    <Compile Include="Library\XbmcVideoLibrary.cs" />
+    <Compile Include="Library\XbmcAudioLibrary.cs" />
+    <Compile Include="Library\XbmcMediaLibrary.cs" />
+    <Compile Include="Media\XbmcMusicVideo.cs" />
+    <Compile Include="Media\XbmcMedia.cs" />
+    <Compile Include="Media\XbmcPlaylist.cs" />
+    <Compile Include="Media\XbmcSong.cs" />
+    <Compile Include="Media\XbmcTvEpisode.cs" />
+    <Compile Include="Media\XbmcAlbum.cs" />
+    <Compile Include="Media\XbmcTvSeason.cs" />
+    <Compile Include="Media\XbmcTvShow.cs" />
+    <Compile Include="Media\XbmcArtist.cs" />
+    <Compile Include="Media\XbmcMovie.cs" />
+    <Compile Include="Media\XbmcVideo.cs" />
+    <Compile Include="Media\XbmcAudio.cs" />
+    <Compile Include="Media\XbmcMediaType.cs" />
     <Compile Include="Player\XbmcPicturePlayer.cs" />
     <Compile Include="Player\XbmcPlayerPlaybackChangedEventArgs.cs" />
     <Compile Include="Player\XbmcPlayerPlaybackPositionChangedEventArgs.cs" />
@@ -67,9 +83,7 @@
     <Compile Include="Xbmc\XbmcGeneral.cs" />
     <Compile Include="Xbmc\XbmcLogLevel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Library\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="JsonRpcAnnouncements.txt" />
     <Content Include="JsonRpcMethods.txt" />

@@ -36,7 +36,7 @@ namespace XBMC.JsonRpc
             {
                 foreach (JObject item in (JArray)query["commands"])
                 {
-                    methods.Add(XbmcJsonRpcMethod.FromJsonObject(item));
+                    methods.Add(XbmcJsonRpcMethod.FromJson(item));
                 }
             }
 

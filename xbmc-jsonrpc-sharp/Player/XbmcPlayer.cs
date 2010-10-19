@@ -142,14 +142,9 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            XbmcMediaPlayer player = this.getActivePlayer();
-            if (player == null) 
-            {
-                return;
-            }
-
             TimeSpan current, total;
-            if (player.GetTime(out current, out total) == XbmcPlayerState.Unavailable)
+            XbmcMediaPlayer player = this.getProgress(out current, out total);
+            if (player == null)
             {
                 return;
             }
@@ -181,7 +176,6 @@ namespace XBMC.JsonRpc
 
         internal void OnPlaybackStopped()
         {
-            // TODO: Fired twice when playback is paused
             if (this.PlaybackStopped == null)
             {
                 return;
@@ -192,6 +186,7 @@ namespace XBMC.JsonRpc
 
         internal void OnPlaybackEnded()
         {
+            // TODO: First a QueueNextItem is sent
             if (this.PlaybackEnded == null)
             {
                 return;
@@ -207,15 +202,9 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            XbmcMediaPlayer player = this.getActivePlayer();
-            if (player == null)
-            {
-                return;
-            }
-
             TimeSpan current, total;
-            // TODO: Need to get the correct position
-            if (player.GetTime(out current, out total) == XbmcPlayerState.Unavailable)
+            XbmcMediaPlayer player = this.getProgress(out current, out total);
+            if (player == null)
             {
                 return;
             }
@@ -230,15 +219,9 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            XbmcMediaPlayer player = this.getActivePlayer();
-            if (player == null)
-            {
-                return;
-            }
-
             TimeSpan current, total;
-            // TODO: Need to get the correct position
-            if (player.GetTime(out current, out total) == XbmcPlayerState.Unavailable)
+            XbmcMediaPlayer player = this.getProgress(out current, out total);
+            if (player == null)
             {
                 return;
             }
@@ -288,6 +271,26 @@ namespace XBMC.JsonRpc
             }
             
             return null;
+        }
+
+        private XbmcMediaPlayer getProgress(out TimeSpan current, out TimeSpan total)
+        {
+            current = new TimeSpan();
+            total = new TimeSpan();
+
+            XbmcMediaPlayer player = this.getActivePlayer();
+            if (player == null)
+            {
+                return null;
+            }
+
+            // TODO: Need to get the correct position
+            if (player.GetTime(out current, out total) == XbmcPlayerState.Unavailable)
+            {
+                return null;
+            }
+
+            return player;
         }
 
         #endregion

@@ -1,8 +1,8 @@
 ﻿+/+ PlaybackStarted
 +/+ PlaybackPaused
 +/+ PlaybackResumed
-+/- PlaybackStopped
-+/- PlaybackEnded
++/+ PlaybackStopped
++/+ PlaybackEnded
 +/- PlaybackSeek
 +/- PlaybackSeekChapter
 +/+ PlaybackSpeedChanged

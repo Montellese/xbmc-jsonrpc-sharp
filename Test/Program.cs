@@ -31,9 +31,8 @@ namespace Test
 
                     Console.Out.WriteLine("succeeded (Version {0})", xbmc.JsonRpc.Version());
                     Console.Out.WriteLine("Press <Enter> to disconnect...");
-                    List<XbmcArtist> artists = new List<XbmcArtist>(xbmc.Library.Audio.GetArtists());
-                    xbmc.Library.Audio.GetSongsByArtist(artists[0]);
-                    xbmc.Library.Audio.GetAlbumsByArtist(artists[0]);
+                    xbmc.Library.Audio.GetSongs(10, 30);
+                    xbmc.Library.Audio.GetAlbums(25, 75);
 
                     while (!aborted)
                     {

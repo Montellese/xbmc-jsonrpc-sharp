@@ -144,6 +144,32 @@ namespace XBMC.JsonRpc
             return this.Call(method, (object)args);
         }
 
+        public static TType GetField<TType>(JObject obj, string field)
+        {
+            return GetField<TType>(obj, field, default(TType));
+        }
+
+        public static TType GetField<TType>(JObject obj, string field, TType defaultValue)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("obj");
+            }
+            if (string.IsNullOrEmpty(field))
+            {
+                throw new ArgumentException();
+            }
+
+            try
+            {
+                return (TType)Convert.ChangeType(obj[field].Value<JValue>().Value, typeof(TType));
+            }
+            catch (Exception)
+            {
+                return defaultValue;
+            }
+        }
+
         #endregion
 
         #region Private functions
@@ -192,7 +218,7 @@ namespace XBMC.JsonRpc
                 throw new UnknownJsonRpcErrorException();
             }
 
-            throw new JsonRpcErrorException((int)error["code"], (string)error["message"]);
+            throw new JsonRpcErrorException(GetField<int>(error, "code"), GetField<string>(error, "message"));
         }
 
         #endregion

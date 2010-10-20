@@ -40,7 +40,13 @@ namespace XBMC.JsonRpc
 
         public string GetDownloadUrl(string file)
         {
-            return (string)this.client.Call("Files.Download", file);
+            JObject query = this.client.Call("Files.Download", file) as JObject;
+            if (query == null || query["path"] == null)
+            {
+                return null;
+            }
+
+            return (string)query["path"];
         }
 
         public string GetDirectory(string directory, XbmcMediaType mediaType)

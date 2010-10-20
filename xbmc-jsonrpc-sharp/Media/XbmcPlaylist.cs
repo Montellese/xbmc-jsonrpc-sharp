@@ -52,7 +52,7 @@ namespace XBMC.JsonRpc
 
         #region Constructors
 
-        internal XbmcPlaylist(int current, int start, int total)
+        private XbmcPlaylist(int current, int start, int total)
         {
             this.current = current;
             this.start = start;

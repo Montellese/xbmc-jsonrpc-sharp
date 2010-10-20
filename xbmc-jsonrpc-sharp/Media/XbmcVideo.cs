@@ -15,8 +15,8 @@ namespace XBMC.JsonRpc
 
         #region Constructors
 
-        internal XbmcVideo(int id)
-            : base(id)
+        protected XbmcVideo(int id, string thumbnail, string fanart)
+            : base(id, thumbnail, fanart)
         { 
             // TODO: XbmcVideo.ctor()
         }

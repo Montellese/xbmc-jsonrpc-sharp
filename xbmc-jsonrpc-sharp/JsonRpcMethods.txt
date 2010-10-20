@@ -84,12 +84,12 @@ x/x Playlist.Swap [ControlPlayback]: Swap items in the playlist. Parameter examp
 +/- Playlist.UnShuffle [ControlPlayback]: UnShuffle playlist
 
 +/+ Files.GetSources [ReadData]: Get the sources of the media windows. Parameter example {"media": "video"}. Media can be video, music, pictures or files
-+/- Files.Download [ReadData]: Specify a file to download to get info about how to download it, i.e a proper URL
++/+ Files.Download [ReadData]: Specify a file to download to get info about how to download it, i.e a proper URL
 +/- Files.GetDirectory [ReadData]: Retrieve the specified directory. Parameter example {"directory": "foo/bar", "media": "video"}. Media can be video, music, pictures or files
 
--/- AudioLibrary.GetArtists [ReadData]: Retrieve all artists
--/- AudioLibrary.GetAlbums [ReadData]: Retrieve all albums from specified artist or genre, Fields: album_description, album_theme, album_mood, album_style, album_type, album_label, album_artist, album_genre, album_rating, album_title
--/- AudioLibrary.GetSongs [ReadData]: Retrieve all songs from specified album, artist or genre
++/+ AudioLibrary.GetArtists [ReadData]: Retrieve all artists
++/+ AudioLibrary.GetAlbums [ReadData]: Retrieve all albums from specified artist or genre, Fields: album_description, album_theme, album_mood, album_style, album_type, album_label, album_artist, album_genre, album_rating, album_title
++/+ AudioLibrary.GetSongs [ReadData]: Retrieve all songs from specified album, artist or genre
 +/- AudioLibrary.ScanForContent [ScanLibrary]:
 
 -/- VideoLibrary.GetMovies [ReadData]: Retrieve all movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional

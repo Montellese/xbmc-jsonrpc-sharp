@@ -41,7 +41,7 @@ namespace XBMC.JsonRpc
 
         #region Constructor
 
-        internal XbmcJsonRpcMethod(string name, string description, string permission, bool executable)
+        private XbmcJsonRpcMethod(string name, string description, string permission, bool executable)
         {
             this.name = name;
             this.description = description;

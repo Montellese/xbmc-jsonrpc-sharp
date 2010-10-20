@@ -38,7 +38,7 @@ namespace XBMC.JsonRpc
 
         #region Constructor
 
-        internal XbmcFileSource(string label, string paths, string fanart)
+        private XbmcFileSource(string label, string paths, string fanart)
         {
             this.label = label;
             this.paths = new List<string>();

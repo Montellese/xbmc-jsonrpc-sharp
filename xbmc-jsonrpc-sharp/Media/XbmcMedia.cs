@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json.Linq;
 
 namespace XBMC.JsonRpc
 {
@@ -6,7 +7,21 @@ namespace XBMC.JsonRpc
     {
         #region Private variables
 
+        protected static string[] fields;
+
         private int id;
+
+        private string thumbnail;
+        private string fanart;
+
+        #endregion
+
+        #region Internal variables
+
+        internal static string[] Fields
+        {
+            get { return (fields != null ? fields : new string[0]); }
+        }
 
         #endregion
 
@@ -17,13 +32,30 @@ namespace XBMC.JsonRpc
             get { return this.id; }
         }
 
+        public string Thumbnail
+        {
+            get { return this.thumbnail; }
+        }
+
+        public string Fanart
+        {
+            get { return this.fanart; }
+        }
+
         #endregion
 
         #region Constructors
 
-        protected XbmcMedia(int id)
+        protected XbmcMedia(int id, string thumbnail, string fanart)
         {
+            if (this.id < 0)
+            {
+                throw new ArgumentException("The ID must be zero or bigger");
+            }
+
             this.id = id;
+            this.thumbnail = thumbnail != null ? thumbnail : string.Empty;
+            this.fanart = fanart != null ? fanart : string.Empty;
         }
 
         #endregion

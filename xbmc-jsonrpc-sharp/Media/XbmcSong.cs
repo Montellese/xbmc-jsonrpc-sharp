@@ -7,29 +7,23 @@ namespace XBMC.JsonRpc
     {
         #region Private variables
 
-        private string label;
-        private string fanart;
-        private string thumbnail;
         private string file;
 
-        private string title;
-        private string artist;
-        private string genre;
-        private int year;
-        private int rating;
         private string album;
-        private string albumArtist;
         private int track;
         private int disc;
-        private int trackAndDisc;
         private TimeSpan duration;
         private string comment;
         private string lyrics;
-        private string musicbrainzTrackId;
-        private string musicbrainzArtistId;
-        private string musicbrainzAlbumId;
-        private string musicbrainzAlbumartistId;
-        private string musicbrainzTRMId;
+
+        #endregion
+
+        #region Internal variables
+
+        internal static string[] Fields
+        {
+            get { return (fields != null ? fields : new string[0]); }
+        }
 
         #endregion
 
@@ -39,10 +33,31 @@ namespace XBMC.JsonRpc
 
         #region Constructors
 
-        internal XbmcSong(int id)
-            : base(id)
+        static XbmcSong()
         {
-            // TODO: XbmcSong.ctor()
+            fields = new string[] { "title", "artist", "genre", "year",
+                                    "rating", "album", "tracknumber", "discnumber", 
+                                    "duration", "comment", "lyrics" };
+        }
+
+        private XbmcSong(int id, string thumbnail, string fanart, string file,
+                         string title, string artist, string genre, int year,
+                         int rating, string album, int track, int disc,
+                         int duration, string comment, string lyrics)
+            : base(id, thumbnail, fanart, title, artist, genre, year, rating)
+        {
+            if (string.IsNullOrEmpty(file))
+            {
+                throw new ArgumentException("file");
+            }
+
+            this.file = file;
+            this.album = album;
+            this.track = track;
+            this.disc = disc;
+            this.duration = TimeSpan.FromSeconds(duration);
+            this.comment = comment;
+            this.lyrics = lyrics;
         }
 
         #endregion
@@ -51,8 +66,26 @@ namespace XBMC.JsonRpc
 
         internal static new XbmcSong FromJson(JObject obj)
         {
-            // TODO: XbmcSong.FromJson()
-            return new XbmcSong(-1);
+            if (obj == null)
+            {
+                return null;
+            }
+
+            return new XbmcSong(JsonRpcClient.GetField<int>(obj, "songid"),
+                                JsonRpcClient.GetField<string>(obj, "thumbnail"),
+                                JsonRpcClient.GetField<string>(obj, "fanart"),
+                                JsonRpcClient.GetField<string>(obj, "file"),
+                                JsonRpcClient.GetField<string>(obj, "title"),
+                                JsonRpcClient.GetField<string>(obj, "artist"),
+                                JsonRpcClient.GetField<string>(obj, "genre", string.Empty),
+                                JsonRpcClient.GetField<int>(obj, "year"),
+                                JsonRpcClient.GetField<int>(obj, "rating"),
+                                JsonRpcClient.GetField<string>(obj, "album", string.Empty),
+                                JsonRpcClient.GetField<int>(obj, "tracknumber"),
+                                JsonRpcClient.GetField<int>(obj, "discnumber"),
+                                JsonRpcClient.GetField<int>(obj, "duration"),
+                                JsonRpcClient.GetField<string>(obj, "comment", string.Empty),
+                                JsonRpcClient.GetField<string>(obj, "lyrics", string.Empty));
         }
 
         #endregion

@@ -92,7 +92,7 @@ x/x Playlist.Swap [ControlPlayback]: Swap items in the playlist. Parameter examp
 +/+ AudioLibrary.GetSongs [ReadData]: Retrieve all songs from specified album, artist or genre
 +/- AudioLibrary.ScanForContent [ScanLibrary]:
 
--/- VideoLibrary.GetMovies [ReadData]: Retrieve all movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
++/+ VideoLibrary.GetMovies [ReadData]: Retrieve all movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
 -/- VideoLibrary.GetTVShows [ReadData]: Parameter example { "fields": ["plot"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
 -/- VideoLibrary.GetSeasons [ReadData]: Parameter example { "tvshowid": 0, "fields": ["season"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
 -/- VideoLibrary.GetEpisodes [ReadData]: Parameter example { "tvshowid": 0, "season": 1, "fields": ["plot"], "sortmethod": "episode", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional

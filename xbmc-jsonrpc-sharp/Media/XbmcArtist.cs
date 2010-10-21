@@ -13,7 +13,7 @@ namespace XBMC.JsonRpc
 
         #region Internal variables
 
-        internal static string[] Fields
+        internal static new string[] Fields
         {
             get { return (fields != null ? fields : new string[0]); }
         }

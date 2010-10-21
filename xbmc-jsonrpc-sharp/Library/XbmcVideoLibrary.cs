@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace XBMC.JsonRpc
 {
@@ -17,8 +18,46 @@ namespace XBMC.JsonRpc
 
         public ICollection<XbmcMovie> GetMovies(params string[] fields)
         {
-            // TODO: XbmcVideoLibrary.GetMovies()
-            throw new NotImplementedException();
+            return this.GetMovies(-1, -1, fields);
+        }
+
+        public ICollection<XbmcMovie> GetMovies(int start, int end, params string[] fields)
+        {
+            JObject args = new JObject();
+            if (fields != null && fields.Length > 0)
+            {
+                string[] fieldCopy = new string[fields.Length + 2];
+                fieldCopy[0] = "movieid";
+                fieldCopy[1] = "title";
+                Array.Copy(fields, 0, fieldCopy, 2, fields.Length);
+                args.Add(new JProperty("fields", fieldCopy));
+            }
+            else
+            {
+                args.Add(new JProperty("fields", XbmcMovie.Fields));
+            }
+            if (start >= 0)
+            {
+                args.Add(new JProperty("start", start));
+            }
+            if (end >= 0)
+            {
+                args.Add(new JProperty("end", end));
+            }
+
+            JObject query = this.client.Call("VideoLibrary.GetMovies", args) as JObject;
+            if (query == null || query["movies"] == null)
+            {
+                return null;
+            }
+
+            List<XbmcMovie> movies = new List<XbmcMovie>();
+            foreach (JObject item in (JArray)query["movies"])
+            {
+                movies.Add(XbmcMovie.FromJson(item));
+            }
+
+            return movies;
         }
 
         public ICollection<XbmcTvShow> GetTvShows(params string[] fields)

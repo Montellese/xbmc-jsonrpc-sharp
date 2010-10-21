@@ -9,13 +9,7 @@ namespace XBMC.JsonRpc
 
         internal XbmcVideoPlaylist(JsonRpcClient client)
             : base("VideoPlaylist", client)
-        {
-            this.fields = new string[] { "title", "artist", "genre", "year", "rating", 
-                                         "director", "trailer", "tagline", "plot", "plotoutline",
-                                         "originaltitle", "lastplayed", "showtitle", "firstaired", "duration",
-                                         "season", "episode", "runtime", "playcount", "writer",
-                                         "studio", "mpaa", "premiered", "album" };
-        }
+        { }
 
         #endregion
 
@@ -27,7 +21,7 @@ namespace XBMC.JsonRpc
 
         public override XbmcVideo GetCurrentItem(params string[] fields)
         {
-            JObject query = this.getItems(fields, -1, -1);
+            JObject query = this.getItems(fields, XbmcVideo.Fields, -1, -1);
             if (query == null || query["current"] == null || query["items"] == null)
             {
                 return null;
@@ -40,6 +34,7 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
+            // TODO: XbmcVideoPlaylist differ between movies, tvshows etc
             return XbmcVideo.FromJson((JObject)items[current]);
         }
 
@@ -50,7 +45,7 @@ namespace XBMC.JsonRpc
 
         public override XbmcPlaylist<XbmcVideo> GetItems(int start, int end, params string[] fields)
         {
-            JObject query = this.getItems(fields, start, end);
+            JObject query = this.getItems(fields, XbmcVideo.Fields, start, end);
             if (query == null || query["items"] == null)
             {
                 return null;
@@ -59,6 +54,7 @@ namespace XBMC.JsonRpc
             XbmcPlaylist<XbmcVideo> playlist = XbmcPlaylist<XbmcVideo>.FromJson(query);
             foreach (JObject item in (JArray)query["items"])
             {
+                // TODO: XbmcVideoPlaylist differ between movies, tvshows etc
                 playlist.Add(XbmcVideo.FromJson(item));
             }
 

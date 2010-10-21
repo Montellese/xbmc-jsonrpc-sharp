@@ -18,7 +18,7 @@ namespace XBMC.JsonRpc
 
         #region Internal variables
 
-        internal static string[] Fields
+        internal static new string[] Fields
         {
             get { return (fields != null ? fields : new string[0]); }
         }
@@ -84,7 +84,7 @@ namespace XBMC.JsonRpc
 
         #region Internal static functions
 
-        internal static new XbmcAlbum FromJson(JObject obj)
+        internal static XbmcAlbum FromJson(JObject obj)
         {
             if (obj == null)
             {

@@ -31,8 +31,7 @@ namespace Test
 
                     Console.Out.WriteLine("succeeded (Version {0})", xbmc.JsonRpc.Version());
                     Console.Out.WriteLine("Press <Enter> to disconnect...");
-                    xbmc.Library.Audio.GetSongs(10, 30);
-                    xbmc.Library.Audio.GetAlbums(25, 75);
+                    xbmc.Library.Video.GetMovies(0, 10);
 
                     while (!aborted)
                     {

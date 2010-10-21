@@ -9,12 +9,7 @@ namespace XBMC.JsonRpc
 
         internal XbmcAudioPlaylist(JsonRpcClient client)
             : base("AudioPlaylist", client)
-        {
-            this.fields = new string[] { "title", "artist", "genre", "year", "rating",
-                                         "album", "albumartist", "tracknumber", "discnumber", "trackanddiscnumber",
-                                         "duration", "comment", "lyrics", "musicbrainztrackid", "musicbrainzartistid",
-                                         "musicbrainzalbumid", "musicbrainzalbumartistid", "musicbrainztrmidid" };
-        }
+        { }
 
         #endregion
 
@@ -26,7 +21,7 @@ namespace XBMC.JsonRpc
 
         public override XbmcSong GetCurrentItem(params string[] fields)
         {
-            JObject query = this.getItems(fields, -1, -1);
+            JObject query = this.getItems(fields, XbmcSong.Fields, -1, -1);
             if (query == null || query["current"] == null || query["items"] == null)
             {
                 return null;
@@ -49,7 +44,7 @@ namespace XBMC.JsonRpc
 
         public override XbmcPlaylist<XbmcSong> GetItems(int start, int end, params string[] fields)
         {
-            JObject query = this.getItems(fields, start, end);
+            JObject query = this.getItems(fields, XbmcSong.Fields, start, end);
             if (query == null || query["items"] == null)
             {
                 return null;

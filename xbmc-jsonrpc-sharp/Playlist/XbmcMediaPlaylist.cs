@@ -11,8 +11,6 @@ namespace XBMC.JsonRpc
 
         private string playlistName;
 
-        protected string[] fields;
-
         #endregion
 
         #region Constructor
@@ -26,7 +24,6 @@ namespace XBMC.JsonRpc
             }
 
             this.playlistName = playlistName;
-            this.fields = new string[] { "title", "artist", "genre", "year", "rating" };
         }
 
         #endregion
@@ -79,7 +76,7 @@ namespace XBMC.JsonRpc
 
         #region Helper functions
 
-        protected JObject getItems(string[] fields, int start, int end) 
+        protected JObject getItems(string[] fields, string[] defaultFields, int start, int end) 
         {
             JObject args = new JObject();
             if (fields != null && fields.Length > 0)
@@ -88,7 +85,7 @@ namespace XBMC.JsonRpc
             }
             else
             {
-                args.Add(new JProperty("fields", this.fields));
+                args.Add(new JProperty("fields", defaultFields));
             }
             if (start >= 0)
             {

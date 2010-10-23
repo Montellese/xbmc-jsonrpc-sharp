@@ -69,7 +69,7 @@ namespace XBMC.JsonRpc
 
         public event EventHandler<XbmcPlayerPlaybackPositionChangedEventArgs> PlaybackSeek;
         public event EventHandler<XbmcPlayerPlaybackPositionChangedEventArgs> PlaybackSeekChapter;
-        public event EventHandler<XbmcPlayerPlaybackChangedEventArgs> PlaybackSpeedChanged;
+        public event EventHandler<XbmcPlayerPlaybackSpeedChangedEventArgs> PlaybackSpeedChanged;
 
         #endregion
 
@@ -204,6 +204,7 @@ namespace XBMC.JsonRpc
 
             TimeSpan current, total;
             XbmcMediaPlayer player = this.getProgress(out current, out total);
+            current = TimeSpan.Parse(this.getInfo<string>("Player.SeekTime"));
             if (player == null)
             {
                 return;
@@ -221,6 +222,7 @@ namespace XBMC.JsonRpc
 
             TimeSpan current, total;
             XbmcMediaPlayer player = this.getProgress(out current, out total);
+            current = TimeSpan.Parse(this.getInfo<string>("Player.SeekTime"));
             if (player == null)
             {
                 return;
@@ -242,7 +244,7 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            this.PlaybackSpeedChanged(this, new XbmcPlayerPlaybackChangedEventArgs(player));
+            this.PlaybackSpeedChanged(this, new XbmcPlayerPlaybackSpeedChangedEventArgs(player, player.Speed));
         }
 
         #endregion
@@ -284,7 +286,6 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
-            // TODO: Need to get the correct position
             if (player.GetTime(out current, out total) == XbmcPlayerState.Unavailable)
             {
                 return null;

@@ -61,6 +61,7 @@
     <Compile Include="Media\XbmcVideo.cs" />
     <Compile Include="Media\XbmcAudio.cs" />
     <Compile Include="Media\XbmcMediaType.cs" />
+    <Compile Include="Player\XbmcPlayerPlaybackSpeedChangedEventArgs.cs" />
     <Compile Include="Player\XbmcPicturePlayer.cs" />
     <Compile Include="Player\XbmcPlayerPlaybackChangedEventArgs.cs" />
     <Compile Include="Player\XbmcPlayerPlaybackPositionChangedEventArgs.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Playlist\XbmcAudioPlaylist.cs" />
     <Compile Include="Playlist\XbmcMediaPlaylist.cs" />
     <Compile Include="Playlist\XbmcPlaylist.cs" />
+    <Compile Include="Playlist\XbmcRepeatTypes.cs" />
     <Compile Include="Playlist\XbmcVideoPlaylist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocketStateObject.cs" />

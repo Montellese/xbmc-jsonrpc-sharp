@@ -3,8 +3,8 @@
 +/+ PlaybackResumed
 +/+ PlaybackStopped
 +/+ PlaybackEnded
-+/- PlaybackSeek
-+/- PlaybackSeekChapter
++/+ PlaybackSeek
++/+ PlaybackSeekChapter
 +/+ PlaybackSpeedChanged
 
 +/- QueueNextItem

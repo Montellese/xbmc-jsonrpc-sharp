@@ -59,6 +59,20 @@ namespace XBMC.JsonRpc
             return playlist;
         }
 
+        public bool Add(XbmcVideo video)
+        {
+            if (video == null)
+            {
+                throw new ArgumentNullException("video");
+            }
+            if (string.IsNullOrEmpty(video.File))
+            {
+                throw new ArgumentException("The given video has no file assigned to it.");
+            }
+
+            return base.Add(video.File);
+        }
+
         #endregion
     }
 }

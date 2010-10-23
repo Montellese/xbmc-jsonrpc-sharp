@@ -47,7 +47,7 @@ namespace XBMC.JsonRpc
             get { return -1; }
         }
 
-        private new int EpisodeCount
+        private new int Episodes
         {
             get { return -1; }
         }

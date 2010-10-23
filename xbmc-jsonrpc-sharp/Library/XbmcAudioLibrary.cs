@@ -53,117 +53,109 @@ namespace XBMC.JsonRpc
 
         public ICollection<XbmcAlbum> GetAlbums(params string[] fields)
         {
-            return this.GetAlbums(-1, -1, -1, -1, fields);
+            return this.getAlbums(-1, -1, -1, -1, fields);
         }
 
         public ICollection<XbmcAlbum> GetAlbums(int start, int end, params string[] fields)
         {
-            return this.GetAlbums(-1, -1, start, end, fields);
+            return this.getAlbums(-1, -1, start, end, fields);
         }
 
-        public ICollection<XbmcAlbum> GetAlbums(int artistId, int genreId, int start, int end, params string[] fields)
-        {
-            JObject args = new JObject();
-            if (artistId >= 0)
-            {
-                args.Add(new JProperty("artistid", artistId));
-            }
-            if (genreId >= 0)
-            {
-                args.Add(new JProperty("genreid", genreId));
-            }
-            if (fields != null && fields.Length > 0)
-            {
-                string[] fieldCopy = new string[fields.Length + 2];
-                fieldCopy[0] = "albumid";
-                fieldCopy[1] = "album_artist";
-                Array.Copy(fields, 0, fieldCopy, 2, fields.Length);
-                args.Add(new JProperty("fields", fieldCopy));
-            }
-            else
-            {
-                args.Add(new JProperty("fields", XbmcAlbum.Fields));
-            }
-            if (start >= 0)
-            {
-                args.Add(new JProperty("start", start));
-            }
-            if (end >= 0)
-            {
-                args.Add(new JProperty("end", end));
-            }
-
-            JObject query = this.client.Call("AudioLibrary.GetAlbums", args) as JObject;
-            if (query == null || query["albums"] == null)
-            {
-                return null;
-            }
-
-            List<XbmcAlbum> albums = new List<XbmcAlbum>();
-            foreach (JObject item in (JArray)query["albums"])
-            {
-                albums.Add(XbmcAlbum.FromJson(item));
-            }
-
-            return albums;
-        }
-
-        public ICollection<XbmcAlbum> GetAlbumsByArtist(int artistId, params string[] fields)
-        {
-            return this.GetAlbums(artistId, -1, -1, -1, fields);
-        }
-
-        public ICollection<XbmcAlbum> GetAlbumsByArtist(int artistId, int start, int end, params string[] fields)
-        {
-            return this.GetAlbums(artistId, -1, start, end, fields);
-        }
-
-        public ICollection<XbmcAlbum> GetAlbumsByArtist(XbmcArtist artist, params string[] fields)
+        public ICollection<XbmcAlbum> GetAlbums(XbmcArtist artist, params string[] fields)
         {
             if (artist == null) 
             {
                 throw new ArgumentNullException("artist");
             }
 
-            return this.GetAlbums(artist.Id, -1, -1, -1, fields);
+            return this.getAlbums(artist.Id, -1, -1, -1, fields);
         }
 
-        public ICollection<XbmcAlbum> GetAlbumsByArtist(XbmcArtist artist, int start, int end, params string[] fields)
+        public ICollection<XbmcAlbum> GetAlbums(XbmcArtist artist, int start, int end, params string[] fields)
         {
             if (artist == null)
             {
                 throw new ArgumentNullException("artist");
             }
 
-            return this.GetAlbums(artist.Id, -1, start, end, fields);
+            return this.getAlbums(artist.Id, -1, start, end, fields);
         }
 
-        public ICollection<XbmcAlbum> GetAlbumsByGenre(int genreId, params string[] fields)
+        public ICollection<XbmcAlbum> GetAlbums(int genreId, params string[] fields)
         {
-            return this.GetAlbums(-1, genreId, -1, -1, fields);
+            return this.getAlbums(-1, genreId, -1, -1, fields);
         }
 
-        public ICollection<XbmcAlbum> GetAlbumsByGenre(int genreId, int start, int end, params string[] fields)
+        public ICollection<XbmcAlbum> GetAlbums(int genreId, int start, int end, params string[] fields)
         {
-            return this.GetAlbums(-1, genreId, start, end, fields);
+            return this.getAlbums(-1, genreId, start, end, fields);
         }
 
         public ICollection<XbmcSong> GetSongs(params string[] fields)
         {
-            return this.GetSongs(-1, -1, -1, -1, -1, fields);
+            return this.getSongs(-1, -1, -1, -1, -1, fields);
         }
 
         public ICollection<XbmcSong> GetSongs(int start, int end, params string[] fields)
         {
-            return this.GetSongs(-1, -1, -1, start, end, fields);
+            return this.getSongs(-1, -1, -1, start, end, fields);
         }
 
-        public ICollection<XbmcSong> GetSongs(int albumId, int artistId, int genreId, params string[] fields)
+        public ICollection<XbmcSong> GetSongs(XbmcAlbum album, params string[] fields)
         {
-            return this.GetSongs(albumId, artistId, genreId, -1, -1, fields);
+            if (album == null)
+            {
+                throw new ArgumentNullException("album");
+            }
+
+            return this.getSongs(album.Id, -1, -1, -1, -1, fields);
         }
 
-        public ICollection<XbmcSong> GetSongs(int albumId, int artistId, int genreId, int start, int end, params string[] fields)
+        public ICollection<XbmcSong> GetSongs(XbmcAlbum album, int start, int end, params string[] fields)
+        {
+            if (album == null)
+            {
+                throw new ArgumentNullException("album");
+            }
+
+            return this.getSongs(album.Id, -1, -1, start, end, fields);
+        }
+
+        public ICollection<XbmcSong> GetSongs(XbmcArtist artist, params string[] fields)
+        {
+            if (artist == null)
+            {
+                throw new ArgumentNullException("artist");
+            }
+
+            return this.getSongs(-1, artist.Id, -1, -1, -1, fields);
+        }
+
+        public ICollection<XbmcSong> GetSongs(XbmcArtist artist, int start, int end, params string[] fields)
+        {
+            if (artist == null)
+            {
+                throw new ArgumentNullException("artist");
+            }
+
+            return this.getSongs(-1, artist.Id, -1, start, end, fields);
+        }
+
+        public ICollection<XbmcSong> GetSongs(int genreId, params string[] fields)
+        {
+            return this.getSongs(-1, -1, genreId, -1, -1, fields);
+        }
+
+        public ICollection<XbmcSong> GetSongs(int genreId, int start, int end, params string[] fields)
+        {
+            return this.getSongs(-1, -1, genreId, start, end, fields);
+        }
+
+        #endregion
+
+        #region Helper functions
+
+        private ICollection<XbmcSong> getSongs(int albumId, int artistId, int genreId, int start, int end, params string[] fields)
         {
             JObject args = new JObject();
             if (albumId >= 0)
@@ -215,79 +207,52 @@ namespace XBMC.JsonRpc
             return songs;
         }
 
-        public ICollection<XbmcSong> GetSongsByAlbum(int albumId, params string[] fields)
+        private ICollection<XbmcAlbum> getAlbums(int artistId, int genreId, int start, int end, params string[] fields)
         {
-            return this.GetSongs(albumId, -1, -1, -1, -1, fields);
-        }
-
-        public ICollection<XbmcSong> GetSongsByAlbum(int albumId, int start, int end, params string[] fields)
-        {
-            return this.GetSongs(albumId, -1, -1, start, end, fields);
-        }
-
-        public ICollection<XbmcSong> GetSongsByAlbum(XbmcAlbum album, params string[] fields)
-        {
-            if (album == null)
+            JObject args = new JObject();
+            if (artistId >= 0)
             {
-                throw new ArgumentNullException("album");
+                args.Add(new JProperty("artistid", artistId));
+            }
+            if (genreId >= 0)
+            {
+                args.Add(new JProperty("genreid", genreId));
+            }
+            if (fields != null && fields.Length > 0)
+            {
+                string[] fieldCopy = new string[fields.Length + 2];
+                fieldCopy[0] = "albumid";
+                fieldCopy[1] = "album_artist";
+                Array.Copy(fields, 0, fieldCopy, 2, fields.Length);
+                args.Add(new JProperty("fields", fieldCopy));
+            }
+            else
+            {
+                args.Add(new JProperty("fields", XbmcAlbum.Fields));
+            }
+            if (start >= 0)
+            {
+                args.Add(new JProperty("start", start));
+            }
+            if (end >= 0)
+            {
+                args.Add(new JProperty("end", end));
             }
 
-            return this.GetSongs(album.Id, -1, -1, -1, -1, fields);
-        }
-
-        public ICollection<XbmcSong> GetSongsByAlbum(XbmcAlbum album, int start, int end, params string[] fields)
-        {
-            if (album == null)
+            JObject query = this.client.Call("AudioLibrary.GetAlbums", args) as JObject;
+            if (query == null || query["albums"] == null)
             {
-                throw new ArgumentNullException("album");
+                return null;
             }
 
-            return this.GetSongs(album.Id, -1, -1, start, end, fields);
-        }
-
-        public ICollection<XbmcSong> GetSongsByArtist(int artistId, params string[] fields)
-        {
-            return this.GetSongs(-1, artistId, -1, -1, -1, fields);
-        }
-
-        public ICollection<XbmcSong> GetSongsByArtist(int artistId, int start, int end, params string[] fields)
-        {
-            return this.GetSongs(-1, artistId, -1, start, end, fields);
-        }
-
-        public ICollection<XbmcSong> GetSongsByArtist(XbmcArtist artist, params string[] fields)
-        {
-            if (artist == null)
+            List<XbmcAlbum> albums = new List<XbmcAlbum>();
+            foreach (JObject item in (JArray)query["albums"])
             {
-                throw new ArgumentNullException("artist");
+                albums.Add(XbmcAlbum.FromJson(item));
             }
 
-            return this.GetSongs(-1, artist.Id, -1, -1, -1, fields);
+            return albums;
         }
-
-        public ICollection<XbmcSong> GetSongsByArtist(XbmcArtist artist, int start, int end, params string[] fields)
-        {
-            if (artist == null)
-            {
-                throw new ArgumentNullException("artist");
-            }
-
-            return this.GetSongs(-1, artist.Id, -1, start, end, fields);
-        }
-
-        public ICollection<XbmcSong> GetSongsByGenre(int genreId, params string[] fields)
-        {
-            return this.GetSongs(-1, -1, genreId, -1, -1, fields);
-        }
-
-        public ICollection<XbmcSong> GetSongsByGenre(int genreId, int start, int end, params string[] fields)
-        {
-            return this.GetSongs(-1, -1, genreId, start, end, fields);
-        }
-
-        #endregion
-
-        #region Helper functions
 
         #endregion
     }

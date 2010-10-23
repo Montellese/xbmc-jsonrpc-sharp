@@ -291,8 +291,6 @@ namespace XBMC.JsonRpc
             {
                 this.system.OnLowBattery();
             }
-
-            Console.Out.WriteLine("Announcement: " + type);
         }
 
         private void receiveAnnouncements(IAsyncResult result)

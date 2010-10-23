@@ -29,6 +29,41 @@ namespace XBMC.JsonRpc
 
         #region Public variables
 
+        public string File
+        {
+            get { return this.file; }
+        }
+
+        public string Album
+        {
+            get { return this.album; }
+        }
+
+        public int Track
+        {
+            get { return this.track; }
+        }
+
+        public int Disc
+        {
+            get { return this.disc; }
+        }
+
+        public TimeSpan Duration
+        {
+            get { return this.duration; }
+        }
+
+        public string Comment
+        {
+            get { return this.comment; }
+        }
+
+        public string Lyrics
+        {
+            get { return this.lyrics; }
+        }
+
         #endregion
 
         #region Constructors

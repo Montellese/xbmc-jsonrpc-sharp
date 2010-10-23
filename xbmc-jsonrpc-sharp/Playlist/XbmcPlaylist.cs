@@ -117,6 +117,52 @@ namespace XBMC.JsonRpc
 
         #endregion
 
+        #region JSON RPC Info Labels
+
+        public virtual int Position
+        {
+            get { return base.getInfo<int>("Playlist.Position", -1); }
+        }
+
+        public virtual int Length
+        {
+            get { return base.getInfo<int>("Playlist.Length", -1); }
+        }
+
+        public virtual bool Random
+        {
+            get 
+            {
+                string random = base.getInfo<string>("Playlist.Random");
+                if (random == "Random")
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public virtual XbmcRepeatTypes Repeat
+        {
+            get
+            {
+                string repeat = base.getInfo<string>("Playlist.Repeat");
+                if (repeat == "One")
+                {
+                    return XbmcRepeatTypes.One;
+                }
+                else if (repeat == "All")
+                {
+                    return XbmcRepeatTypes.All;
+                }
+
+                return XbmcRepeatTypes.Off;
+            }
+        }
+
+        #endregion
+
         #region Internal functions
 
         internal void OnItemQueued()

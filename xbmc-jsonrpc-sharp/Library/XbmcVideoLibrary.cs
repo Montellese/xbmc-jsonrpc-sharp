@@ -106,11 +106,6 @@ namespace XBMC.JsonRpc
             return shows;
         }
 
-        public ICollection<XbmcTvSeason> GetTvSeasons(int tvshowId, params string[] fields)
-        {
-            return this.GetTvSeasons(tvshowId, -1, -1, fields);
-        }
-
         public ICollection<XbmcTvSeason> GetTvSeasons(XbmcTvShow tvshow, params string[] fields)
         {
             if (tvshow == null)
@@ -118,7 +113,7 @@ namespace XBMC.JsonRpc
                 throw new ArgumentNullException("tvshow");
             }
 
-            return this.GetTvSeasons(tvshow.Id, -1, -1, fields);
+            return this.getTvSeasons(tvshow.Id, -1, -1, fields);
         }
 
         public ICollection<XbmcTvSeason> GetTvSeasons(XbmcTvShow tvshow, int start, int end, params string[] fields)
@@ -128,58 +123,7 @@ namespace XBMC.JsonRpc
                 throw new ArgumentNullException("tvshow");
             }
 
-            return this.GetTvSeasons(tvshow.Id, start, end, fields);
-        }
-
-        public ICollection<XbmcTvSeason> GetTvSeasons(int tvshowId, int start, int end, params string[] fields)
-        {
-            if (tvshowId < 0)
-            {
-                throw new ArgumentException("Invalid TvShow Id (" + tvshowId + ")");
-            }
-
-            JObject args = new JObject();
-            args.Add(new JProperty("tvshowid", tvshowId));
-            if (fields != null && fields.Length > 0)
-            {
-                string[] fieldCopy = new string[fields.Length + 3];
-                fieldCopy[0] = "title";
-                fieldCopy[1] = "season";
-                fieldCopy[2] = "showtitle";
-                Array.Copy(fields, 0, fieldCopy, 3, fields.Length);
-                args.Add(new JProperty("fields", fieldCopy));
-            }
-            else
-            {
-                args.Add(new JProperty("fields", XbmcTvSeason.Fields));
-            }
-            if (start >= 0)
-            {
-                args.Add(new JProperty("start", start));
-            }
-            if (end >= 0)
-            {
-                args.Add(new JProperty("end", end));
-            }
-
-            JObject query = this.client.Call("VideoLibrary.GetSeasons", args) as JObject;
-            if (query == null || query["seasons"] == null)
-            {
-                return null;
-            }
-
-            List<XbmcTvSeason> seasons = new List<XbmcTvSeason>();
-            foreach (JObject item in (JArray)query["seasons"])
-            {
-                seasons.Add(XbmcTvSeason.FromJson(item));
-            }
-
-            return seasons;
-        }
-
-        public ICollection<XbmcTvEpisode> GetTvEpisodes(int tvshowId, int season, params string[] fields)
-        {
-            return this.GetTvEpisodes(tvshowId, season, -1, -1, fields);
+            return this.getTvSeasons(tvshow.Id, start, end, fields);
         }
 
         public ICollection<XbmcTvEpisode> GetTvEpisodes(XbmcTvShow tvshow, int season, params string[] fields)
@@ -189,7 +133,7 @@ namespace XBMC.JsonRpc
                 throw new ArgumentNullException("tvshow");
             }
 
-            return this.GetTvEpisodes(tvshow.Id, season, -1, -1, fields);
+            return this.getTvEpisodes(tvshow.Id, season, -1, -1, fields);
         }
 
         public ICollection<XbmcTvEpisode> GetTvEpisodes(XbmcTvShow tvshow, int season, int start, int end, params string[] fields)
@@ -199,60 +143,7 @@ namespace XBMC.JsonRpc
                 throw new ArgumentNullException("tvshow");
             }
 
-            return this.GetTvEpisodes(tvshow.Id, season, start, end, fields);
-        }
-
-        public ICollection<XbmcTvEpisode> GetTvEpisodes(int tvshowId, int season, int start, int end, params string[] fields)
-        {
-            if (tvshowId < 0)
-            {
-                throw new ArgumentException("Invalid TvShow Id (" + tvshowId + ")");
-            }
-            if (season < 0)
-            {
-                throw new ArgumentException("Invalid Season (" + season + ")");
-            }
-
-            JObject args = new JObject();
-            args.Add(new JProperty("tvshowid", tvshowId));
-            args.Add(new JProperty("season", season));
-            if (fields != null && fields.Length > 0)
-            {
-                string[] fieldCopy = new string[fields.Length + 5];
-                fieldCopy[0] = "episodeid";
-                fieldCopy[0] = "title";
-                fieldCopy[1] = "season";
-                fieldCopy[1] = "episode";
-                fieldCopy[2] = "showtitle";
-                Array.Copy(fields, 0, fieldCopy, 5, fields.Length);
-                args.Add(new JProperty("fields", fieldCopy));
-            }
-            else
-            {
-                args.Add(new JProperty("fields", XbmcTvEpisode.Fields));
-            }
-            if (start >= 0)
-            {
-                args.Add(new JProperty("start", start));
-            }
-            if (end >= 0)
-            {
-                args.Add(new JProperty("end", end));
-            }
-
-            JObject query = this.client.Call("VideoLibrary.GetEpisodes", args) as JObject;
-            if (query == null || query["episodes"] == null)
-            {
-                return null;
-            }
-
-            List<XbmcTvEpisode> episodes = new List<XbmcTvEpisode>();
-            foreach (JObject item in (JArray)query["episodes"])
-            {
-                episodes.Add(XbmcTvEpisode.FromJson(item));
-            }
-
-            return episodes;
+            return this.getTvEpisodes(tvshow.Id, season, start, end, fields);
         }
 
         public ICollection<XbmcMusicVideo> GetMusicVideos(params string[] fields)
@@ -342,17 +233,7 @@ namespace XBMC.JsonRpc
             return musicVideos;
         }
 
-        private ICollection<XbmcMusicVideo> GetMusicVideosByArtist(int artistId, params string[] fields)
-        {
-            return this.GetMusicVideos(artistId, -1, -1, -1, fields);
-        }
-
-        private ICollection<XbmcMusicVideo> GetMusicVideosByArtist(int artistId, int start, int end, params string[] fields)
-        {
-            return this.GetMusicVideos(artistId, -1, start, end, fields);
-        }
-
-        private ICollection<XbmcMusicVideo> GetMusicVideosByArtist(XbmcArtist artist, params string[] fields)
+        private ICollection<XbmcMusicVideo> GetMusicVideos(XbmcArtist artist, params string[] fields)
         {
             if (artist == null)
             {
@@ -362,7 +243,7 @@ namespace XBMC.JsonRpc
             return this.GetMusicVideos(artist.Id, -1, -1, -1, fields);
         }
 
-        private ICollection<XbmcMusicVideo> GetMusicVideosByArtist(XbmcArtist artist, int start, int end, params string[] fields)
+        private ICollection<XbmcMusicVideo> GetMusicVideos(XbmcArtist artist, int start, int end, params string[] fields)
         {
             if (artist == null)
             {
@@ -372,17 +253,7 @@ namespace XBMC.JsonRpc
             return this.GetMusicVideos(artist.Id, -1, start, end, fields);
         }
 
-        private ICollection<XbmcMusicVideo> GetMusicVideosByAlbum(int albumId, params string[] fields)
-        {
-            return this.GetMusicVideos(-1, albumId, -1, -1, fields);
-        }
-
-        private ICollection<XbmcMusicVideo> GetMusicVideosByAlbum(int albumId, int start, int end, params string[] fields)
-        {
-            return this.GetMusicVideos(-1, albumId, start, end, fields);
-        }
-
-        private ICollection<XbmcMusicVideo> GetMusicVideosByAlbum(XbmcAlbum album, params string[] fields)
+        private ICollection<XbmcMusicVideo> GetMusicVideos(XbmcAlbum album, params string[] fields)
         {
             if (album == null)
             {
@@ -392,7 +263,7 @@ namespace XBMC.JsonRpc
             return this.GetMusicVideos(-1, album.Id, -1, -1, fields);
         }
 
-        private ICollection<XbmcMusicVideo> GetMusicVideosByAlbum(XbmcAlbum album, int start, int end, params string[] fields)
+        private ICollection<XbmcMusicVideo> GetMusicVideos(XbmcAlbum album, int start, int end, params string[] fields)
         {
             if (album == null)
             {
@@ -542,6 +413,105 @@ namespace XBMC.JsonRpc
         #endregion
 
         #region Helper functions
+
+        private ICollection<XbmcTvSeason> getTvSeasons(int tvshowId, int start, int end, params string[] fields)
+        {
+            if (tvshowId < 0)
+            {
+                throw new ArgumentException("Invalid TvShow Id (" + tvshowId + ")");
+            }
+
+            JObject args = new JObject();
+            args.Add(new JProperty("tvshowid", tvshowId));
+            if (fields != null && fields.Length > 0)
+            {
+                string[] fieldCopy = new string[fields.Length + 3];
+                fieldCopy[0] = "title";
+                fieldCopy[1] = "season";
+                fieldCopy[2] = "showtitle";
+                Array.Copy(fields, 0, fieldCopy, 3, fields.Length);
+                args.Add(new JProperty("fields", fieldCopy));
+            }
+            else
+            {
+                args.Add(new JProperty("fields", XbmcTvSeason.Fields));
+            }
+            if (start >= 0)
+            {
+                args.Add(new JProperty("start", start));
+            }
+            if (end >= 0)
+            {
+                args.Add(new JProperty("end", end));
+            }
+
+            JObject query = this.client.Call("VideoLibrary.GetSeasons", args) as JObject;
+            if (query == null || query["seasons"] == null)
+            {
+                return null;
+            }
+
+            List<XbmcTvSeason> seasons = new List<XbmcTvSeason>();
+            foreach (JObject item in (JArray)query["seasons"])
+            {
+                seasons.Add(XbmcTvSeason.FromJson(item));
+            }
+
+            return seasons;
+        }
+
+        private ICollection<XbmcTvEpisode> getTvEpisodes(int tvshowId, int season, int start, int end, params string[] fields)
+        {
+            if (tvshowId < 0)
+            {
+                throw new ArgumentException("Invalid TvShow Id (" + tvshowId + ")");
+            }
+            if (season < 0)
+            {
+                throw new ArgumentException("Invalid Season (" + season + ")");
+            }
+
+            JObject args = new JObject();
+            args.Add(new JProperty("tvshowid", tvshowId));
+            args.Add(new JProperty("season", season));
+            if (fields != null && fields.Length > 0)
+            {
+                string[] fieldCopy = new string[fields.Length + 5];
+                fieldCopy[0] = "episodeid";
+                fieldCopy[0] = "title";
+                fieldCopy[1] = "season";
+                fieldCopy[1] = "episode";
+                fieldCopy[2] = "showtitle";
+                Array.Copy(fields, 0, fieldCopy, 5, fields.Length);
+                args.Add(new JProperty("fields", fieldCopy));
+            }
+            else
+            {
+                args.Add(new JProperty("fields", XbmcTvEpisode.Fields));
+            }
+            if (start >= 0)
+            {
+                args.Add(new JProperty("start", start));
+            }
+            if (end >= 0)
+            {
+                args.Add(new JProperty("end", end));
+            }
+
+            JObject query = this.client.Call("VideoLibrary.GetEpisodes", args) as JObject;
+            if (query == null || query["episodes"] == null)
+            {
+                return null;
+            }
+
+            List<XbmcTvEpisode> episodes = new List<XbmcTvEpisode>();
+            foreach (JObject item in (JArray)query["episodes"])
+            {
+                episodes.Add(XbmcTvEpisode.FromJson(item));
+            }
+
+            return episodes;
+        }
 
         #endregion
     }

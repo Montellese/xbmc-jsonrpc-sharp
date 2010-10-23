@@ -59,6 +59,20 @@ namespace XBMC.JsonRpc
             return playlist;
         }
 
+        public bool Add(XbmcSong song)
+        {
+            if (song == null)
+            {
+                throw new ArgumentNullException("song");
+            }
+            if (string.IsNullOrEmpty(song.File))
+            {
+                throw new ArgumentException("The given song has no file assigned to it.");
+            }
+
+            return base.Add(song.File);
+        }
+
         #endregion
     }
 }

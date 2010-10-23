@@ -8,6 +8,7 @@ namespace XBMC.JsonRpc
         #region Private variables
 
         private string playerName;
+        private string infoLabelName;
 
         #endregion
 
@@ -26,14 +27,23 @@ namespace XBMC.JsonRpc
         #region Constructors
 
         protected XbmcMediaPlayer(string playerName, JsonRpcClient client)
+            : this(playerName, null, client)
+        { }
+
+        protected XbmcMediaPlayer(string playerName, string infoLabelName, JsonRpcClient client)
             : base(client)
         {
             if (string.IsNullOrEmpty(playerName))
             {
                 throw new ArgumentException();
             }
+            if (string.IsNullOrEmpty(infoLabelName))
+            {
+                infoLabelName = playerName;
+            }
 
             this.playerName = playerName;
+            this.infoLabelName = infoLabelName;
         }
 
         #endregion
@@ -157,6 +167,47 @@ namespace XBMC.JsonRpc
 
         #endregion
 
+        #region JSON RPC Info Labels
+
+        public virtual int Speed
+        {
+            get { return this.getPlaySpeed(); }
+        }
+
+        public virtual bool Random
+        {
+            get
+            {
+                string random = base.getInfo<string>("Playlist.Random");
+                if (random == "Random")
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public virtual XbmcRepeatTypes Repeat
+        {
+            get
+            {
+                string repeat = base.getInfo<string>("Playlist.Repeat");
+                if (repeat == "One")
+                {
+                    return XbmcRepeatTypes.One;
+                }
+                else if (repeat == "All")
+                {
+                    return XbmcRepeatTypes.All;
+                }
+
+                return XbmcRepeatTypes.Off;
+            }
+        }
+
+        #endregion
+
         #region Helper functions
 
         private XbmcPlayerState parsePlayerState(JObject obj)
@@ -214,6 +265,24 @@ namespace XBMC.JsonRpc
             }
 
             return state;
+        }
+
+        private int getPlaySpeed()
+        {
+            string speed = this.getInfo<string>("MusicPlayer.TimeSpeed");
+            if (string.IsNullOrEmpty(speed))
+            {
+                return 0;
+            }
+
+            int start = speed.IndexOf("(") + 1;
+            int end = speed.IndexOf("x)");
+
+            if (start < 1 || end < 0)
+            {
+                return 1;
+            }
+            return Int32.Parse(speed.Substring(start, end - start));
         }
 
         #endregion

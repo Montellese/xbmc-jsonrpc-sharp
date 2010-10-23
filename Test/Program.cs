@@ -32,13 +32,11 @@ namespace Test
                     Console.Out.WriteLine("succeeded (Version {0})", xbmc.JsonRpc.Version());
                     Console.Out.WriteLine("Press <Enter> to disconnect...");
 
-                    XbmcVideo video = xbmc.Playlist.Video.GetCurrentItem();
-                    //List<XbmcArtist> artists = (List<XbmcArtist>)xbmc.Library.Audio.GetArtists();
-                    //xbmc.Library.Audio.GetAlbums();
-                    //List<XbmcMusicVideo> musicvideos1 = (List<XbmcMusicVideo>)xbmc.Library.Video.GetMusicVideosByArtist(114); // ArtistId: 114; AlbumId: 109
-                    //List<XbmcMusicVideo> musicvideos2 = (List<XbmcMusicVideo>)xbmc.Library.Video.GetMusicVideosByAlbum(109);
-                    //List<XbmcMusicVideo> musicvideos = (List<XbmcMusicVideo>)xbmc.Library.Video.GetMusicVideos(1, 4);
-                    //List<XbmcMusicVideo> musicvideos4 = (List<XbmcMusicVideo>)xbmc.Library.Video.GetMusicVideos(114, 109, 0, 2);
+                    string videoCodec = xbmc.Player.Video.VideoCodec;
+                    int resolution = xbmc.Player.Video.Resolution;
+                    double aspectRatio = xbmc.Player.Video.AspectRatio;
+                    int audioChannels = xbmc.Player.Video.AudioChannels;
+                    string audioCodec = xbmc.Player.Video.AudioCodec;
 
                     while (!aborted)
                     {
@@ -94,9 +92,9 @@ namespace Test
             Console.Out.WriteLine("Playback in {0} seeked to {1} of {2}", e.Player.ToString(), e.Position, e.Length);
         }
 
-        private static void xbmc_PlaybackSpeedChanged(object sender, XbmcPlayerPlaybackChangedEventArgs e)
+        private static void xbmc_PlaybackSpeedChanged(object sender, XbmcPlayerPlaybackSpeedChangedEventArgs e)
         {
-            Console.Out.WriteLine("Playback speed in {0} changed", e.Player.ToString());
+            Console.Out.WriteLine("Playback speed in {0} changed to {1}", e.Player.ToString(), e.Speed);
         }
 
         #endregion

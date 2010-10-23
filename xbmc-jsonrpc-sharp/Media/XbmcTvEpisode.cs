@@ -7,11 +7,6 @@ namespace XBMC.JsonRpc
     {
         #region Hidden properties of XbmcVideo
 
-        private new int Id
-        {
-            get { return -1; }
-        }
-
         private new string Genre
         {
             get { return string.Empty; }
@@ -37,7 +32,7 @@ namespace XBMC.JsonRpc
             get { return string.Empty; }
         }
 
-        private new int EpisodeCount
+        private new int Episodes
         {
             get { return -1; }
         }
@@ -65,9 +60,9 @@ namespace XBMC.JsonRpc
 
         #region Public variables
 
-        public int Episode
+        public int Number
         {
-            get { return this.episodeCount; }
+            get { return this.episodes; }
         }
 
         #endregion

@@ -7,6 +7,11 @@ namespace XBMC.JsonRpc
     {
         #region Hidden properties of XbmcVideo
 
+        private new int Id
+        {
+            get { return -1; }
+        }
+
         private new int Year
         {
             get { return -1; }

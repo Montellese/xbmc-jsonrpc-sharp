@@ -27,17 +27,17 @@ namespace XBMC.JsonRpc
 
         #region Public variables
 
-        public int Id
+        public virtual int Id
         {
             get { return this.id; }
         }
 
-        public string Thumbnail
+        public virtual string Thumbnail
         {
             get { return this.thumbnail; }
         }
 
-        public string Fanart
+        public virtual string Fanart
         {
             get { return this.fanart; }
         }

@@ -35,6 +35,11 @@ namespace XBMC.JsonRpc
             return (this.client.Call(this.playlistName + ".Play") != null);
         }
 
+        public virtual bool Play(int itemIndex)
+        {
+            return (this.client.Call(this.playlistName + ".Play", itemIndex) != null);
+        }
+
         public virtual bool SkipPrevious()
         {
             return (this.client.Call(this.playlistName + ".SkipPrevious") != null);
@@ -51,10 +56,17 @@ namespace XBMC.JsonRpc
 
         public abstract XbmcPlaylist<TMediaType> GetItems(int start, int end, params string[] fields);
 
-        public virtual bool Add()
+        public virtual bool Add(string file)
         {
-            // TODO: MediaPlaylist.Add()
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(file))
+            {
+                throw new ArgumentException("file");
+            }
+
+            JObject args = new JObject();
+            args.Add(new JProperty("file", file));
+
+            return (this.client.Call(this.playlistName + ".Add", args) != null);
         }
 
         public virtual bool Clear()

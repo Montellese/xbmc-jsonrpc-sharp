@@ -60,7 +60,7 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 +/- VideoPlaylist.SkipPrevious [ControlPlayback]:
 +/- VideoPlaylist.SkipNext [ControlPlayback]:
 +/- VideoPlaylist.GetItems [ReadData]:
--/- VideoPlaylist.Add [ControlPlayback]:
++/- VideoPlaylist.Add [ControlPlayback]:
 +/- VideoPlaylist.Clear [ControlPlayback]: Clear video playlist
 +/- VideoPlaylist.Shuffle [ControlPlayback]: Shuffle video playlist
 +/- VideoPlaylist.UnShuffle [ControlPlayback]: UnShuffle video playlist
@@ -69,7 +69,7 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 +/- AudioPlaylist.SkipPrevious [ControlPlayback]:
 +/- AudioPlaylist.SkipNext [ControlPlayback]:
 +/- AudioPlaylist.GetItems [ReadData]:
--/- AudioPlaylist.Add [ControlPlayback]:
++/- AudioPlaylist.Add [ControlPlayback]:
 +/- AudioPlaylist.Clear [ControlPlayback]: Clear audio playlist
 +/- AudioPlaylist.Shuffle [ControlPlayback]: Shuffle audio playlist
 +/- AudioPlaylist.UnShuffle [ControlPlayback]: UnShuffle audio playlist
@@ -112,7 +112,7 @@ x/x Playlist.Swap [ControlPlayback]: Swap items in the playlist. Parameter examp
 +/+ XBMC.GetVolume [ReadData]: Retrieve the current volume
 +/? XBMC.SetVolume [ControlPlayback]: Set volume. Parameter integer between 0 and 100
 +/? XBMC.ToggleMute [ControlPlayback]: Toggle mute
--/- XBMC.Play [ControlPlayback]: Starts playback
++/+ XBMC.Play [ControlPlayback]: Starts playback
 +/- XBMC.StartSlideshow [ControlPlayback]: Starts slideshow. Parameter example {"directory": "/foo/", "random": true, "recursive": true} or just string to recursively and random run directory
 +/- XBMC.Log [Logging]: Logs a line in the xbmc.log. Parameter example {"message": "foo", "level": "info"} or just a string to log message with level debug
 +/- XBMC.Quit [ControlPower]: Quit xbmc

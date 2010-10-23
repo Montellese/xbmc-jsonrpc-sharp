@@ -29,7 +29,7 @@ namespace XBMC.JsonRpc
 
         protected string showTitle;
         protected int season;
-        protected int episodeCount;
+        protected int episodes;
         protected DateTime premiered;
         protected DateTime firstAired;
 
@@ -49,122 +49,122 @@ namespace XBMC.JsonRpc
 
         #region Public variables
 
-        public string Title
+        public virtual string Title
         {
             get { return this.title; }
         }
 
-        public string Genre
+        public virtual string Genre
         {
             get { return this.genre; }
         }
 
-        public int Year
+        public virtual int Year
         {
             get { return this.year; }
         }
 
-        public double Rating
+        public virtual double Rating
         {
             get { return this.rating; }
         }
 
-        public int PlayCount
+        public virtual int PlayCount
         {
             get { return this.playCount; }
         }
 
-        public string Studio
+        public virtual string Studio
         {
             get { return this.studio; }
         }
 
-        public string File
+        public virtual string File
         {
             get { return this.file; }
         }
 
-        public string Director
+        public virtual string Director
         {
             get { return this.director; }
         }
 
-        public string Trailer
+        public virtual string Trailer
         {
             get { return this.trailer; }
         }
 
-        public string Tagline
+        public virtual string Tagline
         {
             get { return this.tagline; }
         }
 
-        public string Plot
+        public virtual string Plot
         {
             get { return this.plot; }
         }
 
-        public string Outline
+        public virtual string Outline
         {
             get { return this.outline; }
         }
 
-        public string OriginalTitle
+        public virtual string OriginalTitle
         {
             get { return this.originalTitle; }
         }
 
-        public DateTime LastPlayed
+        public virtual DateTime LastPlayed
         {
             get { return this.lastPlayed; }
         }
 
-        public TimeSpan Duration
+        public virtual TimeSpan Duration
         {
             get { return this.duration; }
         }
 
-        public string Writer
+        public virtual string Writer
         {
             get { return this.writer; }
         }
 
-        public string Mpaa
+        public virtual string Mpaa
         {
             get { return this.mpaa; }
         }
 
-        public string ShowTitle
+        public virtual string ShowTitle
         {
             get { return this.showTitle; }
         }
 
-        public int Season
+        public virtual int Season
         {
             get { return this.season; }
         }
 
-        public int EpisodeCount
+        public virtual int Episodes
         {
-            get { return this.episodeCount; }
+            get { return this.episodes; }
         }
 
-        public DateTime Premiered
+        public virtual DateTime Premiered
         {
             get { return this.premiered; }
         }
 
-        public DateTime FirstAired
+        public virtual DateTime FirstAired
         {
             get { return this.firstAired; }
         }
 
-        public string Artist
+        public virtual string Artist
         {
             get { return this.artist; }
         }
 
-        public string Album
+        public virtual string Album
         {
             get { return this.album; }
         }
@@ -217,7 +217,7 @@ namespace XBMC.JsonRpc
             this.showTitle = showTitle;
             this.firstAired = !string.IsNullOrEmpty(firstAired) ? DateTime.Parse(firstAired) : new DateTime();
             this.season = season;
-            this.episodeCount = episodeCount;
+            this.episodes = episodeCount;
             this.premiered = !string.IsNullOrEmpty(premiered) ? DateTime.Parse(premiered) : new DateTime();
 
             this.artist = artist;

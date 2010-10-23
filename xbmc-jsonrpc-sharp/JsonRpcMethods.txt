@@ -59,7 +59,7 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 +/- VideoPlaylist.Play [ControlPlayback]:
 +/- VideoPlaylist.SkipPrevious [ControlPlayback]:
 +/- VideoPlaylist.SkipNext [ControlPlayback]:
--/- VideoPlaylist.GetItems [ReadData]:
++/- VideoPlaylist.GetItems [ReadData]:
 -/- VideoPlaylist.Add [ControlPlayback]:
 +/- VideoPlaylist.Clear [ControlPlayback]: Clear video playlist
 +/- VideoPlaylist.Shuffle [ControlPlayback]: Shuffle video playlist
@@ -68,7 +68,7 @@ x/x VideoPlayer.GetTime [ReadData]: Retrieve time
 +/- AudioPlaylist.Play [ControlPlayback]:
 +/- AudioPlaylist.SkipPrevious [ControlPlayback]:
 +/- AudioPlaylist.SkipNext [ControlPlayback]:
--/- AudioPlaylist.GetItems [ReadData]:
++/- AudioPlaylist.GetItems [ReadData]:
 -/- AudioPlaylist.Add [ControlPlayback]:
 +/- AudioPlaylist.Clear [ControlPlayback]: Clear audio playlist
 +/- AudioPlaylist.Shuffle [ControlPlayback]: Shuffle audio playlist
@@ -90,17 +90,17 @@ x/x Playlist.Swap [ControlPlayback]: Swap items in the playlist. Parameter examp
 +/+ AudioLibrary.GetArtists [ReadData]: Retrieve all artists
 +/+ AudioLibrary.GetAlbums [ReadData]: Retrieve all albums from specified artist or genre, Fields: album_description, album_theme, album_mood, album_style, album_type, album_label, album_artist, album_genre, album_rating, album_title
 +/+ AudioLibrary.GetSongs [ReadData]: Retrieve all songs from specified album, artist or genre
-+/- AudioLibrary.ScanForContent [ScanLibrary]:
++/+ AudioLibrary.ScanForContent [ScanLibrary]:
 
 +/+ VideoLibrary.GetMovies [ReadData]: Retrieve all movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
--/- VideoLibrary.GetTVShows [ReadData]: Parameter example { "fields": ["plot"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
--/- VideoLibrary.GetSeasons [ReadData]: Parameter example { "tvshowid": 0, "fields": ["season"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
--/- VideoLibrary.GetEpisodes [ReadData]: Parameter example { "tvshowid": 0, "season": 1, "fields": ["plot"], "sortmethod": "episode", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
--/- VideoLibrary.GetMusicVideos [ReadData]: Parameter example { "artistid": 0, "albumid": 0, "fields": ["plot"], "sortmethod": "artistignorethe", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
--/- VideoLibrary.GetRecentlyAddedMovies [ReadData]: Retrieve all recently added movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
--/- VideoLibrary.GetRecentlyAddedEpisodes [ReadData]: Retrieve all recently added episodes. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
--/- VideoLibrary.GetRecentlyAddedMusicVideos [ReadData]: Retrieve all recently added music videos. Parameter example { "fields": ["plot"], "sortmethod": "title","sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
-+/- VideoLibrary.ScanForContent [ScanLibrary]:
++/+ VideoLibrary.GetTVShows [ReadData]: Parameter example { "fields": ["plot"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
++/+ VideoLibrary.GetSeasons [ReadData]: Parameter example { "tvshowid": 0, "fields": ["season"], "sortmethod": "label", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
++/+ VideoLibrary.GetEpisodes [ReadData]: Parameter example { "tvshowid": 0, "season": 1, "fields": ["plot"], "sortmethod": "episode", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
++/+ VideoLibrary.GetMusicVideos [ReadData]: Parameter example { "artistid": 0, "albumid": 0, "fields": ["plot"], "sortmethod": "artistignorethe", "sortorder": "ascending", "start": 0, "end": 3}. sortorder, sortmethod, start and end are optional
++/+ VideoLibrary.GetRecentlyAddedMovies [ReadData]: Retrieve all recently added movies. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
++/+ VideoLibrary.GetRecentlyAddedEpisodes [ReadData]: Retrieve all recently added episodes. Parameter example { "fields": ["plot"], "sortmethod": "title", "sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
++/+ VideoLibrary.GetRecentlyAddedMusicVideos [ReadData]: Retrieve all recently added music videos. Parameter example { "fields": ["plot"], "sortmethod": "title","sortorder": "ascending", "start": 0, "end": 3}. fields, sortorder, sortmethod, start and end are optional
++/+ VideoLibrary.ScanForContent [ScanLibrary]:
 
 +/- System.Shutdown [ControlPower]:
 +/- System.Suspend [ControlPower]:

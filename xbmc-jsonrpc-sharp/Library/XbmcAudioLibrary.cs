@@ -16,7 +16,7 @@ namespace XBMC.JsonRpc
 
         #region JSON RPC Calls
 
-        // TODO: AudioLibrary: Add sorting
+        // TODO: XbmcAudioLibrary: Add sorting
 
         public ICollection<XbmcArtist> GetArtists()
         {

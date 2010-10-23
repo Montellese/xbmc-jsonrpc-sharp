@@ -31,7 +31,14 @@ namespace Test
 
                     Console.Out.WriteLine("succeeded (Version {0})", xbmc.JsonRpc.Version());
                     Console.Out.WriteLine("Press <Enter> to disconnect...");
-                    xbmc.Library.Video.GetMovies(0, 10);
+
+                    XbmcVideo video = xbmc.Playlist.Video.GetCurrentItem();
+                    //List<XbmcArtist> artists = (List<XbmcArtist>)xbmc.Library.Audio.GetArtists();
+                    //xbmc.Library.Audio.GetAlbums();
+                    //List<XbmcMusicVideo> musicvideos1 = (List<XbmcMusicVideo>)xbmc.Library.Video.GetMusicVideosByArtist(114); // ArtistId: 114; AlbumId: 109
+                    //List<XbmcMusicVideo> musicvideos2 = (List<XbmcMusicVideo>)xbmc.Library.Video.GetMusicVideosByAlbum(109);
+                    //List<XbmcMusicVideo> musicvideos = (List<XbmcMusicVideo>)xbmc.Library.Video.GetMusicVideos(1, 4);
+                    //List<XbmcMusicVideo> musicvideos4 = (List<XbmcMusicVideo>)xbmc.Library.Video.GetMusicVideos(114, 109, 0, 2);
 
                     while (!aborted)
                     {

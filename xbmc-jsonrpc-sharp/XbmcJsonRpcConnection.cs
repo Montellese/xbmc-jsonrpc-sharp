@@ -247,7 +247,7 @@ namespace XBMC.JsonRpc
             }
             else if (string.CompareOrdinal(type, "QueueNextItem") == 0)
             {
-                // TODO: Handle announcement QueueNextItem
+                this.playlist.OnItemQueued();
             }
             else if (string.CompareOrdinal(type, "ApplicationStop") == 0)
             {

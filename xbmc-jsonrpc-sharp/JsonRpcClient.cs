@@ -72,7 +72,7 @@ namespace XBMC.JsonRpc
             this.username = username;
             this.password = password;
 
-            this.timeout = 50000; // TODO: Timeout = 5000
+            this.timeout = 5000;
         }
 
         #endregion

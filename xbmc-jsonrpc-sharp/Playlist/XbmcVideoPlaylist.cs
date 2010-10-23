@@ -34,7 +34,6 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
-            // TODO: XbmcVideoPlaylist differ between movies, tvshows etc
             return XbmcVideo.FromJson((JObject)items[current]);
         }
 
@@ -54,7 +53,6 @@ namespace XBMC.JsonRpc
             XbmcPlaylist<XbmcVideo> playlist = XbmcPlaylist<XbmcVideo>.FromJson(query);
             foreach (JObject item in (JArray)query["items"])
             {
-                // TODO: XbmcVideoPlaylist differ between movies, tvshows etc
                 playlist.Add(XbmcVideo.FromJson(item));
             }
 

@@ -26,6 +26,12 @@ namespace XBMC.JsonRpc
 
         #endregion
 
+        #region Events
+
+        public event EventHandler ItemQueued;
+
+        #endregion
+
         #region Constructor
 
         internal XbmcPlaylist(JsonRpcClient client)
@@ -107,6 +113,18 @@ namespace XBMC.JsonRpc
             }
 
             return (this.client.Call("Playlist.UnShuffle", this.getPlaylistArgument(playlist)) != null);
+        }
+
+        #endregion
+
+        #region Internal functions
+
+        internal void OnItemQueued()
+        {
+            if (this.ItemQueued != null)
+            {
+                this.ItemQueued(this, null);
+            }
         }
 
         #endregion

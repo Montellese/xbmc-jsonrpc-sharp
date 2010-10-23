@@ -7,7 +7,7 @@
 +/- PlaybackSeekChapter
 +/+ PlaybackSpeedChanged
 
--/- QueueNextItem
++/- QueueNextItem
 
 +/+ ApplicationStop
 +/- Shutdown

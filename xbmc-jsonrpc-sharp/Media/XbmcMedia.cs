@@ -48,11 +48,6 @@ namespace XBMC.JsonRpc
 
         protected XbmcMedia(int id, string thumbnail, string fanart)
         {
-            if (this.id < 0)
-            {
-                throw new ArgumentException("The ID must be zero or bigger");
-            }
-
             this.id = id;
             this.thumbnail = thumbnail != null ? thumbnail : string.Empty;
             this.fanart = fanart != null ? fanart : string.Empty;

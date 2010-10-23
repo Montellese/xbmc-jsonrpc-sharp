@@ -32,12 +32,6 @@ namespace Test
                     Console.Out.WriteLine("succeeded (Version {0})", xbmc.JsonRpc.Version());
                     Console.Out.WriteLine("Press <Enter> to disconnect...");
 
-                    string videoCodec = xbmc.Player.Video.VideoCodec;
-                    int resolution = xbmc.Player.Video.Resolution;
-                    double aspectRatio = xbmc.Player.Video.AspectRatio;
-                    int audioChannels = xbmc.Player.Video.AudioChannels;
-                    string audioCodec = xbmc.Player.Video.AudioCodec;
-
                     while (!aborted)
                     {
                         int ch = Console.In.Peek();

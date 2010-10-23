@@ -41,8 +41,16 @@ namespace XBMC.JsonRpc
         {
             get
             {
-                if (!this.socket.Connected)
+                try
                 {
+                    if (this.socket == null || !this.socket.Connected)
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
                     return false;
                 }
 
@@ -147,7 +155,7 @@ namespace XBMC.JsonRpc
             }
             catch (Exception ex)
             {
-                Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
                 return false;
             }
 
@@ -156,9 +164,16 @@ namespace XBMC.JsonRpc
 
         public void Close()
         {
-            if (this.socket.Connected)
+            try
             {
-                this.socket.Disconnect(true);
+                if (this.socket.Connected)
+                {
+                    this.socket.Disconnect(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
             }
         }
 
@@ -170,13 +185,22 @@ namespace XBMC.JsonRpc
         {
             if (!this.disposed) 
             {
-                lock (this.socket)
+                try
                 {
-                    this.Close();
-                    this.socket.Close();
+                    lock (this.socket)
+                    {
+                        this.Close();
+                        this.socket.Close();
+                    }
                 }
-
-                this.disposed = true;
+                catch (Exception ex)
+                {
+                    //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                }
+                finally
+                {
+                    this.disposed = true;
+                }
                 GC.SuppressFinalize(this);
             }
         }
@@ -310,7 +334,18 @@ namespace XBMC.JsonRpc
                         return;
                     }
 
-                    int read = this.socket.EndReceive(result);
+                    int read = 0;
+                    try
+                    {
+                        read = this.socket.EndReceive(result);
+                    }
+                    catch (Exception ex)
+                    {
+                        //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                        this.Close();
+                        this.onAborted();
+                    }
+
                     if (read > 0)
                     {
                         state.Builder.Append(Encoding.UTF8.GetString(state.Buffer, 0, read));
@@ -339,7 +374,7 @@ namespace XBMC.JsonRpc
             }
             catch (Exception ex) 
             {
-                Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
             }
         }
 
@@ -350,8 +385,17 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            this.socket.BeginReceive(state.Buffer, 0, SocketStateObject.BufferSize,
+            try
+            {
+                this.socket.BeginReceive(state.Buffer, 0, SocketStateObject.BufferSize,
                     0, new AsyncCallback(this.receiveAnnouncements), state);
+            }
+            catch (Exception ex)
+            {
+                //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                this.Close();
+                this.onAborted();
+            }
         }
 
         #endregion

@@ -91,46 +91,54 @@ namespace XBMC.JsonRpc
                 throw new ArgumentException();
             }
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.uri);
-            request.AllowWriteStreamBuffering = true;
-            request.ContentType = "application/json";
-            request.Credentials = new NetworkCredential(this.username, this.password);
-            request.KeepAlive = false;
-            request.Method = "POST";
-            request.Timeout = this.timeout;
-
-            using (Stream requestStream = request.GetRequestStream())
+            try
             {
-                using (StreamWriter requestWriter = new StreamWriter(requestStream, Encoding.ASCII))
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.uri);
+                request.AllowWriteStreamBuffering = true;
+                request.ContentType = "application/json";
+                request.Credentials = new NetworkCredential(this.username, this.password);
+                request.KeepAlive = false;
+                request.Method = "POST";
+                request.Timeout = this.timeout;
+
+                using (Stream requestStream = request.GetRequestStream())
                 {
-                    if (this.callId >= CallIdMaximum)
+                    using (StreamWriter requestWriter = new StreamWriter(requestStream, Encoding.ASCII))
                     {
-                        this.callId = 0;
-                    }
-                    this.callId += 1;
+                        if (this.callId >= CallIdMaximum)
+                        {
+                            this.callId = 0;
+                        }
+                        this.callId += 1;
 
-                    JObject call = new JObject();
-                    call.Add(new JProperty("jsonrpc", "2.0"));
-                    call.Add(new JProperty("method", method));
-                    if (args != null)
+                        JObject call = new JObject();
+                        call.Add(new JProperty("jsonrpc", "2.0"));
+                        call.Add(new JProperty("method", method));
+                        if (args != null)
+                        {
+                            call.Add(new JProperty("params", args));
+                        }
+                        call.Add(new JProperty("id", this.callId));
+
+                        requestWriter.Write(call.ToString());
+                    }
+                }
+
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (Stream responseStream = response.GetResponseStream())
                     {
-                        call.Add(new JProperty("params", args));
+                        using (StreamReader responseReader = new StreamReader(responseStream, Encoding.UTF8))
+                        {
+                            return this.parseResponse(responseReader);
+                        }
                     }
-                    call.Add(new JProperty("id", this.callId));
-
-                    requestWriter.Write(call.ToString());
                 }
             }
-
-            using (WebResponse response = request.GetResponse())
+            catch (Exception ex)
             {
-                using (Stream responseStream = response.GetResponseStream())
-                {
-                    using (StreamReader responseReader = new StreamReader(responseStream, Encoding.UTF8))
-                    {
-                        return this.parseResponse(responseReader);
-                    }
-                }
+                //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                return null;
             }
         }
 

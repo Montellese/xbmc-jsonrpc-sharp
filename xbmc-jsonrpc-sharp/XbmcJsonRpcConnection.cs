@@ -116,7 +116,6 @@ namespace XBMC.JsonRpc
         public XbmcJsonRpcConnection(Uri uri, string username, string password)
         {
             this.client = new JsonRpcClient(uri, username, password);
-            this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             this.jsonRpc = new XbmcJsonRpc(this.client);
             this.player = new XbmcPlayer(this.client);
@@ -143,6 +142,7 @@ namespace XBMC.JsonRpc
         {
             try
             {
+                this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 this.socket.Connect(this.client.Uri.Host, AnnouncementPort);
                 // Send a ping to XBMC
                 if (!this.IsAlive)
@@ -166,9 +166,9 @@ namespace XBMC.JsonRpc
         {
             try
             {
-                if (this.socket.Connected)
+                if (this.socket != null && this.socket.Connected)
                 {
-                    this.socket.Disconnect(true);
+                    this.socket.Disconnect(false);
                 }
             }
             catch (Exception ex)
@@ -324,57 +324,50 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            try 
+            lock (this.socket)
             {
-                lock (this.socket)
+                SocketStateObject state = result.AsyncState as SocketStateObject;
+                if (state == null || this.socket == null || !this.socket.Connected)
                 {
-                    SocketStateObject state = result.AsyncState as SocketStateObject;
-                    if (state == null || this.socket == null || !this.socket.Connected)
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    int read = 0;
-                    try
-                    {
-                        read = this.socket.EndReceive(result);
-                    }
-                    catch (Exception ex)
-                    {
-                        //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
-                        this.Close();
-                        this.onAborted();
-                    }
+                int read = 0;
+                try
+                {
+                    read = this.socket.EndReceive(result);
+                }
+                catch (Exception ex)
+                {
+                    //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                    this.Close();
+                    this.onAborted();
+                }
 
-                    if (read > 0)
-                    {
-                        state.Builder.Append(Encoding.UTF8.GetString(state.Buffer, 0, read));
-
-                        this.receive(state);
-                    }
-
-                    string data = state.Builder.ToString();
-                    if (data.Length > 0 && data.Contains(AnnouncementEnd) || data.Contains(AnnouncementEndAlternative))
-                    {
-                        int pos = data.IndexOf(AnnouncementEnd);
-                        if (pos < 0)
-                        {
-                            pos = data.IndexOf(AnnouncementEndAlternative) + AnnouncementEndAlternative.Length;
-                        }
-                        else
-                        {
-                            pos += AnnouncementEnd.Length;
-                        }
-                        state.Builder.Remove(0, pos);
-                        this.onAnnouncement(data.Substring(0, pos));
-                    }
+                if (read > 0)
+                {
+                    state.Builder.Append(Encoding.UTF8.GetString(state.Buffer, 0, read));
 
                     this.receive(state);
                 }
-            }
-            catch (Exception ex) 
-            {
-                //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+
+                string data = state.Builder.ToString();
+                if (data.Length > 0 && data.Contains(AnnouncementEnd) || data.Contains(AnnouncementEndAlternative))
+                {
+                    int pos = data.IndexOf(AnnouncementEnd);
+                    if (pos < 0)
+                    {
+                        pos = data.IndexOf(AnnouncementEndAlternative) + AnnouncementEndAlternative.Length;
+                    }
+                    else
+                    {
+                        pos += AnnouncementEnd.Length;
+                    }
+                    state.Builder.Remove(0, pos);
+                    this.onAnnouncement(data.Substring(0, pos));
+                }
+
+                this.receive(state);
             }
         }
 

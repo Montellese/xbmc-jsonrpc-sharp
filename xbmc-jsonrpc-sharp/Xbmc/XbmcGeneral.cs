@@ -20,7 +20,7 @@ namespace XBMC.JsonRpc
             get { return this.system.GetInfoLabel("System.BuildVersion"); }
         }
 
-        public DateTime BuildData
+        public DateTime BuildDate
         {
             get { return DateTime.Parse(this.system.GetInfoLabel("System.BuildDate")); }
         }

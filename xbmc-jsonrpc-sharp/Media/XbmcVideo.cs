@@ -3,14 +3,10 @@ using Newtonsoft.Json.Linq;
 
 namespace XBMC.JsonRpc
 {
-    public class XbmcVideo : XbmcMedia
+    public class XbmcVideo : XbmcPlayable
     {
         #region Private variables
 
-        protected string title;
-        protected string genre;
-        protected int year;
-        protected double rating;
         protected int playCount;
         protected string studio;
 
@@ -48,26 +44,6 @@ namespace XBMC.JsonRpc
         #endregion
 
         #region Public variables
-
-        public virtual string Title
-        {
-            get { return this.title; }
-        }
-
-        public virtual string Genre
-        {
-            get { return this.genre; }
-        }
-
-        public virtual int Year
-        {
-            get { return this.year; }
-        }
-
-        public virtual double Rating
-        {
-            get { return this.rating; }
-        }
 
         public virtual int PlayCount
         {
@@ -188,17 +164,9 @@ namespace XBMC.JsonRpc
                           string outline, string originalTitle, string lastPlayed, int duration, string writer,
                           string mpaa, string showTitle, int season, int episodeCount, string premiered,
                           string firstAired, string artist, string album)
-            : base(id, thumbnail, fanart)
+            : base(id, thumbnail, fanart,
+                   title, genre, year, rating)
         {
-            if (string.IsNullOrEmpty(title))
-            {
-                throw new ArgumentException("title");
-            }
-
-            this.title = title;
-            this.genre = genre;
-            this.year = year;
-            this.rating = rating;
             this.playCount = playCount;
             this.studio = studio;
 

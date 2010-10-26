@@ -50,6 +50,7 @@
     <Compile Include="Library\XbmcMediaLibrary.cs" />
     <Compile Include="Media\XbmcMusicVideo.cs" />
     <Compile Include="Media\XbmcMedia.cs" />
+    <Compile Include="Media\XbmcPlayable.cs" />
     <Compile Include="Media\XbmcPlaylist.cs" />
     <Compile Include="Media\XbmcSong.cs" />
     <Compile Include="Media\XbmcTvEpisode.cs" />

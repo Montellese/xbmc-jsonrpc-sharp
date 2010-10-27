@@ -238,13 +238,15 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            XbmcMediaPlayer player = this.getActivePlayer();
+            TimeSpan current, total;
+            XbmcMediaPlayer player = this.getProgress(out current, out total);
+            current = TimeSpan.Parse(this.getInfo<string>("Player.SeekTime")); 
             if (player == null)
             {
                 return;
             }
 
-            this.PlaybackSpeedChanged(this, new XbmcPlayerPlaybackSpeedChangedEventArgs(player, player.Speed));
+            this.PlaybackSpeedChanged(this, new XbmcPlayerPlaybackSpeedChangedEventArgs(player, current, total, player.Speed));
         }
 
         #endregion

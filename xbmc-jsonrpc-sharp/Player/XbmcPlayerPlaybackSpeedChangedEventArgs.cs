@@ -2,7 +2,7 @@
 
 namespace XBMC.JsonRpc
 {
-    public class XbmcPlayerPlaybackSpeedChangedEventArgs : XbmcPlayerPlaybackChangedEventArgs
+    public class XbmcPlayerPlaybackSpeedChangedEventArgs : XbmcPlayerPlaybackPositionChangedEventArgs
     {
         #region Private variables
 
@@ -21,8 +21,8 @@ namespace XBMC.JsonRpc
 
         #region Constructors
 
-        internal XbmcPlayerPlaybackSpeedChangedEventArgs(XbmcMediaPlayer player, int speed)
-            : base(player)
+        internal XbmcPlayerPlaybackSpeedChangedEventArgs(XbmcMediaPlayer player, TimeSpan position, TimeSpan length, int speed)
+            : base(player, position, length)
         {
             this.speed = speed;
         }

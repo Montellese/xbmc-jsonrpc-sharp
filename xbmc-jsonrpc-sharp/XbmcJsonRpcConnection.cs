@@ -103,6 +103,7 @@ namespace XBMC.JsonRpc
 
         #region Events
 
+        public event EventHandler Connected;
         public event EventHandler Aborted;
 
         #endregion
@@ -150,6 +151,7 @@ namespace XBMC.JsonRpc
                     this.Close();
                     return false;
                 }
+                this.onConnected();
                 
                 this.receive(new SocketStateObject());
             }
@@ -208,6 +210,16 @@ namespace XBMC.JsonRpc
         #endregion
 
         #region Private functions
+
+        private void onConnected()
+        {
+            if (this.Connected == null)
+            {
+                return;
+            }
+
+            this.Connected(this, null);
+        }
 
         private void onAborted()
         {

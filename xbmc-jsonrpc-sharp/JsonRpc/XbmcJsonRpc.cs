@@ -74,7 +74,13 @@ namespace XBMC.JsonRpc
 
         public string Ping()
         {
-            return this.client.Call("JSONRPC.Ping").ToString();
+            object query = this.client.Call("JSONRPC.Ping");
+            if (query == null) 
+            {
+                return string.Empty;
+            }
+
+            return query.ToString();
         }
 
         public void Announce(string sender, string message)

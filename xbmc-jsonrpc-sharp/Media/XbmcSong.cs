@@ -106,21 +106,28 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
-            return new XbmcSong(JsonRpcClient.GetField<int>(obj, "songid"),
-                                JsonRpcClient.GetField<string>(obj, "thumbnail"),
-                                JsonRpcClient.GetField<string>(obj, "fanart"),
-                                JsonRpcClient.GetField<string>(obj, "file"),
-                                JsonRpcClient.GetField<string>(obj, "title"),
-                                JsonRpcClient.GetField<string>(obj, "artist"),
-                                JsonRpcClient.GetField<string>(obj, "genre", string.Empty),
-                                JsonRpcClient.GetField<int>(obj, "year"),
-                                JsonRpcClient.GetField<int>(obj, "rating"),
-                                JsonRpcClient.GetField<string>(obj, "album", string.Empty),
-                                JsonRpcClient.GetField<int>(obj, "tracknumber"),
-                                JsonRpcClient.GetField<int>(obj, "discnumber"),
-                                JsonRpcClient.GetField<int>(obj, "duration"),
-                                JsonRpcClient.GetField<string>(obj, "comment", string.Empty),
-                                JsonRpcClient.GetField<string>(obj, "lyrics", string.Empty));
+            try 
+            {
+                return new XbmcSong(JsonRpcClient.GetField<int>(obj, "songid"),
+                                    JsonRpcClient.GetField<string>(obj, "thumbnail"),
+                                    JsonRpcClient.GetField<string>(obj, "fanart"),
+                                    JsonRpcClient.GetField<string>(obj, "file"),
+                                    JsonRpcClient.GetField<string>(obj, "title"),
+                                    JsonRpcClient.GetField<string>(obj, "artist"),
+                                    JsonRpcClient.GetField<string>(obj, "genre", string.Empty),
+                                    JsonRpcClient.GetField<int>(obj, "year"),
+                                    JsonRpcClient.GetField<int>(obj, "rating"),
+                                    JsonRpcClient.GetField<string>(obj, "album", string.Empty),
+                                    JsonRpcClient.GetField<int>(obj, "tracknumber"),
+                                    JsonRpcClient.GetField<int>(obj, "discnumber"),
+                                    JsonRpcClient.GetField<int>(obj, "duration"),
+                                    JsonRpcClient.GetField<string>(obj, "comment", string.Empty),
+                                    JsonRpcClient.GetField<string>(obj, "lyrics", string.Empty));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         #endregion

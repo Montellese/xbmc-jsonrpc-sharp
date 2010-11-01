@@ -115,19 +115,26 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
-            return new XbmcTvShow(JsonRpcClient.GetField<int>(obj, "tvshowid"),
-                                  JsonRpcClient.GetField<string>(obj, "thumbnail"),
-                                  JsonRpcClient.GetField<string>(obj, "fanart"),
-                                  JsonRpcClient.GetField<string>(obj, "title"),
-                                  JsonRpcClient.GetField<string>(obj, "genre", string.Empty),
-                                  JsonRpcClient.GetField<int>(obj, "year"),
-                                  JsonRpcClient.GetField<double>(obj, "rating"),
-                                  JsonRpcClient.GetField<string>(obj, "plot", string.Empty),
-                                  JsonRpcClient.GetField<int>(obj, "episode"),
-                                  JsonRpcClient.GetField<int>(obj, "playcount"),
-                                  JsonRpcClient.GetField<string>(obj, "studio", string.Empty),
-                                  JsonRpcClient.GetField<string>(obj, "mpaa", string.Empty),
-                                  JsonRpcClient.GetField<string>(obj, "premiered", string.Empty));
+            try 
+            {
+                return new XbmcTvShow(JsonRpcClient.GetField<int>(obj, "tvshowid"),
+                                      JsonRpcClient.GetField<string>(obj, "thumbnail"),
+                                      JsonRpcClient.GetField<string>(obj, "fanart"),
+                                      JsonRpcClient.GetField<string>(obj, "title"),
+                                      JsonRpcClient.GetField<string>(obj, "genre", string.Empty),
+                                      JsonRpcClient.GetField<int>(obj, "year"),
+                                      JsonRpcClient.GetField<double>(obj, "rating"),
+                                      JsonRpcClient.GetField<string>(obj, "plot", string.Empty),
+                                      JsonRpcClient.GetField<int>(obj, "episode"),
+                                      JsonRpcClient.GetField<int>(obj, "playcount"),
+                                      JsonRpcClient.GetField<string>(obj, "studio", string.Empty),
+                                      JsonRpcClient.GetField<string>(obj, "mpaa", string.Empty),
+                                      JsonRpcClient.GetField<string>(obj, "premiered", string.Empty));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         #endregion

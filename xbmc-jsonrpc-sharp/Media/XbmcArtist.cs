@@ -58,10 +58,17 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
-            return new XbmcArtist(JsonRpcClient.GetField<int>(obj, "artistid"),
-                                  JsonRpcClient.GetField<string>(obj, "artist"),
-                                  JsonRpcClient.GetField<string>(obj, "thumbnail"),
-                                  JsonRpcClient.GetField<string>(obj, "fanart"));
+            try
+            {
+                return new XbmcArtist(JsonRpcClient.GetField<int>(obj, "artistid"),
+                                      JsonRpcClient.GetField<string>(obj, "artist"),
+                                      JsonRpcClient.GetField<string>(obj, "thumbnail"),
+                                      JsonRpcClient.GetField<string>(obj, "fanart"));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         #endregion

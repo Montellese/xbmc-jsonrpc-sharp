@@ -2,6 +2,7 @@
 
 using XBMC.JsonRpc;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Test
 {
@@ -31,6 +32,20 @@ namespace Test
 
                     Console.Out.WriteLine("succeeded (Version {0})", xbmc.JsonRpc.Version());
                     Console.Out.WriteLine("Press <Enter> to disconnect...");
+
+                    xbmc.Playlist.Video.GetCurrentItem();
+
+                    /*while (true)
+                    {
+                        IDictionary<string, string> info = xbmc.System.GetInfoLabels("System.CurrentWindow", "System.CurrentControl");
+                        if (info.Count == 2)
+                        {
+                            Console.Out.WriteLine("Window = {0}", info["System.CurrentWindow"]);
+                            Console.Out.WriteLine("Control = {0}", info["System.CurrentControl"]);
+                        }
+
+                        Thread.Sleep(1000);
+                    }*/
 
                     while (!aborted)
                     {

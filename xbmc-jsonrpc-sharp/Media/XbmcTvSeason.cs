@@ -134,17 +134,24 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
-            return new XbmcTvSeason(JsonRpcClient.GetField<string>(obj, "thumbnail"),
-                                    JsonRpcClient.GetField<string>(obj, "fanart"),
-                                    JsonRpcClient.GetField<string>(obj, "title"),
-                                    JsonRpcClient.GetField<string>(obj, "genre", string.Empty),
-                                    JsonRpcClient.GetField<double>(obj, "rating"),
-                                    JsonRpcClient.GetField<string>(obj, "showtitle"),
-                                    JsonRpcClient.GetField<int>(obj, "season"),
-                                    JsonRpcClient.GetField<int>(obj, "episode"),
-                                    JsonRpcClient.GetField<int>(obj, "playcount"),
-                                    JsonRpcClient.GetField<string>(obj, "studio", string.Empty),
-                                    JsonRpcClient.GetField<string>(obj, "mpaa", string.Empty));
+            try 
+            {
+                return new XbmcTvSeason(JsonRpcClient.GetField<string>(obj, "thumbnail"),
+                                        JsonRpcClient.GetField<string>(obj, "fanart"),
+                                        JsonRpcClient.GetField<string>(obj, "title"),
+                                        JsonRpcClient.GetField<string>(obj, "genre", string.Empty),
+                                        JsonRpcClient.GetField<double>(obj, "rating"),
+                                        JsonRpcClient.GetField<string>(obj, "showtitle"),
+                                        JsonRpcClient.GetField<int>(obj, "season"),
+                                        JsonRpcClient.GetField<int>(obj, "episode"),
+                                        JsonRpcClient.GetField<int>(obj, "playcount"),
+                                        JsonRpcClient.GetField<string>(obj, "studio", string.Empty),
+                                        JsonRpcClient.GetField<string>(obj, "mpaa", string.Empty));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         #endregion

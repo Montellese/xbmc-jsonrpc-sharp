@@ -36,9 +36,5 @@ namespace XBMC.JsonRpc
         }
 
         #endregion
-
-        #region Internal static functions
-
-        #endregion
     }
 }

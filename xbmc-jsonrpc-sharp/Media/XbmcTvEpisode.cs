@@ -111,26 +111,33 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
-            return new XbmcTvEpisode(JsonRpcClient.GetField<int>(obj, "episodeid"),
-                                     JsonRpcClient.GetField<string>(obj, "thumbnail"),
-                                     JsonRpcClient.GetField<string>(obj, "fanart"),
-                                     JsonRpcClient.GetField<string>(obj, "file"),
-                                     JsonRpcClient.GetField<string>(obj, "title"),
-                                     JsonRpcClient.GetField<int>(obj, "year"),
-                                     JsonRpcClient.GetField<double>(obj, "rating"),
-                                     JsonRpcClient.GetField<string>(obj, "director", string.Empty),
-                                     JsonRpcClient.GetField<string>(obj, "plot", string.Empty),
-                                     JsonRpcClient.GetField<string>(obj, "lastplayed", string.Empty),
-                                     JsonRpcClient.GetField<string>(obj, "showtitle"),
-                                     JsonRpcClient.GetField<string>(obj, "firstaired"),
-                                     JsonRpcClient.GetField<int>(obj, "duration"),
-                                     JsonRpcClient.GetField<int>(obj, "season"),
-                                     JsonRpcClient.GetField<int>(obj, "episode"),
-                                     JsonRpcClient.GetField<int>(obj, "playcount"),
-                                     JsonRpcClient.GetField<string>(obj, "writer", string.Empty),
-                                     JsonRpcClient.GetField<string>(obj, "studio", string.Empty),
-                                     JsonRpcClient.GetField<string>(obj, "mpaa", string.Empty),
-                                     JsonRpcClient.GetField<string>(obj, "premiered", string.Empty));
+            try 
+            {
+                return new XbmcTvEpisode(JsonRpcClient.GetField<int>(obj, "episodeid"),
+                                         JsonRpcClient.GetField<string>(obj, "thumbnail"),
+                                         JsonRpcClient.GetField<string>(obj, "fanart"),
+                                         JsonRpcClient.GetField<string>(obj, "file"),
+                                         JsonRpcClient.GetField<string>(obj, "title"),
+                                         JsonRpcClient.GetField<int>(obj, "year"),
+                                         JsonRpcClient.GetField<double>(obj, "rating"),
+                                         JsonRpcClient.GetField<string>(obj, "director", string.Empty),
+                                         JsonRpcClient.GetField<string>(obj, "plot", string.Empty),
+                                         JsonRpcClient.GetField<string>(obj, "lastplayed", string.Empty),
+                                         JsonRpcClient.GetField<string>(obj, "showtitle"),
+                                         JsonRpcClient.GetField<string>(obj, "firstaired"),
+                                         JsonRpcClient.GetField<int>(obj, "duration"),
+                                         JsonRpcClient.GetField<int>(obj, "season"),
+                                         JsonRpcClient.GetField<int>(obj, "episode"),
+                                         JsonRpcClient.GetField<int>(obj, "playcount"),
+                                         JsonRpcClient.GetField<string>(obj, "writer", string.Empty),
+                                         JsonRpcClient.GetField<string>(obj, "studio", string.Empty),
+                                         JsonRpcClient.GetField<string>(obj, "mpaa", string.Empty),
+                                         JsonRpcClient.GetField<string>(obj, "premiered", string.Empty));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         #endregion

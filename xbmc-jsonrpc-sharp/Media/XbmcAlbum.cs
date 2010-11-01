@@ -91,20 +91,27 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
-            return new XbmcAlbum(JsonRpcClient.GetField<int>(obj, "albumid"),
-                                 JsonRpcClient.GetField<string>(obj, "thumbnail"),
-                                 JsonRpcClient.GetField<string>(obj, "fanart"),
-                                 JsonRpcClient.GetField<string>(obj, "album_title"),
-                                 JsonRpcClient.GetField<string>(obj, "album_artist"),
-                                 JsonRpcClient.GetField<int>(obj, "year"),
-                                 JsonRpcClient.GetField<int>(obj, "album_rating"),
-                                 JsonRpcClient.GetField<string>(obj, "album_genre", string.Empty),
-                                 JsonRpcClient.GetField<string>(obj, "album_mood", string.Empty),
-                                 JsonRpcClient.GetField<string>(obj, "album_theme", string.Empty),
-                                 JsonRpcClient.GetField<string>(obj, "album_style", string.Empty),
-                                 JsonRpcClient.GetField<string>(obj, "album_type", string.Empty),
-                                 JsonRpcClient.GetField<string>(obj, "album_label", string.Empty),
-                                 JsonRpcClient.GetField<string>(obj, "album_description", string.Empty));
+            try
+            {
+                return new XbmcAlbum(JsonRpcClient.GetField<int>(obj, "albumid"),
+                                     JsonRpcClient.GetField<string>(obj, "thumbnail"),
+                                     JsonRpcClient.GetField<string>(obj, "fanart"),
+                                     JsonRpcClient.GetField<string>(obj, "album_title"),
+                                     JsonRpcClient.GetField<string>(obj, "album_artist"),
+                                     JsonRpcClient.GetField<int>(obj, "year"),
+                                     JsonRpcClient.GetField<int>(obj, "album_rating"),
+                                     JsonRpcClient.GetField<string>(obj, "album_genre", string.Empty),
+                                     JsonRpcClient.GetField<string>(obj, "album_mood", string.Empty),
+                                     JsonRpcClient.GetField<string>(obj, "album_theme", string.Empty),
+                                     JsonRpcClient.GetField<string>(obj, "album_style", string.Empty),
+                                     JsonRpcClient.GetField<string>(obj, "album_type", string.Empty),
+                                     JsonRpcClient.GetField<string>(obj, "album_label", string.Empty),
+                                     JsonRpcClient.GetField<string>(obj, "album_description", string.Empty));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         #endregion

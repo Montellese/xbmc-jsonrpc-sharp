@@ -203,19 +203,26 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
-            // If there is a showtitle field and it has a value, the retrieved item is a XbmcTvEpisode
-            if (obj["showtitle"] != null && !string.IsNullOrEmpty(JsonRpcClient.GetField<string>(obj, "showtitle")))
+            try
             {
-                return XbmcTvEpisode.FromJson(obj);
+                // If there is a showtitle field and it has a value, the retrieved item is a XbmcTvEpisode
+                if (obj["showtitle"] != null && !string.IsNullOrEmpty(JsonRpcClient.GetField<string>(obj, "showtitle")))
+                {
+                    return XbmcTvEpisode.FromJson(obj);
+                }
+                // If there is a artist field and it has a vaue, the retrieved item is a XbmcMusicVideo
+                if (obj["artist"] != null && !string.IsNullOrEmpty(JsonRpcClient.GetField<string>(obj, "artist")))
+                {
+                    return XbmcMusicVideo.FromJson(obj);
+                }
+
+                // Otherwise it must be a movie
+                return XbmcMovie.FromJson(obj);
             }
-            // If there is a artist field and it has a vaue, the retrieved item is a XbmcMusicVideo
-            if (obj["artist"] != null && !string.IsNullOrEmpty(JsonRpcClient.GetField<string>(obj, "artist")))
+            catch (Exception ex)
             {
-                return XbmcMusicVideo.FromJson(obj);
+                return null;
             }
-            
-            // Otherwise it must be a movie
-            return XbmcMovie.FromJson(obj);
         }
 
         #endregion

@@ -3,8 +3,9 @@ using System.Net;
 using System.Collections;
 using System.IO;
 using System.Text;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+
+using Newtonsoft.Json.Linq;
 
 namespace XBMC.JsonRpc
 {
@@ -23,6 +24,13 @@ namespace XBMC.JsonRpc
         private string password;
 
         private int timeout;
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler<XbmcJsonRpcLogEventArgs> Log;
+        public event EventHandler<XbmcJsonRpcLogErrorEventArgs> LogError;
 
         #endregion
 
@@ -91,6 +99,8 @@ namespace XBMC.JsonRpc
                 throw new ArgumentException();
             }
 
+            this.LogMessage("Calling JSON RPC method \"" + method + "\"...");
+            
             try
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.uri);
@@ -120,6 +130,7 @@ namespace XBMC.JsonRpc
                         }
                         call.Add(new JProperty("id", this.callId));
 
+                        this.LogMessage("JSON RPC call: " + call.ToString());
                         requestWriter.Write(call.ToString());
                     }
                 }
@@ -137,7 +148,7 @@ namespace XBMC.JsonRpc
             }
             catch (Exception ex)
             {
-                //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                this.LogErrorMessage("Error while calling JSON RPC method \"" + method + "\"", ex);
                 return null;
             }
         }
@@ -180,11 +191,42 @@ namespace XBMC.JsonRpc
 
         #endregion
 
+        #region Internal functions
+
+        internal void LogMessage(string message)
+        {
+            if (string.IsNullOrEmpty(message) || this.Log == null)
+            {
+                return;
+            }
+
+            this.Log(this, new XbmcJsonRpcLogEventArgs(message));
+        }
+
+        internal void LogErrorMessage(string message)
+        {
+            this.LogErrorMessage(message, null);
+        }
+
+        internal void LogErrorMessage(string message, Exception exception)
+        {
+            if (string.IsNullOrEmpty(message) || this.LogError == null)
+            {
+                return;
+            }
+
+            this.LogError(this, new XbmcJsonRpcLogErrorEventArgs(message, exception));
+        }
+
+        #endregion
+
         #region Private functions
 
         private object parseResponse(StreamReader reader)
         {
             string response = reader.ReadToEnd();
+            this.LogMessage("JSON RPC response: " + response);
+
             JObject responseObject = JObject.Parse(response);
             foreach (JProperty property in responseObject.Properties())
             {
@@ -216,11 +258,14 @@ namespace XBMC.JsonRpc
                 }
             }
 
+            this.LogErrorMessage("Invalid JSON RPC response: " + response);
             throw new InvalidJsonRpcResponseException(response);
         }
 
         private void parseError(JObject error)
         {
+            this.LogErrorMessage("JSON RPC error received: " + error != null ? error.ToString() : "unknown");
+            
             if (error == null)
             {
                 throw new UnknownJsonRpcErrorException();

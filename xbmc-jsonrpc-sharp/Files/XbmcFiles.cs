@@ -18,20 +18,26 @@ namespace XBMC.JsonRpc
 
         public ICollection<XbmcFileSource> GetSources(XbmcMediaType mediaType)
         {
+            this.client.LogMessage("XbmcFiles.GetSources(" + mediaType + ")");
+
             JObject args = new JObject();
             args.Add(new JProperty("media", getMediaType(mediaType)));
 
             JObject query = this.client.Call("Files.GetSources", args) as JObject;
             List<XbmcFileSource> sources = new List<XbmcFileSource>();
-            if (query != null && query["shares"] != null)
+            if (query == null || query["shares"] == null)
             {
-                foreach (JObject source in (JArray)query["shares"])
+                this.client.LogErrorMessage("Files.GetSources(" + getMediaType(mediaType) + "): Invalid response");
+
+                return sources;
+            }
+
+            foreach (JObject source in (JArray)query["shares"])
+            {
+                XbmcFileSource src = XbmcFileSource.FromJson(source);
+                if (src != null)
                 {
-                    XbmcFileSource src = XbmcFileSource.FromJson(source);
-                    if (src != null)
-                    {
-                        sources.Add(src);
-                    }
+                    sources.Add(src);
                 }
             }
 
@@ -40,9 +46,13 @@ namespace XBMC.JsonRpc
 
         public string GetDownloadUrl(string file)
         {
+            this.client.LogMessage("XbmcFiles.GetDownloadUrl(" + file + ")");
+
             JObject query = this.client.Call("Files.Download", file) as JObject;
             if (query == null || query["path"] == null)
             {
+                this.client.LogErrorMessage("Files.Download(" + file + "): Invalid response");
+
                 return null;
             }
 
@@ -51,6 +61,8 @@ namespace XBMC.JsonRpc
 
         public string GetDirectory(string directory, XbmcMediaType mediaType)
         {
+            this.client.LogMessage("XbmcFiles.GetDirectory(" + directory + ", " + mediaType + ")");
+
             if (string.IsNullOrEmpty(directory))
             {
                 throw new ArgumentException();
@@ -60,7 +72,15 @@ namespace XBMC.JsonRpc
             args.Add(new JProperty("directory", directory));
             args.Add(new JProperty("media", getMediaType(mediaType)));
 
-            return (string)this.client.Call("Files.GetDirectory", args);
+            object path = this.client.Call("Files.GetDirectory", args);
+            if (path == null)
+            {
+                this.client.LogErrorMessage("Files.GetDirectory(" + directory + ", " + getMediaType(mediaType) + "): Invalid response");
+
+                return string.Empty;
+            }
+
+            return (string)path;
         }
 
         #endregion

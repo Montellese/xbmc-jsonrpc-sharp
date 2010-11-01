@@ -17,12 +17,22 @@ namespace XBMC.JsonRpc
 
         public string BuildVersion
         {
-            get { return this.system.GetInfoLabel("System.BuildVersion"); }
+            get
+            {
+                this.client.LogMessage("XbmcGeneral.BuildVersion");
+
+                return this.system.GetInfoLabel("System.BuildVersion");
+            }
         }
 
         public DateTime BuildDate
         {
-            get { return DateTime.Parse(this.system.GetInfoLabel("System.BuildDate")); }
+            get
+            {
+                this.client.LogMessage("XbmcGeneral.BuildDate");
+
+                return DateTime.Parse(this.system.GetInfoLabel("System.BuildDate"));
+            }
         }
 
         #endregion
@@ -41,11 +51,23 @@ namespace XBMC.JsonRpc
 
         public int GetVolume()
         {
-            return (int)this.client.Call("XBMC.GetVolume");
+            this.client.LogMessage("XbmcGeneral.GetVolume()");
+
+            object volume = this.client.Call("XBMC.GetVolume");
+            if (volume == null) 
+            {
+                this.client.LogErrorMessage("XBMC.GetVolume(): Invalid response");
+
+                return -1;
+            }
+
+            return (int)volume;
         }
 
         public bool SetVolume(int value)
         {
+            this.client.LogMessage("XbmcGeneral.SetVolume()");
+
             if (value < 0)
             {
                 value = 0;
@@ -60,11 +82,23 @@ namespace XBMC.JsonRpc
 
         public int ToggleMute()
         {
-            return (int)this.client.Call("XBMC.ToggleMute");
+            this.client.LogMessage("XbmcGeneral.ToggleMute()");
+
+            object volume = this.client.Call("XBMC.ToggleMute");
+            if (volume == null) 
+            {
+                this.client.LogErrorMessage("XBMC.ToggleMute(): Invalid response");
+
+                return -1;
+            }
+
+            return (int)volume;
         }
 
         public bool Log(string message)
         {
+            this.client.LogMessage("XbmcGeneral.Log(message)");
+
             if (string.IsNullOrEmpty(message))
             {
                 throw new ArgumentException();
@@ -75,6 +109,8 @@ namespace XBMC.JsonRpc
 
         public bool Log(string message, XbmcLogLevel logLevel)
         {
+            this.client.LogMessage("XbmcGeneral.Log(message, level)");
+
             if (string.IsNullOrEmpty(message))
             {
                 throw new ArgumentException();
@@ -89,6 +125,8 @@ namespace XBMC.JsonRpc
 
         public bool StartSlideshow(string directory)
         {
+            this.client.LogMessage("XbmcGeneral.StartSliedshow(directory)");
+
             if (string.IsNullOrEmpty(directory))
             {
                 throw new ArgumentException();
@@ -99,6 +137,8 @@ namespace XBMC.JsonRpc
 
         public bool StartSlideshow(string directory, bool random, bool recursive)
         {
+            this.client.LogMessage("XbmcGeneral.StartSlideshow(directory, random, recursive)");
+
             if (string.IsNullOrEmpty(directory))
             {
                 throw new ArgumentException();
@@ -114,6 +154,8 @@ namespace XBMC.JsonRpc
 
         public bool Play(string file)
         {
+            this.client.LogMessage("XbmcGeneral.Play(" + file + ")");
+
             if (string.IsNullOrEmpty(file))
             {
                 throw new ArgumentException("file");
@@ -127,7 +169,10 @@ namespace XBMC.JsonRpc
 
         public bool Play(XbmcArtist artist)
         {
-            if (artist == null) {
+            this.client.LogMessage("XbmcGeneral.Play(artist)");
+
+            if (artist == null)
+            {
                 throw new ArgumentNullException("artist");
             }
             if (artist.Id < 0)
@@ -143,6 +188,8 @@ namespace XBMC.JsonRpc
 
         public bool Play(XbmcAlbum album)
         {
+            this.client.LogMessage("XbmcGeneral.Play(album)");
+
             if (album == null)
             {
                 throw new ArgumentNullException("album");
@@ -160,6 +207,8 @@ namespace XBMC.JsonRpc
 
         public bool Play(XbmcSong song)
         {
+            this.client.LogMessage("XbmcGeneral.Play(song)");
+
             if (song == null)
             {
                 throw new ArgumentNullException("song");
@@ -177,6 +226,8 @@ namespace XBMC.JsonRpc
 
         public bool Play(XbmcMusicVideo musicVideo)
         {
+            this.client.LogMessage("XbmcGeneral.Play(musicVideo)");
+
             if (musicVideo == null)
             {
                 throw new ArgumentNullException("musicVideo");
@@ -194,6 +245,8 @@ namespace XBMC.JsonRpc
 
         public bool Play(XbmcTvEpisode episode)
         {
+            this.client.LogMessage("XbmcGeneral.Play(episode)");
+
             if (episode == null)
             {
                 throw new ArgumentNullException("episode");
@@ -211,6 +264,8 @@ namespace XBMC.JsonRpc
 
         public bool Play(XbmcMovie movie)
         {
+            this.client.LogMessage("XbmcGeneral.Play(movie)");
+
             if (movie == null)
             {
                 throw new ArgumentNullException("movie");
@@ -228,6 +283,8 @@ namespace XBMC.JsonRpc
 
         public bool Quit()
         {
+            this.client.LogMessage("XbmcGeneral.Quit()");
+
             return (this.client.Call("XBMC.Quit") != null);
         }
 

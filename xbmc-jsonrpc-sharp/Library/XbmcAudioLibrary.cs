@@ -25,6 +25,8 @@ namespace XBMC.JsonRpc
 
         public ICollection<XbmcArtist> GetArtists(int start, int end)
         {
+            this.client.LogMessage("XbmcAudioLibrary.GetArtists()");
+            
             JObject args = new JObject();
             args.Add(new JProperty("fields", XbmcArtist.Fields));
             if (start >= 0)
@@ -39,6 +41,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("AudioLibrary.GetArtists", args) as JObject;
             if (query == null || query["artists"] == null)
             {
+                this.client.LogErrorMessage("AudioLibrary.GetArtists(): Invalid response");
+
                 return null;
             }
 
@@ -157,6 +161,8 @@ namespace XBMC.JsonRpc
 
         private ICollection<XbmcSong> getSongs(int albumId, int artistId, int genreId, int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcAudioLibrary.GetSongs()");
+
             JObject args = new JObject();
             if (albumId >= 0)
             {
@@ -195,6 +201,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("AudioLibrary.GetSongs", args) as JObject;
             if (query == null || query["songs"] == null)
             {
+                this.client.LogErrorMessage("AudioLibrary.GetSongs(): Invalid response");
+
                 return null;
             }
 
@@ -209,6 +217,8 @@ namespace XBMC.JsonRpc
 
         private ICollection<XbmcAlbum> getAlbums(int artistId, int genreId, int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcAudioLibrary.GetAlbums()");
+
             JObject args = new JObject();
             if (artistId >= 0)
             {
@@ -242,6 +252,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("AudioLibrary.GetAlbums", args) as JObject;
             if (query == null || query["albums"] == null)
             {
+                this.client.LogErrorMessage("AudioLibrary.GetAlbums(): Invalid response");
+
                 return null;
             }
 

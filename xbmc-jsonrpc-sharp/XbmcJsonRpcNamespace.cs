@@ -34,20 +34,17 @@ namespace XBMC.JsonRpc
 
         protected TType getInfo<TType>(string label, TType defaultValue)
         {
+            this.client.LogMessage("System.GetInfoLabels(" + label + ")");
+
             JObject result = this.client.Call("System.GetInfoLabels", new string[] { label }) as JObject;
             if (result == null || result[label] == null)
             {
+                this.client.LogErrorMessage("System.GetInfoLabels(" + label + "): Invalid response");
+
                 return defaultValue;
             }
 
-            try
-            {
-                return JsonRpcClient.GetField<TType>(result, label);
-            }
-            catch (Exception)
-            {
-                return defaultValue;
-            }
+            return JsonRpcClient.GetField<TType>(result, label, defaultValue);
         }
 
         #endregion

@@ -89,6 +89,8 @@ namespace XBMC.JsonRpc
 
         public bool GetActivePlayers(out bool video, out bool audio, out bool picture)
         {
+            this.client.LogMessage("XbmcPlayer.GetActivePlayers()");
+
             video = false;
             audio = false;
             picture = false;
@@ -96,6 +98,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("Player.GetActivePlayers") as JObject;
             if (query == null)
             {
+                this.client.LogErrorMessage("Player.GetActivePlayers(): Invalid response");
+
                 return false;
             }
 
@@ -165,10 +169,15 @@ namespace XBMC.JsonRpc
                 return;
             }
 
-            TimeSpan current, total;
-            if (player.GetTime(out current, out total) != XbmcPlayerState.Playing)
+            TimeSpan current = new TimeSpan();
+            TimeSpan total = new TimeSpan();
+            if (player is XbmcVideoPlayer)
             {
-                return;
+                ((XbmcVideoPlayer)player).GetTime(out current, out total);
+            }
+            else if (player is XbmcAudioPlayer)
+            {
+                ((XbmcAudioPlayer)player).GetTime(out current, out total);
             }
 
             this.PlaybackResumed(this, new XbmcPlayerPlaybackPositionChangedEventArgs(player, current, total));
@@ -288,9 +297,13 @@ namespace XBMC.JsonRpc
                 return null;
             }
 
-            if (player.GetTime(out current, out total) == XbmcPlayerState.Unavailable)
+            if (player is XbmcVideoPlayer)
             {
-                return null;
+                ((XbmcVideoPlayer)player).GetTime(out current, out total);
+            }
+            else if (player is XbmcAudioPlayer)
+            {
+                ((XbmcAudioPlayer)player).GetTime(out current, out total);
             }
 
             return player;

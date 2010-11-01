@@ -12,12 +12,14 @@ namespace XBMC.JsonRpc
 
         #endregion
 
-        #region Public variables
+        #region Protected variables
 
-        public virtual XbmcPlayerState State
+        protected XbmcPlayerState state
         {
             get
             {
+                this.client.LogMessage("XbmcMediaPlayer.State");
+
                 return this.parsePlayerState(this.client.Call(this.playerName + ".State") as JObject);
             }
         }
@@ -52,56 +54,132 @@ namespace XBMC.JsonRpc
 
         public virtual XbmcPlayerState PlayPause()
         {
+            this.client.LogMessage("XbmcMediaPlayer.PlayPause()");
+
             return this.parsePlayerState(this.client.Call(this.playerName + ".PlayPause") as JObject);
         }
 
         public virtual bool Stop()
         {
+            this.client.LogMessage("XbmcMediaPlayer.Stop()");
+
             return (this.client.Call(this.playerName + ".Stop") != null);
         }
 
         public virtual bool SkipPrevious()
         {
+            this.client.LogMessage("XbmcMediaPlayer.SkipPrevious()");
+
             return (this.client.Call(this.playerName + ".SkipPrevious") != null);
         }
 
         public virtual bool SkipNext()
         {
+            this.client.LogMessage("XbmcMediaPlayer.SkipNext()");
+
             return (this.client.Call(this.playerName + ".SkipNext") != null);
         }
 
-        public virtual bool BigSkipBackward()
+        #endregion
+
+        #region JSON RPC Info Labels
+
+        public virtual int Speed
         {
+            get
+            {
+                this.client.LogMessage("XbmcMediaPlayer.Speed");
+
+                return this.getPlaySpeed();
+            }
+        }
+
+        public virtual bool Random
+        {
+            get
+            {
+                this.client.LogMessage("XbmcMediaPlayer.Random");
+
+                string random = base.getInfo<string>("Playlist.Random");
+                if (random == "Random")
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public virtual XbmcRepeatTypes Repeat
+        {
+            get
+            {
+                this.client.LogMessage("XbmcMediaPlayer.Repeat");
+
+                string repeat = base.getInfo<string>("Playlist.Repeat");
+                if (repeat == "One")
+                {
+                    return XbmcRepeatTypes.One;
+                }
+                else if (repeat == "All")
+                {
+                    return XbmcRepeatTypes.All;
+                }
+
+                return XbmcRepeatTypes.Off;
+            }
+        }
+
+        #endregion
+
+        #region Helper functions
+
+        protected bool bigSkipBackward()
+        {
+            this.client.LogMessage("Xbmc" + this.playerName + ".()");
+
             return (this.client.Call(this.playerName + ".BigSkipBackward") != null);
         }
 
-        public virtual bool BigSkipForward()
+        protected bool bigSkipForward()
         {
+            this.client.LogMessage("Xbmc" + this.playerName + ".BigSkipForward()");
+
             return (this.client.Call(this.playerName + ".BigSkipForward") != null);
         }
 
-        public virtual bool SmallSkipBackward()
+        protected bool smallSkipBackward()
         {
+            this.client.LogMessage("Xbmc" + this.playerName + ".SmallSkipBackward()");
+
             return (this.client.Call(this.playerName + ".SmallSkipBackward") != null);
         }
 
-        public virtual bool SmallSkipForward()
+        protected bool smallSkipForward()
         {
+            this.client.LogMessage("Xbmc" + this.playerName + ".SmallSkipForward()");
+
             return (this.client.Call(this.playerName + ".SmallSkipForward") != null);
         }
 
-        public virtual bool Rewind()
+        protected bool rewind()
         {
+            this.client.LogMessage("Xbmc" + this.playerName + ".Rewind()");
+
             return (this.client.Call(this.playerName + ".Rewind") != null);
         }
 
-        public virtual bool Forward()
+        protected bool forward()
         {
+            this.client.LogMessage("Xbmc" + this.playerName + ".Forward()");
+
             return (this.client.Call(this.playerName + ".Forward") != null);
         }
 
-        public virtual XbmcPlayerState GetTime(out TimeSpan currentPosition, out TimeSpan totalLength)
+        protected XbmcPlayerState getTime(out TimeSpan currentPosition, out TimeSpan totalLength)
         {
+            this.client.LogMessage("Xbmc" + this.playerName + ".GetTime()");
+
             currentPosition = new TimeSpan();
             totalLength = new TimeSpan();
 
@@ -122,37 +200,47 @@ namespace XBMC.JsonRpc
                 }
             }
 
+            this.client.LogErrorMessage(this.playerName + ".GetTimeMS(): Invalid response");
+
             return XbmcPlayerState.Unavailable;
         }
 
-        public virtual int GetPercentage()
+        protected int getPercentage()
         {
+            this.client.LogMessage("Xbmc" + this.playerName + ".GetPercentage()");
+
             JObject query = this.client.Call(this.playerName + ".GetPercentage") as JObject;
             if (query == null)
             {
+                this.client.LogErrorMessage(this.playerName + ".GetPercentage(): Invalid response");
+
                 return -1;
             }
 
             return (int)query;
         }
 
-        public virtual bool SeekTime(int seconds)
+        protected bool seekTime(int seconds)
         {
+            this.client.LogMessage("Xbmc" + this.playerName + ".SeekTime(" + seconds + ")");
+
             if (seconds < 0)
             {
                 seconds = 0;
             }
-            
+
             return (this.client.Call(this.playerName + ".SeekTime", seconds) != null);
         }
 
-        public virtual bool SeekTime(TimeSpan position)
+        protected bool seekTime(TimeSpan position)
         {
-            return this.SeekTime(Convert.ToInt32(position.TotalSeconds));
+            return this.seekTime(Convert.ToInt32(position.TotalSeconds));
         }
 
-        public virtual bool SeekPercentage(int percentage)
+        protected bool seekPercentage(int percentage)
         {
+            this.client.LogMessage("Xbmc" + this.playerName + ".SeekPercentage(" + percentage + ")");
+
             if (percentage < 0)
             {
                 percentage = 0;
@@ -165,52 +253,7 @@ namespace XBMC.JsonRpc
             return (this.client.Call(this.playerName + ".SeekPercentage", percentage) != null);
         }
 
-        #endregion
-
-        #region JSON RPC Info Labels
-
-        public virtual int Speed
-        {
-            get { return this.getPlaySpeed(); }
-        }
-
-        public virtual bool Random
-        {
-            get
-            {
-                string random = base.getInfo<string>("Playlist.Random");
-                if (random == "Random")
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
-        public virtual XbmcRepeatTypes Repeat
-        {
-            get
-            {
-                string repeat = base.getInfo<string>("Playlist.Repeat");
-                if (repeat == "One")
-                {
-                    return XbmcRepeatTypes.One;
-                }
-                else if (repeat == "All")
-                {
-                    return XbmcRepeatTypes.All;
-                }
-
-                return XbmcRepeatTypes.Off;
-            }
-        }
-
-        #endregion
-
-        #region Helper functions
-
-        private XbmcPlayerState parsePlayerState(JObject obj)
+        protected XbmcPlayerState parsePlayerState(JObject obj)
         {
             if (obj == null || obj["playing"] == null || obj["paused"] == null || obj["partymode"] == null)
             {
@@ -267,7 +310,7 @@ namespace XBMC.JsonRpc
             return state;
         }
 
-        private int getPlaySpeed()
+        protected int getPlaySpeed()
         {
             string speed = this.getInfo<string>("MusicPlayer.TimeSpeed");
             if (string.IsNullOrEmpty(speed))

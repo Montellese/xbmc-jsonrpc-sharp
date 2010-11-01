@@ -23,21 +23,26 @@ namespace XBMC.JsonRpc
 
         public ICollection<XbmcJsonRpcMethod> Introspect(bool getPermissions, bool getDescriptions, bool filterByTransport)
         {
+            this.client.LogMessage("XbmcJsonRpc.Introspect()");
+
             JObject args = new JObject();
             args.Add(new JProperty("getpermissions", getPermissions));
             args.Add(new JProperty("getDescriptions", getDescriptions));
             args.Add(new JProperty("filterbytransport", filterByTransport));
 
             JObject query = this.client.Call("JSONRPC.Introspect", args) as JObject;
-
             List<XbmcJsonRpcMethod> methods = new List<XbmcJsonRpcMethod>();
 
-            if (query["commands"] != null)
+            if (query == null || query["commands"] == null)
             {
-                foreach (JObject item in (JArray)query["commands"])
-                {
-                    methods.Add(XbmcJsonRpcMethod.FromJson(item));
-                }
+                this.client.LogErrorMessage("JSONRPC.Introspect: Invalid response");
+
+                return methods;
+            }
+
+            foreach (JObject item in (JArray)query["commands"])
+            {
+                methods.Add(XbmcJsonRpcMethod.FromJson(item));
             }
 
             return methods;
@@ -45,10 +50,14 @@ namespace XBMC.JsonRpc
 
         public int Version()
         {
+            this.client.LogMessage("XbmcJsonRpc.Version()");
+
             JObject query = this.client.Call("JSONRPC.Version") as JObject;
 
             if (query == null || query["version"] == null)
             {
+                this.client.LogErrorMessage("JSONRPC.Version: Invalid response");
+
                 return -1;
             }
 
@@ -57,16 +66,22 @@ namespace XBMC.JsonRpc
 
         public ICollection<string> Permission()
         {
+            this.client.LogMessage("XbmcJsonRpc.Permission()");
+
             JObject query = this.client.Call("JSONRPC.Permission") as JObject;
 
             List<string> permissions = new List<string>();
 
-            if (query["permission"] != null)
+            if (query["permission"] == null)
             {
-                foreach (string item in ((JArray)query["permission"]))
-                {
-                    permissions.Add(item);
-                }
+                this.client.LogErrorMessage("JSONRPC.Permission: Invalid response");
+
+                return permissions;
+            }
+                
+            foreach (string item in ((JArray)query["permission"]))
+            {
+                permissions.Add(item);
             }
 
             return permissions;
@@ -74,9 +89,13 @@ namespace XBMC.JsonRpc
 
         public string Ping()
         {
+            this.client.LogMessage("XbmcJsonRpc.Ping()");
+
             object query = this.client.Call("JSONRPC.Ping");
             if (query == null) 
             {
+                this.client.LogErrorMessage("JSONRPC.Ping: Invalid response");
+
                 return string.Empty;
             }
 
@@ -90,6 +109,8 @@ namespace XBMC.JsonRpc
 
         public void Announce(string sender, string message, object data)
         {
+            this.client.LogMessage("XbmcJsonRpc.Announce()");
+
             JObject args = new JObject();
             args.Add(new JProperty("sender", sender));
             args.Add(new JProperty("message", message));

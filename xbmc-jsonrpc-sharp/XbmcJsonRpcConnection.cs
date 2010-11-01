@@ -41,6 +41,8 @@ namespace XBMC.JsonRpc
         {
             get
             {
+                this.client.LogMessage("XbmcJsonRpcConnection.IsAlive");
+                
                 try
                 {
                     if (this.socket == null || !this.socket.Connected)
@@ -50,7 +52,7 @@ namespace XBMC.JsonRpc
                 }
                 catch (Exception ex)
                 {
-                    //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                    this.client.LogErrorMessage("Could not determine the state of the TCP socket", ex);
                     return false;
                 }
 
@@ -105,6 +107,8 @@ namespace XBMC.JsonRpc
 
         public event EventHandler Connected;
         public event EventHandler Aborted;
+        public event EventHandler<XbmcJsonRpcLogEventArgs> Log;
+        public event EventHandler<XbmcJsonRpcLogErrorEventArgs> LogError;
 
         #endregion
 
@@ -117,6 +121,8 @@ namespace XBMC.JsonRpc
         public XbmcJsonRpcConnection(Uri uri, string username, string password)
         {
             this.client = new JsonRpcClient(uri, username, password);
+            this.client.Log += onLog;
+            this.client.LogError += onLogError;
 
             this.jsonRpc = new XbmcJsonRpc(this.client);
             this.player = new XbmcPlayer(this.client);
@@ -141,6 +147,8 @@ namespace XBMC.JsonRpc
 
         public bool Open() 
         {
+            this.client.LogMessage("Opening a connection to XBMC");
+
             try
             {
                 this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -152,12 +160,12 @@ namespace XBMC.JsonRpc
                     return false;
                 }
                 this.onConnected();
-                
+
                 this.receive(new SocketStateObject());
             }
             catch (Exception ex)
             {
-                //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                this.client.LogErrorMessage("Could not open a connection to XBMC", ex);
                 return false;
             }
 
@@ -166,6 +174,8 @@ namespace XBMC.JsonRpc
 
         public void Close()
         {
+            this.client.LogMessage("Closing the connection");
+
             try
             {
                 if (this.socket != null && this.socket.Connected)
@@ -175,7 +185,7 @@ namespace XBMC.JsonRpc
             }
             catch (Exception ex)
             {
-                //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                this.client.LogErrorMessage("Could not disconnect from the TCP socket", ex);
             }
         }
 
@@ -197,7 +207,7 @@ namespace XBMC.JsonRpc
                 }
                 catch (Exception ex)
                 {
-                    //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                    this.client.LogErrorMessage("Could not close the TCP socket", ex);
                 }
                 finally
                 {
@@ -351,7 +361,7 @@ namespace XBMC.JsonRpc
                 }
                 catch (Exception ex)
                 {
-                    //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                    this.client.LogErrorMessage("Could not read the TCP socket", ex);
                     this.Close();
                     this.onAborted();
                 }
@@ -366,6 +376,8 @@ namespace XBMC.JsonRpc
                 string data = state.Builder.ToString();
                 if (data.Length > 0 && data.Contains(AnnouncementEnd) || data.Contains(AnnouncementEndAlternative))
                 {
+                    this.client.LogMessage("JSON RPC Announcement received: " + data);
+                    
                     int pos = data.IndexOf(AnnouncementEnd);
                     if (pos < 0)
                     {
@@ -397,9 +409,25 @@ namespace XBMC.JsonRpc
             }
             catch (Exception ex)
             {
-                //Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+                this.client.LogErrorMessage("Could not start receiving from the TCP socket", ex);
                 this.Close();
                 this.onAborted();
+            }
+        }
+
+        private void onLog(object sender, XbmcJsonRpcLogEventArgs e)
+        {
+            if (this.Log != null)
+            {
+                this.Log(this, e);
+            }
+        }
+
+        private void onLogError(object sender, XbmcJsonRpcLogErrorEventArgs e)
+        {
+            if (this.LogError != null)
+            {
+                this.LogError(this, e);
             }
         }
 

@@ -25,6 +25,8 @@ namespace XBMC.JsonRpc
 
         public ICollection<XbmcMovie> GetMovies(int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcVideoLibrary.GetMovies()");
+
             JObject args = new JObject();
             if (fields != null && fields.Length > 0)
             {
@@ -50,6 +52,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("VideoLibrary.GetMovies", args) as JObject;
             if (query == null || query["movies"] == null)
             {
+                this.client.LogErrorMessage("VideoLibrary.GetMovies(): Invalid response");
+                
                 return null;
             }
 
@@ -69,6 +73,8 @@ namespace XBMC.JsonRpc
 
         public ICollection<XbmcTvShow> GetTvShows(int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcVideoLibrary.GetTvShows()");
+
             JObject args = new JObject();
             if (fields != null && fields.Length > 0)
             {
@@ -94,6 +100,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("VideoLibrary.GetTVShows", args) as JObject;
             if (query == null || query["tvshows"] == null)
             {
+                this.client.LogErrorMessage("VideoLibrary.GetTVShows(): Invalid response");
+
                 return null;
             }
 
@@ -186,6 +194,8 @@ namespace XBMC.JsonRpc
 
         private ICollection<XbmcMusicVideo> GetMusicVideos(int artistId, int albumId, int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcVideoLibrary.GetMusicVideos()");
+
             JObject args = new JObject();
             if (artistId >= 0)
             {
@@ -221,6 +231,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("VideoLibrary.GetMusicVideos", args) as JObject;
             if (query == null || query["musicvideos"] == null)
             {
+                this.client.LogErrorMessage("VideoLibrary.GetMusicVideos(): Invalid response");
+
                 return null;
             }
 
@@ -280,6 +292,8 @@ namespace XBMC.JsonRpc
 
         public ICollection<XbmcMovie> GetRecentlyAddedMovies(int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcVideoLibrary.GetRecentlyAddedMovies()");
+
             JObject args = new JObject();
             if (fields != null && fields.Length > 0)
             {
@@ -305,6 +319,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("VideoLibrary.GetRecentlyAddedMovies", args) as JObject;
             if (query == null || query["movies"] == null)
             {
+                this.client.LogErrorMessage("VideoLibrary.GetRecentlyAddedMovies(): Invalid response");
+
                 return null;
             }
 
@@ -324,6 +340,8 @@ namespace XBMC.JsonRpc
 
         public ICollection<XbmcTvEpisode> GetRecentlyAddedTvEpisodes(int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcVideoLibrary.GetRecentlyAddedTvEpisodes()");
+
             JObject args = new JObject();
             if (fields != null && fields.Length > 0)
             {
@@ -352,6 +370,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("VideoLibrary.GetRecentlyAddedEpisodes", args) as JObject;
             if (query == null || query["episodes"] == null)
             {
+                this.client.LogErrorMessage("VideoLibrary.GetRecentlyAddedEpisodes(): Invalid response");
+
                 return null;
             }
 
@@ -371,6 +391,8 @@ namespace XBMC.JsonRpc
 
         public ICollection<XbmcMusicVideo> GetRecentlyAddedMusicVideos(int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcVideoLibrary.GetRecentlyAddedMusicVideos()");
+
             JObject args = new JObject();
             if (fields != null && fields.Length > 0)
             {
@@ -398,6 +420,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("VideoLibrary.GetRecentlyAddedMusicVideos", args) as JObject;
             if (query == null || query["musicvideos"] == null)
             {
+                this.client.LogErrorMessage("VideoLibrary.GetRecentlyAddedMusicVideos(): Invalid response");
+
                 return null;
             }
 
@@ -416,6 +440,8 @@ namespace XBMC.JsonRpc
 
         private ICollection<XbmcTvSeason> getTvSeasons(int tvshowId, int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcVideoLibrary.GetTvSeasons()");
+
             if (tvshowId < 0)
             {
                 throw new ArgumentException("Invalid TvShow Id (" + tvshowId + ")");
@@ -448,6 +474,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("VideoLibrary.GetSeasons", args) as JObject;
             if (query == null || query["seasons"] == null)
             {
+                this.client.LogErrorMessage("VideoLibrary.GetSeasons(): Invalid response");
+
                 return null;
             }
 
@@ -462,6 +490,8 @@ namespace XBMC.JsonRpc
 
         private ICollection<XbmcTvEpisode> getTvEpisodes(int tvshowId, int season, int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcVideoLibrary.GetTvEpisodes()");
+
             if (tvshowId < 0)
             {
                 throw new ArgumentException("Invalid TvShow Id (" + tvshowId + ")");
@@ -501,6 +531,8 @@ namespace XBMC.JsonRpc
             JObject query = this.client.Call("VideoLibrary.GetEpisodes", args) as JObject;
             if (query == null || query["episodes"] == null)
             {
+                this.client.LogErrorMessage("VideoLibrary.GetEpisodes(): Invalid response");
+
                 return null;
             }
 

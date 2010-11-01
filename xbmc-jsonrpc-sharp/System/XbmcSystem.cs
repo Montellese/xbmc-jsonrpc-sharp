@@ -23,6 +23,8 @@ namespace XBMC.JsonRpc
         {
             get 
             {
+                this.client.LogMessage("XbmcSystem.CanShutdown");
+
                 this.checkLabels();
 
                 return this.canShutdown;
@@ -33,6 +35,8 @@ namespace XBMC.JsonRpc
         {
             get
             {
+                this.client.LogMessage("XbmcSystem.CanSuspend");
+
                 this.checkLabels();
 
                 return this.canSuspend;
@@ -43,6 +47,8 @@ namespace XBMC.JsonRpc
         {
             get
             {
+                this.client.LogMessage("XbmcSystem.CanHibernate");
+
                 this.checkLabels();
 
                 return this.canHibernate;
@@ -53,6 +59,8 @@ namespace XBMC.JsonRpc
         {
             get
             {
+                this.client.LogMessage("XbmcSystem.CanReboot");
+
                 this.checkLabels();
 
                 return this.canReboot;
@@ -86,8 +94,12 @@ namespace XBMC.JsonRpc
 
         public bool Shutdown() 
         {
+            this.client.LogMessage("XbmcSystem.Shutdown()");
+            
             if (!this.CanShutdown) 
             {
+                this.client.LogErrorMessage("Cannot shutdown computer running XBMC");
+                
                 return false;
             }
 
@@ -96,8 +108,12 @@ namespace XBMC.JsonRpc
 
         public bool Suspend() 
         {
+            this.client.LogMessage("XbmcSystem.Suspend()");
+
             if (!this.CanSuspend) 
             {
+                this.client.LogErrorMessage("Cannot suspend computer running XBMC");
+
                 return false;
             }
 
@@ -106,8 +122,12 @@ namespace XBMC.JsonRpc
 
         public bool Hibernate() 
         {
+            this.client.LogMessage("XbmcSystem.Hibernate()");
+
             if (!this.CanHibernate) 
             {
+                this.client.LogErrorMessage("Cannot hibernate computer running XBMC");
+
                 return false;
             }
 
@@ -116,8 +136,12 @@ namespace XBMC.JsonRpc
 
         public bool Reboot() 
         {
+            this.client.LogMessage("XbmcSystem.Reboot()");
+
             if (!this.CanReboot) 
             {
+                this.client.LogErrorMessage("Cannot reboot computer running XBMC");
+
                 return false;
             }
 
@@ -126,6 +150,8 @@ namespace XBMC.JsonRpc
 
         public IDictionary<string, string> GetInfoLabels(params string[] labels) 
         {
+            this.client.LogMessage("XbmcSystem.GetInfoLabels(" + string.Join(", ", labels) + ")");
+
             if (labels == null)
             {
                 throw new ArgumentNullException("labels");
@@ -137,18 +163,22 @@ namespace XBMC.JsonRpc
 
             JObject results = this.client.Call("System.GetInfoLabels", labels) as JObject;
             Dictionary<string, string> list = new Dictionary<string, string>();
-            if (results != null)
+            if (results == null)
             {
-                int index = 0;
-                foreach (string label in labels)
-                {
-                    if (results[label] != null)
-                    {
-                        list.Add(label, (string)results[label]);
-                    }
+                this.client.LogErrorMessage("System.GetInfoLabels(" + string.Join(", ", labels) + "): invalid response");
 
-                    index += 1;
+                return list;
+            }
+                
+            int index = 0;
+            foreach (string label in labels)
+            {
+                if (results[label] != null)
+                {
+                    list.Add(label, (string)results[label]);
                 }
+
+                index += 1;
             }
 
             return list;
@@ -156,6 +186,8 @@ namespace XBMC.JsonRpc
 
         public string GetInfoLabel(string label)
         {
+            this.client.LogMessage("XbmcSystem.GetInfoLabel(" + label + ")");
+
             if (label == null)
             {
                 throw new ArgumentNullException("label");
@@ -164,6 +196,8 @@ namespace XBMC.JsonRpc
             JObject result = this.client.Call("System.GetInfoLabels", new string[] { label }) as JObject;
             if (result == null || result[label] == null)
             {
+                this.client.LogErrorMessage("System.GetInfoLabels(" + label + "): invalid response");
+
                 return null;
             }
 
@@ -172,6 +206,8 @@ namespace XBMC.JsonRpc
 
         public IDictionary<string, bool> GetInfoBooleans(params string[] labels)
         {
+            this.client.LogMessage("XbmcSystem.GetInfoBooleans(" + string.Join(", ", labels) + ")");
+
             if (labels == null)
             {
                 throw new ArgumentNullException("labels");
@@ -183,18 +219,22 @@ namespace XBMC.JsonRpc
 
             JObject results = this.client.Call("System.GetInfoBooleans", labels) as JObject;
             Dictionary<string, bool> list = new Dictionary<string, bool>();
-            if (results != null)
+            if (results == null)
             {
-                int index = 0;
-                foreach (string label in labels)
-                {
-                    if (results[label] != null)
-                    {
-                        list.Add(label, (bool)results[label]);
-                    }
+                this.client.LogErrorMessage("System.GetInfoBooleans(" + string.Join(", ", labels) + "): invalid response");
 
-                    index += 1;
+                return list;
+            }
+
+            int index = 0;
+            foreach (string label in labels)
+            {
+                if (results[label] != null)
+                {
+                    list.Add(label, (bool)results[label]);
                 }
+
+                index += 1;
             }
 
             return list;
@@ -202,6 +242,8 @@ namespace XBMC.JsonRpc
 
         public bool GetInfoBoolean(string label)
         {
+            this.client.LogMessage("XbmcSystem.GetInfoBoolean(" + label + ")");
+
             if (label == null)
             {
                 throw new ArgumentNullException("label");
@@ -210,6 +252,8 @@ namespace XBMC.JsonRpc
             JObject result = this.client.Call("System.GetInfoBooleans", new string[] { label }) as JObject;
             if (result == null || result[label] == null)
             {
+                this.client.LogErrorMessage("System.GetInfoBooleans(" + label + "): invalid response");
+
                 return false;
             }
 

@@ -39,6 +39,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="XbmcJsonRpcLogErrorEventArgs.cs" />
     <Compile Include="Files\XbmcFiles.cs" />
     <Compile Include="Files\XbmcFileSource.cs" />
     <Compile Include="InvalidJsonRpcResponseException.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="UnknownJsonRpcErrorException.cs" />
     <Compile Include="JsonRpc\XbmcJsonRpc.cs" />
     <Compile Include="XbmcJsonRpcConnection.cs" />
+    <Compile Include="XbmcJsonRpcLogEventArgs.cs" />
     <Compile Include="XbmcJsonRpcNamespace.cs" />
     <Compile Include="Xbmc\XbmcGeneral.cs" />
     <Compile Include="Xbmc\XbmcLogLevel.cs" />

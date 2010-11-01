@@ -33,6 +33,8 @@ namespace XBMC.JsonRpc
 
         public virtual bool ScanForContent()
         {
+            this.client.LogMessage("Xbmc" + this.libraryName + ".ScanForContent()");
+
             return (this.client.Call(this.libraryName + ".ScanForContent") != null);
         }
 

@@ -21,9 +21,13 @@ namespace XBMC.JsonRpc
 
         public override XbmcSong GetCurrentItem(params string[] fields)
         {
+            this.client.LogMessage("XbmcAudioPlaylist.GetCurrentItem()");
+
             JObject query = this.getItems(fields, XbmcSong.Fields, -1, -1);
             if (query == null || query["current"] == null || query["items"] == null)
             {
+                this.client.LogErrorMessage("AudioPlaylist.GetItems(): Invalid response");
+
                 return null;
             }
 
@@ -44,9 +48,13 @@ namespace XBMC.JsonRpc
 
         public override XbmcPlaylist<XbmcSong> GetItems(int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcAudioPlaylist.GetItems()");
+
             JObject query = this.getItems(fields, XbmcSong.Fields, start, end);
             if (query == null || query["items"] == null)
             {
+                this.client.LogErrorMessage("AudioPlaylist.GetItems(): Invalid response");
+
                 return null;
             }
 
@@ -61,6 +69,8 @@ namespace XBMC.JsonRpc
 
         public bool Add(XbmcSong song)
         {
+            this.client.LogMessage("XbmcAudioPlaylist.Add()");
+
             if (song == null)
             {
                 throw new ArgumentNullException("song");

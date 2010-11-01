@@ -21,9 +21,13 @@ namespace XBMC.JsonRpc
 
         public override XbmcVideo GetCurrentItem(params string[] fields)
         {
-            JObject query = this.getItems(fields, XbmcVideo.Fields, -1, -1);
+            this.client.LogMessage("XbmcVideoPlaylist.GetCurrentItem()");
+
+            JObject query = base.getItems(fields, XbmcVideo.Fields, -1, -1);
             if (query == null || query["current"] == null || query["items"] == null)
             {
+                this.client.LogErrorMessage("VideoPlaylist.GetItems(): Invalid response");
+
                 return null;
             }
 
@@ -44,9 +48,13 @@ namespace XBMC.JsonRpc
 
         public override XbmcPlaylist<XbmcVideo> GetItems(int start, int end, params string[] fields)
         {
+            this.client.LogMessage("XbmcVideoPlaylist.GetItems()");
+
             JObject query = this.getItems(fields, XbmcVideo.Fields, start, end);
             if (query == null || query["items"] == null)
             {
+                this.client.LogErrorMessage("VideoPlaylist.GetItems(): Invalid response");
+
                 return null;
             }
 
@@ -61,6 +69,8 @@ namespace XBMC.JsonRpc
 
         public bool Add(XbmcVideo video)
         {
+            this.client.LogMessage("XbmcVideoPlaylist.Add()");
+
             if (video == null)
             {
                 throw new ArgumentNullException("video");

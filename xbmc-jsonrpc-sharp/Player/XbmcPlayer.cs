@@ -213,7 +213,6 @@ namespace XBMC.JsonRpc
 
             TimeSpan current, total;
             XbmcMediaPlayer player = this.getProgress(out current, out total);
-            current = TimeSpan.Parse(this.getInfo<string>("Player.SeekTime"));
             if (player == null)
             {
                 return;
@@ -231,7 +230,6 @@ namespace XBMC.JsonRpc
 
             TimeSpan current, total;
             XbmcMediaPlayer player = this.getProgress(out current, out total);
-            current = TimeSpan.Parse(this.getInfo<string>("Player.SeekTime"));
             if (player == null)
             {
                 return;

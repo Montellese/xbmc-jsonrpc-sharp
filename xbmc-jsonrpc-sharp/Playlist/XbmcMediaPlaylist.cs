@@ -5,7 +5,7 @@ namespace XBMC.JsonRpc
 {
     public abstract class XbmcMediaPlaylist<TMediaType>
         : XbmcJsonRpcNamespace
-        where TMediaType : XbmcMedia 
+        where TMediaType : XbmcPlayable
     {
         #region Private variables
 
